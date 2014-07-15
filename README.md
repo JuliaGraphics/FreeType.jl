@@ -1,13 +1,13 @@
-# Freetype.jl
+# FreeType.jl
 
-[![Build Status](https://travis-ci.org/jhasse/Freetype.jl.svg?branch=master)](https://travis-ci.org/jhasse/Freetype.jl)
+[![Build Status](https://travis-ci.org/jhasse/FreeType.jl.svg?branch=master)](https://travis-ci.org/jhasse/FreeType.jl)
 
-[Freetype](http://www.freetype.org/) bindings for [Julia](http://julialang.org/).
+[FreeType](http://www.freetype.org/) bindings for [Julia](http://julialang.org/).
 
 ## Example
 
 ```julia
-using Freetype
+using FreeType
 
 library = Array(FT_Library, 1)
 error = FT_Init_FreeType(pointer(library))

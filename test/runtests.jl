@@ -1,4 +1,4 @@
-using Freetype
+using FreeType
 using Base.Test
 
 library = Array(FT_Library, 1)
