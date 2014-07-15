@@ -1,6 +1,7 @@
 module Freetype
 
-const freetype = find_library(["libfreetype"], ["/usr/lib/x86_64-linux-gnu"])
+const freetype = find_library(["libfreetype"], ["/usr/lib/i386-linux-gnu",
+                                                "/usr/lib/x86_64-linux-gnu"])
 
 typealias FT_Int16 Int16
 typealias FT_UInt16 Uint16
