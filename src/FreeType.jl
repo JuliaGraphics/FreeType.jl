@@ -59,6 +59,32 @@ type FT_BBox
     xMax::FT_Pos
     yMax::FT_Pos
 end
+
+const FT_LOAD_DEFAULT = int32(0)
+const FT_LOAD_TARGET_NORMAL = int32(0)
+const FT_LOAD_NO_SCALE = int32(1 << 0)
+const FT_LOAD_NO_HINTING = int32(1 << 1)
+const FT_LOAD_RENDER = int32(1 << 2)
+const FT_LOAD_NO_BITMAP = int32(1 << 3)
+const FT_LOAD_VERTICAL_LAYOUT = int32(1 << 4)
+const FT_LOAD_FORCE_AUTOHINT = int32(1 << 5)
+const FT_LOAD_CROP_BITMAP = int32(1 << 6)
+const FT_LOAD_PEDANTIC = int32(1 << 7)
+const FT_LOAD_ADVANCE_ONLY = int32(1 << 8)
+const FT_LOAD_IGNORE_GLOBAL_ADVANCE_WIDTH = int32(1 << 9)
+const FT_LOAD_NO_RECURSE = int32(1 << 10)
+const FT_LOAD_IGNORE_TRANSFORM = int32(1 << 11)
+const FT_LOAD_MONOCHROME = int32(1 << 12)
+const FT_LOAD_LINEAR_DESIGN = int32(1 << 13)
+const FT_LOAD_SBITS_ONLY = int32(1 << 14)
+const FT_LOAD_NO_AUTOHINT = int32(1 << 15)
+const FT_LOAD_TARGET_LIGHT = int32(1 << 16)
+const FT_LOAD_TARGET_MONO = int32(1 << 17)
+const FT_LOAD_TARGET_LCD = int32(196608)
+const FT_LOAD_TARGET_LCD_V = int32(1 << 18)
+const FT_LOAD_COLOR = int32(1 << 20)
+
+
 # begin enum FT_Pixel_Mode_
 typealias FT_Pixel_Mode_ Uint32
 const FT_PIXEL_MODE_NONE = uint32(0)
@@ -360,9 +386,6 @@ typealias FT_Driver Ptr{FT_DriverRec_}
 type FT_RendererRec_
 end
 typealias FT_Renderer Ptr{FT_RendererRec_}
-type FT_FaceRec_
-end
-typealias FT_Face Ptr{FT_FaceRec_}
 type FT_SizeRec_
 end
 typealias FT_Size Ptr{FT_SizeRec_}
@@ -416,12 +439,6 @@ const FT_ENCODING_ADOBE_LATIN_1 = uint32(1818326065)
 const FT_ENCODING_OLD_LATIN_2 = uint32(1818326066)
 const FT_ENCODING_APPLE_ROMAN = uint32(1634889070)
 # end enum FT_Encoding
-type FT_CharMapRec
-    face::FT_Face
-    encoding::FT_Encoding
-    platform_id::FT_UShort
-    encoding_id::FT_UShort
-end
 type FT_Face_InternalRec_
 end
 typealias FT_Face_Internal Ptr{FT_Face_InternalRec_}
@@ -457,6 +474,13 @@ type FT_FaceRec
     autohint::FT_Generic
     extensions::Ptr{Void}
     internal::FT_Face_Internal
+end
+typealias FT_Face Ptr{FT_FaceRec}
+type FT_CharMapRec
+    face::FT_Face
+    encoding::FT_Encoding
+    platform_id::FT_UShort
+    encoding_id::FT_UShort
 end
 type FT_Size_InternalRec_
 end
@@ -580,12 +604,6 @@ end
 typealias FT_Size_Request Ptr{FT_Size_RequestRec_}
 # begin enum FT_Render_Mode_
 typealias FT_Render_Mode_ Uint32
-const FT_RENDER_MODE_NORMAL = uint32(0)
-const FT_RENDER_MODE_LIGHT = uint32(1)
-const FT_RENDER_MODE_MONO = uint32(2)
-const FT_RENDER_MODE_LCD = uint32(3)
-const FT_RENDER_MODE_LCD_V = uint32(4)
-const FT_RENDER_MODE_MAX = uint32(5)
 # end enum FT_Render_Mode_
 # begin enum FT_Render_Mode
 typealias FT_Render_Mode Uint32
@@ -614,7 +632,7 @@ end
 function FT_Done_FreeType(library::FT_Library)
     ccall((:FT_Done_FreeType,freetype),FT_Error,(FT_Library,),library)
 end
-function FT_New_Face(library::FT_Library,filepathname::Ptr{Uint8},face_index::FT_Long,aface::Ptr{FT_Face})
+function FT_New_Face(library::FT_Library,filepathname::AbstractString,face_index::FT_Long,aface::Ptr{FT_Face})
     ccall((:FT_New_Face,freetype),FT_Error,(FT_Library,Ptr{Uint8},FT_Long,Ptr{FT_Face}),library,filepathname,face_index,aface)
 end
 function FT_New_Memory_Face(library::FT_Library,file_base::Ptr{FT_Byte},file_size::FT_Long,face_index::FT_Long,aface::Ptr{FT_Face})
@@ -623,7 +641,7 @@ end
 function FT_Open_Face(library::FT_Library,args::Ptr{FT_Open_Args},face_index::FT_Long,aface::Ptr{FT_Face})
     ccall((:FT_Open_Face,freetype),FT_Error,(FT_Library,Ptr{FT_Open_Args},FT_Long,Ptr{FT_Face}),library,args,face_index,aface)
 end
-function FT_Attach_File(face::FT_Face,filepathname::Ptr{Uint8})
+function FT_Attach_File(face::FT_Face,filepathname::AbstractString)
     ccall((:FT_Attach_File,freetype),FT_Error,(FT_Face,Ptr{Uint8}),face,filepathname)
 end
 function FT_Attach_Stream(face::FT_Face,parameters::Ptr{FT_Open_Args})
@@ -650,7 +668,7 @@ end
 function FT_Load_Glyph(face::FT_Face,glyph_index::FT_UInt,load_flags::FT_Int32)
     ccall((:FT_Load_Glyph,freetype),FT_Error,(FT_Face,FT_UInt,FT_Int32),face,glyph_index,load_flags)
 end
-function FT_Load_Char(face::FT_Face,char_code::FT_ULong,load_flags::FT_Int32)
+function FT_Load_Char(face::FT_Face,char_code::Char,load_flags::FT_Int32)
     ccall((:FT_Load_Char,freetype),FT_Error,(FT_Face,FT_ULong,FT_Int32),face,char_code,load_flags)
 end
 function FT_Set_Transform(face::FT_Face,matrix::Ptr{FT_Matrix},delta::Ptr{FT_Vector})
@@ -680,7 +698,7 @@ end
 function FT_Get_Charmap_Index(charmap::FT_CharMap)
     ccall((:FT_Get_Charmap_Index,freetype),FT_Int,(FT_CharMap,),charmap)
 end
-function FT_Get_Char_Index(face::FT_Face,charcode::FT_ULong)
+function FT_Get_Char_Index(face::FT_Face,charcode::Char)
     ccall((:FT_Get_Char_Index,freetype),FT_UInt,(FT_Face,FT_ULong),face,charcode)
 end
 function FT_Get_First_Char(face::FT_Face,agindex::Ptr{FT_UInt})
@@ -856,5 +874,36 @@ export FT_Size_Request_Type
 export FT_Size_Request
 export FT_Render_Mode
 export FT_Kerning_Mode
+
+export FT_LOAD_DEFAULT
+export FT_LOAD_TARGET_NORMAL
+export FT_LOAD_NO_SCALE
+export FT_LOAD_NO_HINTING
+export FT_LOAD_RENDER
+export FT_LOAD_NO_BITMAP
+export FT_LOAD_VERTICAL_LAYOUT
+export FT_LOAD_FORCE_AUTOHINT
+export FT_LOAD_CROP_BITMAP
+export FT_LOAD_PEDANTIC
+export FT_LOAD_ADVANCE_ONLY
+export FT_LOAD_IGNORE_GLOBAL_ADVANCE_WIDTH
+export FT_LOAD_NO_RECURSE
+export FT_LOAD_IGNORE_TRANSFORM
+export FT_LOAD_MONOCHROME
+export FT_LOAD_LINEAR_DESIGN
+export FT_LOAD_SBITS_ONLY
+export FT_LOAD_NO_AUTOHINT
+export FT_LOAD_TARGET_LIGHT
+export FT_LOAD_TARGET_MONO
+export FT_LOAD_TARGET_LCD
+export FT_LOAD_TARGET_LCD_V
+export FT_LOAD_COLOR
+
+export FT_RENDER_MODE_NORMAL
+export FT_RENDER_MODE_LIGHT
+export FT_RENDER_MODE_MONO
+export FT_RENDER_MODE_LCD
+export FT_RENDER_MODE_LCD_V
+export FT_RENDER_MODE_MAX
 
 end
