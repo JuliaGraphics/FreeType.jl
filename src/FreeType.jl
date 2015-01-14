@@ -389,9 +389,6 @@ typealias FT_Renderer Ptr{FT_RendererRec_}
 type FT_SizeRec_
 end
 typealias FT_Size Ptr{FT_SizeRec_}
-type FT_GlyphSlotRec_
-end
-typealias FT_GlyphSlot Ptr{FT_GlyphSlotRec_}
 type FT_CharMapRec_
 end
 typealias FT_CharMap Ptr{FT_CharMapRec_}
@@ -442,6 +439,60 @@ const FT_ENCODING_APPLE_ROMAN = uint32(1634889070)
 type FT_Face_InternalRec_
 end
 typealias FT_Face_Internal Ptr{FT_Face_InternalRec_}
+type FT_Size_InternalRec_
+end
+typealias FT_Size_Internal Ptr{FT_Size_InternalRec_}
+type FT_Size_Metrics_
+    x_ppem::FT_UShort
+    y_ppem::FT_UShort
+    x_scale::FT_Fixed
+    y_scale::FT_Fixed
+    ascender::FT_Pos
+    descender::FT_Pos
+    height::FT_Pos
+    max_advance::FT_Pos
+end
+type FT_Size_Metrics
+    x_ppem::FT_UShort
+    y_ppem::FT_UShort
+    x_scale::FT_Fixed
+    y_scale::FT_Fixed
+    ascender::FT_Pos
+    descender::FT_Pos
+    height::FT_Pos
+    max_advance::FT_Pos
+end
+type FT_SubGlyphRec_
+end
+typealias FT_SubGlyph Ptr{FT_SubGlyphRec_}
+type FT_Slot_InternalRec_
+end
+typealias FT_Slot_Internal Ptr{FT_Slot_InternalRec_}
+type FT_GlyphSlotRec
+    library::FT_Library
+    face::Ptr{Void}
+    next::Ptr{FT_GlyphSlotRec}
+    reserved::FT_UInt
+    generic::FT_Generic
+    metrics::FT_Glyph_Metrics
+    linearHoriAdvance::FT_Fixed
+    linearVertAdvance::FT_Fixed
+    advance::FT_Vector
+    format::FT_Glyph_Format
+    bitmap::FT_Bitmap
+    bitmap_left::FT_Int
+    bitmap_top::FT_Int
+    outline::FT_Outline
+    num_subglyphs::FT_UInt
+    subglyphs::FT_SubGlyph
+    control_data::Ptr{Void}
+    control_len::Clong
+    lsb_delta::FT_Pos
+    rsb_delta::FT_Pos
+    other::Ptr{Void}
+    internal::FT_Slot_Internal
+end
+typealias FT_GlyphSlot Ptr{FT_GlyphSlotRec}
 type FT_FaceRec
     num_faces::FT_Long
     face_index::FT_Long
@@ -482,64 +533,11 @@ type FT_CharMapRec
     platform_id::FT_UShort
     encoding_id::FT_UShort
 end
-type FT_Size_InternalRec_
-end
-typealias FT_Size_Internal Ptr{FT_Size_InternalRec_}
-type FT_Size_Metrics_
-    x_ppem::FT_UShort
-    y_ppem::FT_UShort
-    x_scale::FT_Fixed
-    y_scale::FT_Fixed
-    ascender::FT_Pos
-    descender::FT_Pos
-    height::FT_Pos
-    max_advance::FT_Pos
-end
-type FT_Size_Metrics
-    x_ppem::FT_UShort
-    y_ppem::FT_UShort
-    x_scale::FT_Fixed
-    y_scale::FT_Fixed
-    ascender::FT_Pos
-    descender::FT_Pos
-    height::FT_Pos
-    max_advance::FT_Pos
-end
 type FT_SizeRec
     face::FT_Face
     generic::FT_Generic
     metrics::FT_Size_Metrics
     internal::FT_Size_Internal
-end
-type FT_SubGlyphRec_
-end
-typealias FT_SubGlyph Ptr{FT_SubGlyphRec_}
-type FT_Slot_InternalRec_
-end
-typealias FT_Slot_Internal Ptr{FT_Slot_InternalRec_}
-type FT_GlyphSlotRec
-    library::FT_Library
-    face::FT_Face
-    next::FT_GlyphSlot
-    reserved::FT_UInt
-    generic::FT_Generic
-    metrics::FT_Glyph_Metrics
-    linearHoriAdvance::FT_Fixed
-    linearVertAdvance::FT_Fixed
-    advance::FT_Vector
-    format::FT_Glyph_Format
-    bitmap::FT_Bitmap
-    bitmap_left::FT_Int
-    bitmap_top::FT_Int
-    outline::FT_Outline
-    num_subglyphs::FT_UInt
-    subglyphs::FT_SubGlyph
-    control_data::Ptr{Void}
-    control_len::Clong
-    lsb_delta::FT_Pos
-    rsb_delta::FT_Pos
-    other::Ptr{Void}
-    internal::FT_Slot_Internal
 end
 type FT_Parameter_
     tag::FT_ULong
