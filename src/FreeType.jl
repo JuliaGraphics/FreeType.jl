@@ -657,7 +657,7 @@ end
 function FT_Request_Size(face::FT_Face,req::FT_Size_Request)
     ccall((:FT_Request_Size,freetype),FT_Error,(FT_Face,FT_Size_Request),face,req)
 end
-function FT_Set_Char_Size(face::FT_Face,char_width::FT_F26Dot6,char_height::FT_F26Dot6,horz_resolution::FT_UInt,vert_resolution::FT_UInt)
+function FT_Set_Char_Size(face::FT_Face, char_width, char_height, horz_resolution, vert_resolution)
     ccall((:FT_Set_Char_Size,freetype),FT_Error,(FT_Face,FT_F26Dot6,FT_F26Dot6,FT_UInt,FT_UInt),face,char_width,char_height,horz_resolution,vert_resolution)
 end
 function FT_Set_Pixel_Sizes(face::FT_Face,pixel_width::FT_UInt,pixel_height::FT_UInt)
