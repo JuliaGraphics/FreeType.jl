@@ -39,11 +39,7 @@ type FT_StreamRec
     limit::Ptr{Cuchar}
 end
 typealias FT_Pos Clong
-type FT_Vector_
-    x::FT_Pos
-    y::FT_Pos
-end
-type FT_Vector
+immutable FT_Vector
     x::FT_Pos
     y::FT_Pos
 end
@@ -53,7 +49,7 @@ type FT_BBox_
     xMax::FT_Pos
     yMax::FT_Pos
 end
-type FT_BBox
+immutable FT_BBox
     xMin::FT_Pos
     yMin::FT_Pos
     xMax::FT_Pos
@@ -109,7 +105,7 @@ const FT_PIXEL_MODE_LCD_V = uint32(6)
 const FT_PIXEL_MODE_BGRA = uint32(7)
 const FT_PIXEL_MODE_MAX = uint32(8)
 # end enum FT_Pixel_Mode
-type FT_Bitmap_
+immutable FT_Bitmap
     rows::Cint
     width::Cint
     pitch::Cint
@@ -119,25 +115,7 @@ type FT_Bitmap_
     palette_mode::Uint8
     palette::Ptr{Void}
 end
-type FT_Bitmap
-    rows::Cint
-    width::Cint
-    pitch::Cint
-    buffer::Ptr{Cuchar}
-    num_grays::Int16
-    pixel_mode::Uint8
-    palette_mode::Uint8
-    palette::Ptr{Void}
-end
-type FT_Outline_
-    n_contours::Int16
-    n_points::Int16
-    points::Ptr{FT_Vector}
-    tags::Ptr{Uint8}
-    contours::Ptr{Int16}
-    flags::Cint
-end
-type FT_Outline
+immutable FT_Outline
     n_contours::Int16
     n_points::Int16
     points::Ptr{FT_Vector}
@@ -290,11 +268,7 @@ type FT_Data
     length::FT_Int
 end
 typealias FT_Generic_Finalizer Ptr{Void}
-type FT_Generic_
-    data::Ptr{Void}
-    finalizer::FT_Generic_Finalizer
-end
-type FT_Generic
+immutable FT_Generic
     data::Ptr{Void}
     finalizer::FT_Generic_Finalizer
 end
@@ -309,7 +283,7 @@ type FT_ListNodeRec
     next::FT_ListNode
     data::Ptr{Void}
 end
-type FT_ListRec
+immutable FT_ListRec
     head::FT_ListNode
     tail::FT_ListNode
 end
@@ -340,17 +314,7 @@ const FT_Mod_Err_Winfonts = uint32(0)
 const FT_Mod_Err_GXvalid = uint32(0)
 const FT_Mod_Err_Max = uint32(1)
 # end enum ANONYMOUS_1
-type FT_Glyph_Metrics_
-    width::FT_Pos
-    height::FT_Pos
-    horiBearingX::FT_Pos
-    horiBearingY::FT_Pos
-    horiAdvance::FT_Pos
-    vertBearingX::FT_Pos
-    vertBearingY::FT_Pos
-    vertAdvance::FT_Pos
-end
-type FT_Glyph_Metrics
+immutable FT_Glyph_Metrics
     width::FT_Pos
     height::FT_Pos
     horiBearingX::FT_Pos
