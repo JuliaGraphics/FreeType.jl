@@ -1,7 +1,9 @@
 module FreeType
 
 const freetype = find_library(["libfreetype", "libfreetype-6"],
-                              ["/usr/lib/i386-linux-gnu", "/usr/lib/x86_64-linux-gnu"])
+                              ["/usr/lib/i386-linux-gnu", "/usr/lib/x86_64-linux-gnu",
+                               Pkg.dir("WinRPM", "deps", "usr", "$(Sys.ARCH)-w64-mingw32",
+                                       "sys-root", "mingw", "bin")])
 
 typealias FT_Int16 Int16
 typealias FT_UInt16 Uint16
