@@ -80,19 +80,6 @@ const FT_LOAD_TARGET_LCD = int32(196608)
 const FT_LOAD_TARGET_LCD_V = int32(1 << 18)
 const FT_LOAD_COLOR = int32(1 << 20)
 
-
-# begin enum FT_Pixel_Mode_
-typealias FT_Pixel_Mode_ Uint32
-const FT_PIXEL_MODE_NONE = uint32(0)
-const FT_PIXEL_MODE_MONO = uint32(1)
-const FT_PIXEL_MODE_GRAY = uint32(2)
-const FT_PIXEL_MODE_GRAY2 = uint32(3)
-const FT_PIXEL_MODE_GRAY4 = uint32(4)
-const FT_PIXEL_MODE_LCD = uint32(5)
-const FT_PIXEL_MODE_LCD_V = uint32(6)
-const FT_PIXEL_MODE_BGRA = uint32(7)
-const FT_PIXEL_MODE_MAX = uint32(8)
-# end enum FT_Pixel_Mode_
 # begin enum FT_Pixel_Mode
 typealias FT_Pixel_Mode Uint32
 const FT_PIXEL_MODE_NONE = uint32(0)
@@ -867,5 +854,15 @@ export FT_RENDER_MODE_MONO
 export FT_RENDER_MODE_LCD
 export FT_RENDER_MODE_LCD_V
 export FT_RENDER_MODE_MAX
+
+export FT_PIXEL_MODE_NONE
+export FT_PIXEL_MODE_MONO
+export FT_PIXEL_MODE_GRAY
+export FT_PIXEL_MODE_GRAY2
+export FT_PIXEL_MODE_GRAY4
+export FT_PIXEL_MODE_LCD
+export FT_PIXEL_MODE_LCD_V
+export FT_PIXEL_MODE_BGRA
+export FT_PIXEL_MODE_MAX
 
 end
