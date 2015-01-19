@@ -573,7 +573,7 @@ end
 function FT_Done_FreeType(library::FT_Library)
     ccall((:FT_Done_FreeType,freetype),FT_Error,(FT_Library,),library)
 end
-function FT_New_Face(library::FT_Library,filepathname::AbstractString,face_index::FT_Long, aface)
+function FT_New_Face(library::FT_Library,filepathname::AbstractString,face_index::Integer, aface)
     ccall((:FT_New_Face,freetype),FT_Error,(FT_Library,Ptr{Uint8},FT_Long,Ptr{FT_Face}),library,filepathname,face_index,aface)
 end
 function FT_New_Memory_Face(library::FT_Library,file_base::Ptr{FT_Byte},file_size::FT_Long,face_index::FT_Long,aface::Ptr{FT_Face})
