@@ -395,17 +395,7 @@ typealias FT_Face_Internal Ptr{FT_Face_InternalRec_}
 type FT_Size_InternalRec_
 end
 typealias FT_Size_Internal Ptr{FT_Size_InternalRec_}
-type FT_Size_Metrics_
-    x_ppem::FT_UShort
-    y_ppem::FT_UShort
-    x_scale::FT_Fixed
-    y_scale::FT_Fixed
-    ascender::FT_Pos
-    descender::FT_Pos
-    height::FT_Pos
-    max_advance::FT_Pos
-end
-type FT_Size_Metrics
+immutable FT_Size_Metrics
     x_ppem::FT_UShort
     y_ppem::FT_UShort
     x_scale::FT_Fixed
