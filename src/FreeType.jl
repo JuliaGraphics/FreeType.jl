@@ -82,6 +82,22 @@ const FT_LOAD_TARGET_LCD = int32(196608)
 const FT_LOAD_TARGET_LCD_V = int32(1 << 18)
 const FT_LOAD_COLOR = int32(1 << 20)
 
+const FT_FACE_FLAG_SCALABLE         = int32(1 <<  0)
+const FT_FACE_FLAG_FIXED_SIZES      = int32(1 <<  1)
+const FT_FACE_FLAG_FIXED_WIDTH      = int32(1 <<  2)
+const FT_FACE_FLAG_SFNT             = int32(1 <<  3)
+const FT_FACE_FLAG_HORIZONTAL       = int32(1 <<  4)
+const FT_FACE_FLAG_VERTICAL         = int32(1 <<  5)
+const FT_FACE_FLAG_KERNING          = int32(1 <<  6)
+const FT_FACE_FLAG_FAST_GLYPHS      = int32(1 <<  7)
+const FT_FACE_FLAG_MULTIPLE_MASTERS = int32(1 <<  8)
+const FT_FACE_FLAG_GLYPH_NAMES      = int32(1 <<  9)
+const FT_FACE_FLAG_EXTERNAL_STREAM  = int32(1 << 10)
+const FT_FACE_FLAG_HINTER           = int32(1 << 11)
+const FT_FACE_FLAG_CID_KEYED        = int32(1 << 12)
+const FT_FACE_FLAG_TRICKY           = int32(1 << 13)
+const FT_FACE_FLAG_COLOR            = int32(1 << 14)
+
 # begin enum FT_Pixel_Mode
 typealias FT_Pixel_Mode Uint32
 const FT_PIXEL_MODE_NONE = uint32(0)
@@ -839,6 +855,22 @@ export FT_LOAD_TARGET_MONO
 export FT_LOAD_TARGET_LCD
 export FT_LOAD_TARGET_LCD_V
 export FT_LOAD_COLOR
+
+export FT_FACE_FLAG_SCALABLE
+export FT_FACE_FLAG_FIXED_SIZES
+export FT_FACE_FLAG_FIXED_WIDTH
+export FT_FACE_FLAG_SFNT
+export FT_FACE_FLAG_HORIZONTAL
+export FT_FACE_FLAG_VERTICAL
+export FT_FACE_FLAG_KERNING
+export FT_FACE_FLAG_FAST_GLYPHS
+export FT_FACE_FLAG_MULTIPLE_MASTERS
+export FT_FACE_FLAG_GLYPH_NAMES
+export FT_FACE_FLAG_EXTERNAL_STREAM
+export FT_FACE_FLAG_HINTER
+export FT_FACE_FLAG_CID_KEYED
+export FT_FACE_FLAG_TRICKY
+export FT_FACE_FLAG_COLOR
 
 export FT_RENDER_MODE_NORMAL
 export FT_RENDER_MODE_LIGHT
