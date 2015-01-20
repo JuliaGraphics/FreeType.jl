@@ -24,9 +24,6 @@ typealias FT_Realloc_Func Ptr{Void}
 type FT_StreamRec_
 end
 typealias FT_Stream Ptr{FT_StreamRec_}
-type FT_StreamDesc_
-    _FT_StreamDesc_::Ptr{Void}
-end
 type FT_StreamDesc
     _FT_StreamDesc::Ptr{Void}
 end
@@ -48,12 +45,6 @@ typealias FT_Pos Clong
 immutable FT_Vector
     x::FT_Pos
     y::FT_Pos
-end
-type FT_BBox_
-    xMin::FT_Pos
-    yMin::FT_Pos
-    xMax::FT_Pos
-    yMax::FT_Pos
 end
 immutable FT_BBox
     xMin::FT_Pos
@@ -136,14 +127,6 @@ typealias FT_Outline_MoveToFunc Ptr{Void}
 typealias FT_Outline_LineToFunc Ptr{Void}
 typealias FT_Outline_ConicToFunc Ptr{Void}
 typealias FT_Outline_CubicToFunc Ptr{Void}
-type FT_Outline_Funcs_
-    move_to::FT_Outline_MoveToFunc
-    line_to::FT_Outline_LineToFunc
-    conic_to::FT_Outline_ConicToFunc
-    cubic_to::FT_Outline_CubicToFunc
-    shift::Cint
-    delta::FT_Pos
-end
 type FT_Outline_Funcs
     move_to::FT_Outline_MoveToFunc
     line_to::FT_Outline_LineToFunc
@@ -152,14 +135,6 @@ type FT_Outline_Funcs
     shift::Cint
     delta::FT_Pos
 end
-# begin enum FT_Glyph_Format_
-typealias FT_Glyph_Format_ Uint32
-const FT_GLYPH_FORMAT_NONE = uint32(0)
-const FT_GLYPH_FORMAT_COMPOSITE = uint32(1668246896)
-const FT_GLYPH_FORMAT_BITMAP = uint32(1651078259)
-const FT_GLYPH_FORMAT_OUTLINE = uint32(1869968492)
-const FT_GLYPH_FORMAT_PLOTTER = uint32(1886154612)
-# end enum FT_Glyph_Format_
 # begin enum FT_Glyph_Format
 typealias FT_Glyph_Format Uint32
 const FT_GLYPH_FORMAT_NONE = uint32(0)
@@ -171,11 +146,6 @@ const FT_GLYPH_FORMAT_PLOTTER = uint32(1886154612)
 type FT_RasterRec_
 end
 typealias FT_Raster Ptr{FT_RasterRec_}
-type FT_Span_
-    x::Int16
-    len::Uint16
-    coverage::Cuchar
-end
 type FT_Span
     x::Int16
     len::Uint16
@@ -184,17 +154,6 @@ end
 typealias FT_SpanFunc Ptr{Void}
 typealias FT_Raster_BitTest_Func Ptr{Void}
 typealias FT_Raster_BitSet_Func Ptr{Void}
-type FT_Raster_Params_
-    target::Ptr{FT_Bitmap}
-    source::Ptr{Void}
-    flags::Cint
-    gray_spans::FT_SpanFunc
-    black_spans::FT_SpanFunc
-    bit_test::FT_Raster_BitTest_Func
-    bit_set::FT_Raster_BitSet_Func
-    user::Ptr{Void}
-    clip_box::FT_BBox
-end
 type FT_Raster_Params
     target::Ptr{FT_Bitmap}
     source::Ptr{Void}
@@ -211,14 +170,6 @@ typealias FT_Raster_DoneFunc Ptr{Void}
 typealias FT_Raster_ResetFunc Ptr{Void}
 typealias FT_Raster_SetModeFunc Ptr{Void}
 typealias FT_Raster_RenderFunc Ptr{Void}
-type FT_Raster_Funcs_
-    glyph_format::FT_Glyph_Format
-    raster_new::FT_Raster_NewFunc
-    raster_reset::FT_Raster_ResetFunc
-    raster_set_mode::FT_Raster_SetModeFunc
-    raster_render::FT_Raster_RenderFunc
-    raster_done::FT_Raster_DoneFunc
-end
 type FT_Raster_Funcs
     glyph_format::FT_Glyph_Format
     raster_new::FT_Raster_NewFunc
@@ -248,29 +199,15 @@ typealias FT_Error Cint
 typealias FT_Pointer Ptr{Void}
 typealias FT_Offset Csize_t
 typealias FT_PtrDist Cptrdiff_t
-type FT_UnitVector_
-    x::FT_F2Dot14
-    y::FT_F2Dot14
-end
 type FT_UnitVector
     x::FT_F2Dot14
     y::FT_F2Dot14
-end
-type FT_Matrix_
-    xx::FT_Fixed
-    xy::FT_Fixed
-    yx::FT_Fixed
-    yy::FT_Fixed
 end
 type FT_Matrix
     xx::FT_Fixed
     xy::FT_Fixed
     yx::FT_Fixed
     yy::FT_Fixed
-end
-type FT_Data_
-    pointer::Ptr{FT_Byte}
-    length::FT_Int
 end
 type FT_Data
     pointer::Ptr{FT_Byte}
@@ -333,13 +270,6 @@ immutable FT_Glyph_Metrics
     vertBearingY::FT_Pos
     vertAdvance::FT_Pos
 end
-type FT_Bitmap_Size_
-    height::FT_Short
-    width::FT_Short
-    size::FT_Pos
-    x_ppem::FT_Pos
-    y_ppem::FT_Pos
-end
 type FT_Bitmap_Size
     height::FT_Short
     width::FT_Short
@@ -365,28 +295,6 @@ typealias FT_Size Ptr{FT_SizeRec_}
 type FT_CharMapRec_
 end
 typealias FT_CharMap Ptr{FT_CharMapRec_}
-# begin enum FT_Encoding_
-typealias FT_Encoding_ Uint32
-const FT_ENCODING_NONE = uint32(0)
-const FT_ENCODING_MS_SYMBOL = uint32(1937337698)
-const FT_ENCODING_UNICODE = uint32(1970170211)
-const FT_ENCODING_SJIS = uint32(1936353651)
-const FT_ENCODING_GB2312 = uint32(1734484000)
-const FT_ENCODING_BIG5 = uint32(1651074869)
-const FT_ENCODING_WANSUNG = uint32(2002873971)
-const FT_ENCODING_JOHAB = uint32(1785686113)
-const FT_ENCODING_MS_SJIS = uint32(1936353651)
-const FT_ENCODING_MS_GB2312 = uint32(1734484000)
-const FT_ENCODING_MS_BIG5 = uint32(1651074869)
-const FT_ENCODING_MS_WANSUNG = uint32(2002873971)
-const FT_ENCODING_MS_JOHAB = uint32(1785686113)
-const FT_ENCODING_ADOBE_STANDARD = uint32(1094995778)
-const FT_ENCODING_ADOBE_EXPERT = uint32(1094992453)
-const FT_ENCODING_ADOBE_CUSTOM = uint32(1094992451)
-const FT_ENCODING_ADOBE_LATIN_1 = uint32(1818326065)
-const FT_ENCODING_OLD_LATIN_2 = uint32(1818326066)
-const FT_ENCODING_APPLE_ROMAN = uint32(1634889070)
-# end enum FT_Encoding_
 # begin enum FT_Encoding
 typealias FT_Encoding Uint32
 const FT_ENCODING_NONE = uint32(0)
@@ -502,23 +410,9 @@ type FT_SizeRec
     metrics::FT_Size_Metrics
     internal::FT_Size_Internal
 end
-type FT_Parameter_
-    tag::FT_ULong
-    data::FT_Pointer
-end
 type FT_Parameter
     tag::FT_ULong
     data::FT_Pointer
-end
-type FT_Open_Args_
-    flags::FT_UInt
-    memory_base::Ptr{FT_Byte}
-    memory_size::FT_Long
-    pathname::Ptr{FT_String}
-    stream::FT_Stream
-    driver::FT_Module
-    num_params::FT_Int
-    params::Ptr{FT_Parameter}
 end
 type FT_Open_Args
     flags::FT_UInt
@@ -530,15 +424,6 @@ type FT_Open_Args
     num_params::FT_Int
     params::Ptr{FT_Parameter}
 end
-# begin enum FT_Size_Request_Type_
-typealias FT_Size_Request_Type_ Uint32
-const FT_SIZE_REQUEST_TYPE_NOMINAL = uint32(0)
-const FT_SIZE_REQUEST_TYPE_REAL_DIM = uint32(1)
-const FT_SIZE_REQUEST_TYPE_BBOX = uint32(2)
-const FT_SIZE_REQUEST_TYPE_CELL = uint32(3)
-const FT_SIZE_REQUEST_TYPE_SCALES = uint32(4)
-const FT_SIZE_REQUEST_TYPE_MAX = uint32(5)
-# end enum FT_Size_Request_Type_
 # begin enum FT_Size_Request_Type
 typealias FT_Size_Request_Type Uint32
 const FT_SIZE_REQUEST_TYPE_NOMINAL = uint32(0)
@@ -548,13 +433,6 @@ const FT_SIZE_REQUEST_TYPE_CELL = uint32(3)
 const FT_SIZE_REQUEST_TYPE_SCALES = uint32(4)
 const FT_SIZE_REQUEST_TYPE_MAX = uint32(5)
 # end enum FT_Size_Request_Type
-type FT_Size_RequestRec_
-    _type::FT_Size_Request_Type
-    width::FT_Long
-    height::FT_Long
-    horiResolution::FT_UInt
-    vertResolution::FT_UInt
-end
 type FT_Size_RequestRec
     _type::FT_Size_Request_Type
     width::FT_Long
@@ -562,10 +440,7 @@ type FT_Size_RequestRec
     horiResolution::FT_UInt
     vertResolution::FT_UInt
 end
-typealias FT_Size_Request Ptr{FT_Size_RequestRec_}
-# begin enum FT_Render_Mode_
-typealias FT_Render_Mode_ Uint32
-# end enum FT_Render_Mode_
+typealias FT_Size_Request Ptr{FT_Size_RequestRec}
 # begin enum FT_Render_Mode
 typealias FT_Render_Mode Uint32
 const FT_RENDER_MODE_NORMAL = uint32(0)
@@ -575,12 +450,6 @@ const FT_RENDER_MODE_LCD = uint32(3)
 const FT_RENDER_MODE_LCD_V = uint32(4)
 const FT_RENDER_MODE_MAX = uint32(5)
 # end enum FT_Render_Mode
-# begin enum FT_Kerning_Mode_
-typealias FT_Kerning_Mode_ Uint32
-const FT_KERNING_DEFAULT = uint32(0)
-const FT_KERNING_UNFITTED = uint32(1)
-const FT_KERNING_UNSCALED = uint32(2)
-# end enum FT_Kerning_Mode_
 # begin enum FT_Kerning_Mode
 typealias FT_Kerning_Mode Uint32
 const FT_KERNING_DEFAULT = uint32(0)
