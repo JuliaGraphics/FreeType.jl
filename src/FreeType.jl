@@ -5,6 +5,10 @@ const freetype = find_library(["libfreetype", "libfreetype-6"],
                                Pkg.dir("WinRPM", "deps", "usr", "$(Sys.ARCH)-w64-mingw32",
                                        "sys-root", "mingw", "bin")])
 
+if VERSION < v"0.4.0-"
+    typealias AbstractString String
+end
+
 typealias FT_Int16 Int16
 typealias FT_UInt16 Uint16
 typealias FT_Int32 Cint
