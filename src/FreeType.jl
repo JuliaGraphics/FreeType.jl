@@ -15,15 +15,11 @@ typealias FT_Int32 Cint
 typealias FT_UInt32 Uint32
 typealias FT_Fast Cint
 typealias FT_UFast Uint32
-type FT_MemoryRec_
-end
+abstract FT_MemoryRec_
 typealias FT_Memory Ptr{FT_MemoryRec_}
 typealias FT_Alloc_Func Ptr{Void}
 typealias FT_Free_Func Ptr{Void}
 typealias FT_Realloc_Func Ptr{Void}
-type FT_StreamRec_
-end
-typealias FT_Stream Ptr{FT_StreamRec_}
 type FT_StreamDesc
     _FT_StreamDesc::Ptr{Void}
 end
@@ -41,6 +37,7 @@ type FT_StreamRec
     cursor::Ptr{Cuchar}
     limit::Ptr{Cuchar}
 end
+typealias FT_Stream Ptr{FT_StreamRec}
 typealias FT_Pos Clong
 immutable FT_Vector
     x::FT_Pos
@@ -143,8 +140,7 @@ const FT_GLYPH_FORMAT_BITMAP = uint32(1651078259)
 const FT_GLYPH_FORMAT_OUTLINE = uint32(1869968492)
 const FT_GLYPH_FORMAT_PLOTTER = uint32(1886154612)
 # end enum FT_Glyph_Format
-type FT_RasterRec_
-end
+abstract FT_RasterRec_
 typealias FT_Raster Ptr{FT_RasterRec_}
 type FT_Span
     x::Int16
@@ -218,13 +214,9 @@ immutable FT_Generic
     data::Ptr{Void}
     finalizer::FT_Generic_Finalizer
 end
-type FT_ListNodeRec_
-end
+abstract FT_ListNodeRec_
 typealias FT_ListNode Ptr{FT_ListNodeRec_}
-type FT_ListRec_
-end
-typealias FT_List Ptr{FT_ListRec_}
-type FT_ListNodeRec
+type FT_ListNodeRec <: FT_ListNodeRec_
     prev::FT_ListNode
     next::FT_ListNode
     data::Ptr{Void}
@@ -233,6 +225,7 @@ immutable FT_ListRec
     head::FT_ListNode
     tail::FT_ListNode
 end
+typealias FT_List Ptr{FT_ListRec}
 # begin enum ANONYMOUS_1
 typealias ANONYMOUS_1 Uint32
 const FT_Mod_Err_Base = uint32(0)
@@ -277,23 +270,17 @@ type FT_Bitmap_Size
     x_ppem::FT_Pos
     y_ppem::FT_Pos
 end
-type FT_LibraryRec_
-end
+abstract FT_LibraryRec_
 typealias FT_Library Ptr{FT_LibraryRec_}
-type FT_ModuleRec_
-end
+abstract FT_ModuleRec_
 typealias FT_Module Ptr{FT_ModuleRec_}
-type FT_DriverRec_
-end
+abstract FT_DriverRec_
 typealias FT_Driver Ptr{FT_DriverRec_}
-type FT_RendererRec_
-end
+abstract FT_RendererRec_
 typealias FT_Renderer Ptr{FT_RendererRec_}
-type FT_SizeRec_
-end
+abstract FT_SizeRec_
 typealias FT_Size Ptr{FT_SizeRec_}
-type FT_CharMapRec_
-end
+abstract FT_CharMapRec_
 typealias FT_CharMap Ptr{FT_CharMapRec_}
 # begin enum FT_Encoding
 typealias FT_Encoding Uint32
@@ -317,11 +304,9 @@ const FT_ENCODING_ADOBE_LATIN_1 = uint32(1818326065)
 const FT_ENCODING_OLD_LATIN_2 = uint32(1818326066)
 const FT_ENCODING_APPLE_ROMAN = uint32(1634889070)
 # end enum FT_Encoding
-type FT_Face_InternalRec_
-end
+abstract FT_Face_InternalRec_
 typealias FT_Face_Internal Ptr{FT_Face_InternalRec_}
-type FT_Size_InternalRec_
-end
+abstract FT_Size_InternalRec_
 typealias FT_Size_Internal Ptr{FT_Size_InternalRec_}
 immutable FT_Size_Metrics
     x_ppem::FT_UShort
@@ -333,11 +318,9 @@ immutable FT_Size_Metrics
     height::FT_Pos
     max_advance::FT_Pos
 end
-type FT_SubGlyphRec_
-end
+abstract FT_SubGlyphRec_
 typealias FT_SubGlyph Ptr{FT_SubGlyphRec_}
-type FT_Slot_InternalRec_
-end
+abstract FT_Slot_InternalRec_
 typealias FT_Slot_Internal Ptr{FT_Slot_InternalRec_}
 type FT_GlyphSlotRec
     library::FT_Library
@@ -398,13 +381,13 @@ type FT_FaceRec
     internal::FT_Face_Internal
 end
 typealias FT_Face Ptr{FT_FaceRec}
-type FT_CharMapRec
+type FT_CharMapRec <: FT_CharMapRec_
     face::FT_Face
     encoding::FT_Encoding
     platform_id::FT_UShort
     encoding_id::FT_UShort
 end
-type FT_SizeRec
+type FT_SizeRec <: FT_SizeRec_
     face::FT_Face
     generic::FT_Generic
     metrics::FT_Size_Metrics
