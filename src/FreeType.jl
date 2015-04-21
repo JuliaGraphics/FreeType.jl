@@ -1,9 +1,9 @@
 module FreeType
 
-const freetype = find_library(["libfreetype", "libfreetype-6"],
-                              ["/usr/lib/i386-linux-gnu", "/usr/lib/x86_64-linux-gnu",
-                               Pkg.dir("WinRPM", "deps", "usr", "$(Sys.ARCH)-w64-mingw32",
-                                       "sys-root", "mingw", "bin")])
+const freetype = Libdl.find_library(["libfreetype", "libfreetype-6"],
+                                    ["/usr/lib/i386-linux-gnu", "/usr/lib/x86_64-linux-gnu",
+                                     Pkg.dir("WinRPM", "deps", "usr", "$(Sys.ARCH)-w64-mingw32",
+                                             "sys-root", "mingw", "bin")])
 
 using Compat
 
@@ -48,57 +48,57 @@ immutable FT_BBox
     yMax::FT_Pos
 end
 
-const FT_LOAD_DEFAULT = int32(0)
-const FT_LOAD_TARGET_NORMAL = int32(0)
-const FT_LOAD_NO_SCALE = int32(1 << 0)
-const FT_LOAD_NO_HINTING = int32(1 << 1)
-const FT_LOAD_RENDER = int32(1 << 2)
-const FT_LOAD_NO_BITMAP = int32(1 << 3)
-const FT_LOAD_VERTICAL_LAYOUT = int32(1 << 4)
-const FT_LOAD_FORCE_AUTOHINT = int32(1 << 5)
-const FT_LOAD_CROP_BITMAP = int32(1 << 6)
-const FT_LOAD_PEDANTIC = int32(1 << 7)
-const FT_LOAD_ADVANCE_ONLY = int32(1 << 8)
-const FT_LOAD_IGNORE_GLOBAL_ADVANCE_WIDTH = int32(1 << 9)
-const FT_LOAD_NO_RECURSE = int32(1 << 10)
-const FT_LOAD_IGNORE_TRANSFORM = int32(1 << 11)
-const FT_LOAD_MONOCHROME = int32(1 << 12)
-const FT_LOAD_LINEAR_DESIGN = int32(1 << 13)
-const FT_LOAD_SBITS_ONLY = int32(1 << 14)
-const FT_LOAD_NO_AUTOHINT = int32(1 << 15)
-const FT_LOAD_TARGET_LIGHT = int32(1 << 16)
-const FT_LOAD_TARGET_MONO = int32(1 << 17)
-const FT_LOAD_TARGET_LCD = int32(196608)
-const FT_LOAD_TARGET_LCD_V = int32(1 << 18)
-const FT_LOAD_COLOR = int32(1 << 20)
+const FT_LOAD_DEFAULT = Int32(0)
+const FT_LOAD_TARGET_NORMAL = Int32(0)
+const FT_LOAD_NO_SCALE = Int32(1 << 0)
+const FT_LOAD_NO_HINTING = Int32(1 << 1)
+const FT_LOAD_RENDER = Int32(1 << 2)
+const FT_LOAD_NO_BITMAP = Int32(1 << 3)
+const FT_LOAD_VERTICAL_LAYOUT = Int32(1 << 4)
+const FT_LOAD_FORCE_AUTOHINT = Int32(1 << 5)
+const FT_LOAD_CROP_BITMAP = Int32(1 << 6)
+const FT_LOAD_PEDANTIC = Int32(1 << 7)
+const FT_LOAD_ADVANCE_ONLY = Int32(1 << 8)
+const FT_LOAD_IGNORE_GLOBAL_ADVANCE_WIDTH = Int32(1 << 9)
+const FT_LOAD_NO_RECURSE = Int32(1 << 10)
+const FT_LOAD_IGNORE_TRANSFORM = Int32(1 << 11)
+const FT_LOAD_MONOCHROME = Int32(1 << 12)
+const FT_LOAD_LINEAR_DESIGN = Int32(1 << 13)
+const FT_LOAD_SBITS_ONLY = Int32(1 << 14)
+const FT_LOAD_NO_AUTOHINT = Int32(1 << 15)
+const FT_LOAD_TARGET_LIGHT = Int32(1 << 16)
+const FT_LOAD_TARGET_MONO = Int32(1 << 17)
+const FT_LOAD_TARGET_LCD = Int32(196608)
+const FT_LOAD_TARGET_LCD_V = Int32(1 << 18)
+const FT_LOAD_COLOR = Int32(1 << 20)
 
-const FT_FACE_FLAG_SCALABLE         = int32(1 <<  0)
-const FT_FACE_FLAG_FIXED_SIZES      = int32(1 <<  1)
-const FT_FACE_FLAG_FIXED_WIDTH      = int32(1 <<  2)
-const FT_FACE_FLAG_SFNT             = int32(1 <<  3)
-const FT_FACE_FLAG_HORIZONTAL       = int32(1 <<  4)
-const FT_FACE_FLAG_VERTICAL         = int32(1 <<  5)
-const FT_FACE_FLAG_KERNING          = int32(1 <<  6)
-const FT_FACE_FLAG_FAST_GLYPHS      = int32(1 <<  7)
-const FT_FACE_FLAG_MULTIPLE_MASTERS = int32(1 <<  8)
-const FT_FACE_FLAG_GLYPH_NAMES      = int32(1 <<  9)
-const FT_FACE_FLAG_EXTERNAL_STREAM  = int32(1 << 10)
-const FT_FACE_FLAG_HINTER           = int32(1 << 11)
-const FT_FACE_FLAG_CID_KEYED        = int32(1 << 12)
-const FT_FACE_FLAG_TRICKY           = int32(1 << 13)
-const FT_FACE_FLAG_COLOR            = int32(1 << 14)
+const FT_FACE_FLAG_SCALABLE         = Int32(1 <<  0)
+const FT_FACE_FLAG_FIXED_SIZES      = Int32(1 <<  1)
+const FT_FACE_FLAG_FIXED_WIDTH      = Int32(1 <<  2)
+const FT_FACE_FLAG_SFNT             = Int32(1 <<  3)
+const FT_FACE_FLAG_HORIZONTAL       = Int32(1 <<  4)
+const FT_FACE_FLAG_VERTICAL         = Int32(1 <<  5)
+const FT_FACE_FLAG_KERNING          = Int32(1 <<  6)
+const FT_FACE_FLAG_FAST_GLYPHS      = Int32(1 <<  7)
+const FT_FACE_FLAG_MULTIPLE_MASTERS = Int32(1 <<  8)
+const FT_FACE_FLAG_GLYPH_NAMES      = Int32(1 <<  9)
+const FT_FACE_FLAG_EXTERNAL_STREAM  = Int32(1 << 10)
+const FT_FACE_FLAG_HINTER           = Int32(1 << 11)
+const FT_FACE_FLAG_CID_KEYED        = Int32(1 << 12)
+const FT_FACE_FLAG_TRICKY           = Int32(1 << 13)
+const FT_FACE_FLAG_COLOR            = Int32(1 << 14)
 
 # begin enum FT_Pixel_Mode
 typealias FT_Pixel_Mode Uint32
-const FT_PIXEL_MODE_NONE = uint32(0)
-const FT_PIXEL_MODE_MONO = uint32(1)
-const FT_PIXEL_MODE_GRAY = uint32(2)
-const FT_PIXEL_MODE_GRAY2 = uint32(3)
-const FT_PIXEL_MODE_GRAY4 = uint32(4)
-const FT_PIXEL_MODE_LCD = uint32(5)
-const FT_PIXEL_MODE_LCD_V = uint32(6)
-const FT_PIXEL_MODE_BGRA = uint32(7)
-const FT_PIXEL_MODE_MAX = uint32(8)
+const FT_PIXEL_MODE_NONE = UInt32(0)
+const FT_PIXEL_MODE_MONO = UInt32(1)
+const FT_PIXEL_MODE_GRAY = UInt32(2)
+const FT_PIXEL_MODE_GRAY2 = UInt32(3)
+const FT_PIXEL_MODE_GRAY4 = UInt32(4)
+const FT_PIXEL_MODE_LCD = UInt32(5)
+const FT_PIXEL_MODE_LCD_V = UInt32(6)
+const FT_PIXEL_MODE_BGRA = UInt32(7)
+const FT_PIXEL_MODE_MAX = UInt32(8)
 # end enum FT_Pixel_Mode
 immutable FT_Bitmap
     rows::Cint
@@ -132,11 +132,11 @@ type FT_Outline_Funcs
 end
 # begin enum FT_Glyph_Format
 typealias FT_Glyph_Format Uint32
-const FT_GLYPH_FORMAT_NONE = uint32(0)
-const FT_GLYPH_FORMAT_COMPOSITE = uint32(1668246896)
-const FT_GLYPH_FORMAT_BITMAP = uint32(1651078259)
-const FT_GLYPH_FORMAT_OUTLINE = uint32(1869968492)
-const FT_GLYPH_FORMAT_PLOTTER = uint32(1886154612)
+const FT_GLYPH_FORMAT_NONE = UInt32(0)
+const FT_GLYPH_FORMAT_COMPOSITE = UInt32(1668246896)
+const FT_GLYPH_FORMAT_BITMAP = UInt32(1651078259)
+const FT_GLYPH_FORMAT_OUTLINE = UInt32(1869968492)
+const FT_GLYPH_FORMAT_PLOTTER = UInt32(1886154612)
 # end enum FT_Glyph_Format
 abstract FT_RasterRec_
 typealias FT_Raster Ptr{FT_RasterRec_}
@@ -226,30 +226,30 @@ end
 typealias FT_List Ptr{FT_ListRec}
 # begin enum ANONYMOUS_1
 typealias ANONYMOUS_1 Uint32
-const FT_Mod_Err_Base = uint32(0)
-const FT_Mod_Err_Autofit = uint32(0)
-const FT_Mod_Err_BDF = uint32(0)
-const FT_Mod_Err_Bzip2 = uint32(0)
-const FT_Mod_Err_Cache = uint32(0)
-const FT_Mod_Err_CFF = uint32(0)
-const FT_Mod_Err_CID = uint32(0)
-const FT_Mod_Err_Gzip = uint32(0)
-const FT_Mod_Err_LZW = uint32(0)
-const FT_Mod_Err_OTvalid = uint32(0)
-const FT_Mod_Err_PCF = uint32(0)
-const FT_Mod_Err_PFR = uint32(0)
-const FT_Mod_Err_PSaux = uint32(0)
-const FT_Mod_Err_PShinter = uint32(0)
-const FT_Mod_Err_PSnames = uint32(0)
-const FT_Mod_Err_Raster = uint32(0)
-const FT_Mod_Err_SFNT = uint32(0)
-const FT_Mod_Err_Smooth = uint32(0)
-const FT_Mod_Err_TrueType = uint32(0)
-const FT_Mod_Err_Type1 = uint32(0)
-const FT_Mod_Err_Type42 = uint32(0)
-const FT_Mod_Err_Winfonts = uint32(0)
-const FT_Mod_Err_GXvalid = uint32(0)
-const FT_Mod_Err_Max = uint32(1)
+const FT_Mod_Err_Base = UInt32(0)
+const FT_Mod_Err_Autofit = UInt32(0)
+const FT_Mod_Err_BDF = UInt32(0)
+const FT_Mod_Err_Bzip2 = UInt32(0)
+const FT_Mod_Err_Cache = UInt32(0)
+const FT_Mod_Err_CFF = UInt32(0)
+const FT_Mod_Err_CID = UInt32(0)
+const FT_Mod_Err_Gzip = UInt32(0)
+const FT_Mod_Err_LZW = UInt32(0)
+const FT_Mod_Err_OTvalid = UInt32(0)
+const FT_Mod_Err_PCF = UInt32(0)
+const FT_Mod_Err_PFR = UInt32(0)
+const FT_Mod_Err_PSaux = UInt32(0)
+const FT_Mod_Err_PShinter = UInt32(0)
+const FT_Mod_Err_PSnames = UInt32(0)
+const FT_Mod_Err_Raster = UInt32(0)
+const FT_Mod_Err_SFNT = UInt32(0)
+const FT_Mod_Err_Smooth = UInt32(0)
+const FT_Mod_Err_TrueType = UInt32(0)
+const FT_Mod_Err_Type1 = UInt32(0)
+const FT_Mod_Err_Type42 = UInt32(0)
+const FT_Mod_Err_Winfonts = UInt32(0)
+const FT_Mod_Err_GXvalid = UInt32(0)
+const FT_Mod_Err_Max = UInt32(1)
 # end enum ANONYMOUS_1
 immutable FT_Glyph_Metrics
     width::FT_Pos
@@ -282,25 +282,25 @@ abstract FT_CharMapRec_
 typealias FT_CharMap Ptr{FT_CharMapRec_}
 # begin enum FT_Encoding
 typealias FT_Encoding Uint32
-const FT_ENCODING_NONE = uint32(0)
-const FT_ENCODING_MS_SYMBOL = uint32(1937337698)
-const FT_ENCODING_UNICODE = uint32(1970170211)
-const FT_ENCODING_SJIS = uint32(1936353651)
-const FT_ENCODING_GB2312 = uint32(1734484000)
-const FT_ENCODING_BIG5 = uint32(1651074869)
-const FT_ENCODING_WANSUNG = uint32(2002873971)
-const FT_ENCODING_JOHAB = uint32(1785686113)
-const FT_ENCODING_MS_SJIS = uint32(1936353651)
-const FT_ENCODING_MS_GB2312 = uint32(1734484000)
-const FT_ENCODING_MS_BIG5 = uint32(1651074869)
-const FT_ENCODING_MS_WANSUNG = uint32(2002873971)
-const FT_ENCODING_MS_JOHAB = uint32(1785686113)
-const FT_ENCODING_ADOBE_STANDARD = uint32(1094995778)
-const FT_ENCODING_ADOBE_EXPERT = uint32(1094992453)
-const FT_ENCODING_ADOBE_CUSTOM = uint32(1094992451)
-const FT_ENCODING_ADOBE_LATIN_1 = uint32(1818326065)
-const FT_ENCODING_OLD_LATIN_2 = uint32(1818326066)
-const FT_ENCODING_APPLE_ROMAN = uint32(1634889070)
+const FT_ENCODING_NONE = UInt32(0)
+const FT_ENCODING_MS_SYMBOL = UInt32(1937337698)
+const FT_ENCODING_UNICODE = UInt32(1970170211)
+const FT_ENCODING_SJIS = UInt32(1936353651)
+const FT_ENCODING_GB2312 = UInt32(1734484000)
+const FT_ENCODING_BIG5 = UInt32(1651074869)
+const FT_ENCODING_WANSUNG = UInt32(2002873971)
+const FT_ENCODING_JOHAB = UInt32(1785686113)
+const FT_ENCODING_MS_SJIS = UInt32(1936353651)
+const FT_ENCODING_MS_GB2312 = UInt32(1734484000)
+const FT_ENCODING_MS_BIG5 = UInt32(1651074869)
+const FT_ENCODING_MS_WANSUNG = UInt32(2002873971)
+const FT_ENCODING_MS_JOHAB = UInt32(1785686113)
+const FT_ENCODING_ADOBE_STANDARD = UInt32(1094995778)
+const FT_ENCODING_ADOBE_EXPERT = UInt32(1094992453)
+const FT_ENCODING_ADOBE_CUSTOM = UInt32(1094992451)
+const FT_ENCODING_ADOBE_LATIN_1 = UInt32(1818326065)
+const FT_ENCODING_OLD_LATIN_2 = UInt32(1818326066)
+const FT_ENCODING_APPLE_ROMAN = UInt32(1634889070)
 # end enum FT_Encoding
 abstract FT_Face_InternalRec_
 typealias FT_Face_Internal Ptr{FT_Face_InternalRec_}
@@ -407,12 +407,12 @@ type FT_Open_Args
 end
 # begin enum FT_Size_Request_Type
 typealias FT_Size_Request_Type Uint32
-const FT_SIZE_REQUEST_TYPE_NOMINAL = uint32(0)
-const FT_SIZE_REQUEST_TYPE_REAL_DIM = uint32(1)
-const FT_SIZE_REQUEST_TYPE_BBOX = uint32(2)
-const FT_SIZE_REQUEST_TYPE_CELL = uint32(3)
-const FT_SIZE_REQUEST_TYPE_SCALES = uint32(4)
-const FT_SIZE_REQUEST_TYPE_MAX = uint32(5)
+const FT_SIZE_REQUEST_TYPE_NOMINAL = UInt32(0)
+const FT_SIZE_REQUEST_TYPE_REAL_DIM = UInt32(1)
+const FT_SIZE_REQUEST_TYPE_BBOX = UInt32(2)
+const FT_SIZE_REQUEST_TYPE_CELL = UInt32(3)
+const FT_SIZE_REQUEST_TYPE_SCALES = UInt32(4)
+const FT_SIZE_REQUEST_TYPE_MAX = UInt32(5)
 # end enum FT_Size_Request_Type
 type FT_Size_RequestRec
     _type::FT_Size_Request_Type
@@ -424,18 +424,18 @@ end
 typealias FT_Size_Request Ptr{FT_Size_RequestRec}
 # begin enum FT_Render_Mode
 typealias FT_Render_Mode Uint32
-const FT_RENDER_MODE_NORMAL = uint32(0)
-const FT_RENDER_MODE_LIGHT = uint32(1)
-const FT_RENDER_MODE_MONO = uint32(2)
-const FT_RENDER_MODE_LCD = uint32(3)
-const FT_RENDER_MODE_LCD_V = uint32(4)
-const FT_RENDER_MODE_MAX = uint32(5)
+const FT_RENDER_MODE_NORMAL = UInt32(0)
+const FT_RENDER_MODE_LIGHT = UInt32(1)
+const FT_RENDER_MODE_MONO = UInt32(2)
+const FT_RENDER_MODE_LCD = UInt32(3)
+const FT_RENDER_MODE_LCD_V = UInt32(4)
+const FT_RENDER_MODE_MAX = UInt32(5)
 # end enum FT_Render_Mode
 # begin enum FT_Kerning_Mode
 typealias FT_Kerning_Mode Uint32
-const FT_KERNING_DEFAULT = uint32(0)
-const FT_KERNING_UNFITTED = uint32(1)
-const FT_KERNING_UNSCALED = uint32(2)
+const FT_KERNING_DEFAULT = UInt32(0)
+const FT_KERNING_UNFITTED = UInt32(1)
+const FT_KERNING_UNSCALED = UInt32(2)
 # end enum FT_Kerning_Mode
 function FT_Init_FreeType(alibrary)
     ccall((:FT_Init_FreeType,freetype),FT_Error,(Ptr{FT_Library},),alibrary)
