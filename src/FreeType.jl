@@ -3,12 +3,17 @@ module FreeType
 using Compat
 
 const freetype = Libdl.find_library(
-    ["libfreetype", "libfreetype-6"],
+    ["libfreetype", "libfreetype-6", "libfreetype.6", "freetype"],
     [
         "/usr/lib/i386-linux-gnu", "/usr/lib/x86_64-linux-gnu",
-        Pkg.dir("WinRPM", "deps", "usr", "$(Sys.ARCH)-w64-mingw32", "sys-root", "mingw", "bin")
+        Pkg.dir("WinRPM", "deps", "usr", "$(Sys.ARCH)-w64-mingw32", "sys-root", "mingw", "bin"),
+        "/Developer/SDKs/MacOSX10.7.sdk/usr/X11/include/freetype2", "/usr/X11/lib/"
     ]
 )
+
+if isempty(freetype)
+    error("FreeType library could not be found. Please file an issue here: https://github.com/jhasse/FreeType.jl/issues/new")
+end
 
 typealias FT_Int16 Int16
 typealias FT_UInt16 Uint16
