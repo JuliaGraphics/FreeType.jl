@@ -1,3 +1,5 @@
+using Compat
+
 @windows_only begin
     using WinRPM
     WinRPM.install("libfreetype6")
