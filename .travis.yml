@@ -4,10 +4,13 @@ os:
     - osx
     - linux
 julia:
-    - release
+    - 0.3
+    - 0.4
     - nightly
 notifications:
     email: false
 script:
-    - julia -e 'Pkg.clone(pwd()); Pkg.build("FreeType"); Pkg.test("FreeType"; coverage=true)';
-    - julia -e 'cd(Pkg.dir("FreeType")); Pkg.add("Coverage"); using Coverage; Codecov.submit(process_folder())';
+    - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
+    - julia -e 'Pkg.clone(pwd()); Pkg.build("FreeType"); Pkg.test("FreeType"; coverage=true)'
+after_success:
+    - julia -e 'cd(Pkg.dir("FreeType")); Pkg.add("Coverage"); using Coverage; Coveralls.submit(process_folder()); Codecov.submit(process_folder())'
