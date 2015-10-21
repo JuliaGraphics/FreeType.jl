@@ -13,11 +13,11 @@ function __init__()
 end
 
 typealias FT_Int16 Int16
-typealias FT_UInt16 Uint16
+typealias FT_UInt16 UInt16
 typealias FT_Int32 Cint
-typealias FT_UInt32 Uint32
+typealias FT_UInt32 UInt32
 typealias FT_Fast Cint
-typealias FT_UFast Uint32
+typealias FT_UFast UInt32
 abstract FT_MemoryRec_
 typealias FT_Memory Ptr{FT_MemoryRec_}
 typealias FT_Alloc_Func Ptr{Void}
@@ -94,7 +94,7 @@ const FT_FACE_FLAG_TRICKY           = @compat Int32(1 << 13)
 const FT_FACE_FLAG_COLOR            = @compat Int32(1 << 14)
 
 # begin enum FT_Pixel_Mode
-typealias FT_Pixel_Mode Uint32
+typealias FT_Pixel_Mode UInt32
 const FT_PIXEL_MODE_NONE = @compat UInt32(0)
 const FT_PIXEL_MODE_MONO = @compat UInt32(1)
 const FT_PIXEL_MODE_GRAY = @compat UInt32(2)
@@ -111,15 +111,15 @@ immutable FT_Bitmap
     pitch::Cint
     buffer::Ptr{Cuchar}
     num_grays::Int16
-    pixel_mode::Uint8
-    palette_mode::Uint8
+    pixel_mode::UInt8
+    palette_mode::UInt8
     palette::Ptr{Void}
 end
 immutable FT_Outline
     n_contours::Int16
     n_points::Int16
     points::Ptr{FT_Vector}
-    tags::Ptr{Uint8}
+    tags::Ptr{UInt8}
     contours::Ptr{Int16}
     flags::Cint
 end
@@ -136,7 +136,7 @@ type FT_Outline_Funcs
     delta::FT_Pos
 end
 # begin enum FT_Glyph_Format
-typealias FT_Glyph_Format Uint32
+typealias FT_Glyph_Format UInt32
 const FT_GLYPH_FORMAT_NONE = @compat UInt32(0)
 const FT_GLYPH_FORMAT_COMPOSITE = @compat UInt32(1668246896)
 const FT_GLYPH_FORMAT_BITMAP = @compat UInt32(1651078259)
@@ -147,7 +147,7 @@ abstract FT_RasterRec_
 typealias FT_Raster Ptr{FT_RasterRec_}
 type FT_Span
     x::Int16
-    len::Uint16
+    len::UInt16
     coverage::Cuchar
 end
 typealias FT_SpanFunc Ptr{Void}
@@ -179,16 +179,16 @@ type FT_Raster_Funcs
 end
 typealias FT_Bool Cuchar
 typealias FT_FWord Int16
-typealias FT_UFWord Uint16
-typealias FT_Char Uint8
+typealias FT_UFWord UInt16
+typealias FT_Char UInt8
 typealias FT_Byte Cuchar
 typealias FT_Bytes Ptr{FT_Byte}
 typealias FT_Tag FT_UInt32
-typealias FT_String Uint8
+typealias FT_String UInt8
 typealias FT_Short Int16
-typealias FT_UShort Uint16
+typealias FT_UShort UInt16
 typealias FT_Int Cint
-typealias FT_UInt Uint32
+typealias FT_UInt UInt32
 typealias FT_Long Clong
 typealias FT_ULong Culong
 typealias FT_F2Dot14 Int16
@@ -230,7 +230,7 @@ immutable FT_ListRec
 end
 typealias FT_List Ptr{FT_ListRec}
 # begin enum ANONYMOUS_1
-typealias ANONYMOUS_1 Uint32
+typealias ANONYMOUS_1 UInt32
 const FT_Mod_Err_Base = @compat UInt32(0)
 const FT_Mod_Err_Autofit = @compat UInt32(0)
 const FT_Mod_Err_BDF = @compat UInt32(0)
@@ -286,7 +286,7 @@ typealias FT_Size Ptr{FT_SizeRec_}
 abstract FT_CharMapRec_
 typealias FT_CharMap Ptr{FT_CharMapRec_}
 # begin enum FT_Encoding
-typealias FT_Encoding Uint32
+typealias FT_Encoding UInt32
 const FT_ENCODING_NONE = @compat UInt32(0)
 const FT_ENCODING_MS_SYMBOL = @compat UInt32(1937337698)
 const FT_ENCODING_UNICODE = @compat UInt32(1970170211)
@@ -411,7 +411,7 @@ type FT_Open_Args
     params::Ptr{FT_Parameter}
 end
 # begin enum FT_Size_Request_Type
-typealias FT_Size_Request_Type Uint32
+typealias FT_Size_Request_Type UInt32
 const FT_SIZE_REQUEST_TYPE_NOMINAL = @compat UInt32(0)
 const FT_SIZE_REQUEST_TYPE_REAL_DIM = @compat UInt32(1)
 const FT_SIZE_REQUEST_TYPE_BBOX = @compat UInt32(2)
@@ -428,7 +428,7 @@ type FT_Size_RequestRec
 end
 typealias FT_Size_Request Ptr{FT_Size_RequestRec}
 # begin enum FT_Render_Mode
-typealias FT_Render_Mode Uint32
+typealias FT_Render_Mode UInt32
 const FT_RENDER_MODE_NORMAL = @compat UInt32(0)
 const FT_RENDER_MODE_LIGHT = @compat UInt32(1)
 const FT_RENDER_MODE_MONO = @compat UInt32(2)
@@ -437,7 +437,7 @@ const FT_RENDER_MODE_LCD_V = @compat UInt32(4)
 const FT_RENDER_MODE_MAX = @compat UInt32(5)
 # end enum FT_Render_Mode
 # begin enum FT_Kerning_Mode
-typealias FT_Kerning_Mode Uint32
+typealias FT_Kerning_Mode UInt32
 const FT_KERNING_DEFAULT = @compat UInt32(0)
 const FT_KERNING_UNFITTED = @compat UInt32(1)
 const FT_KERNING_UNSCALED = @compat UInt32(2)
@@ -449,7 +449,7 @@ function FT_Done_FreeType(library::FT_Library)
     ccall((:FT_Done_FreeType,freetype),FT_Error,(FT_Library,),library)
 end
 function FT_New_Face(library::FT_Library,filepathname::AbstractString,face_index::Integer, aface)
-    ccall((:FT_New_Face,freetype),FT_Error,(FT_Library,Ptr{Uint8},FT_Long,Ptr{FT_Face}),library,filepathname,face_index,aface)
+    ccall((:FT_New_Face,freetype),FT_Error,(FT_Library,Ptr{UInt8},FT_Long,Ptr{FT_Face}),library,filepathname,face_index,aface)
 end
 function FT_New_Memory_Face(library::FT_Library,file_base::Ptr{FT_Byte},file_size::FT_Long,face_index::FT_Long,aface::Ptr{FT_Face})
     ccall((:FT_New_Memory_Face,freetype),FT_Error,(FT_Library,Ptr{FT_Byte},FT_Long,FT_Long,Ptr{FT_Face}),library,file_base,file_size,face_index,aface)
@@ -458,7 +458,7 @@ function FT_Open_Face(library::FT_Library,args::Ptr{FT_Open_Args},face_index::FT
     ccall((:FT_Open_Face,freetype),FT_Error,(FT_Library,Ptr{FT_Open_Args},FT_Long,Ptr{FT_Face}),library,args,face_index,aface)
 end
 function FT_Attach_File(face::FT_Face,filepathname::AbstractString)
-    ccall((:FT_Attach_File,freetype),FT_Error,(FT_Face,Ptr{Uint8}),face,filepathname)
+    ccall((:FT_Attach_File,freetype),FT_Error,(FT_Face,Ptr{UInt8}),face,filepathname)
 end
 function FT_Attach_Stream(face::FT_Face,parameters::Ptr{FT_Open_Args})
     ccall((:FT_Attach_Stream,freetype),FT_Error,(FT_Face,Ptr{FT_Open_Args}),face,parameters)
@@ -503,7 +503,7 @@ function FT_Get_Glyph_Name(face::FT_Face,glyph_index::FT_UInt,buffer::FT_Pointer
     ccall((:FT_Get_Glyph_Name,freetype),FT_Error,(FT_Face,FT_UInt,FT_Pointer,FT_UInt),face,glyph_index,buffer,buffer_max)
 end
 function FT_Get_Postscript_Name(face::FT_Face)
-    ccall((:FT_Get_Postscript_Name,freetype),Ptr{Uint8},(FT_Face,),face)
+    ccall((:FT_Get_Postscript_Name,freetype),Ptr{UInt8},(FT_Face,),face)
 end
 function FT_Select_Charmap(face::FT_Face,encoding::FT_Encoding)
     ccall((:FT_Select_Charmap,freetype),FT_Error,(FT_Face,FT_Encoding),face,encoding)
