@@ -1,6 +1,6 @@
 # FreeType.jl
 
-[![Build Status](https://travis-ci.org/jhasse/FreeType.jl.svg?branch=master)](https://travis-ci.org/jhasse/FreeType.jl)
+[![Build Status](https://travis-ci.org/JuliaGraphics/FreeType.jl.svg?branch=master)](https://travis-ci.org/jhasse/FreeType.jl)
 
 [FreeType](http://www.freetype.org/) bindings for [Julia](http://julialang.org/).
 
