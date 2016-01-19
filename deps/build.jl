@@ -2,7 +2,7 @@ using Compat
 
 @windows_only begin
     using WinRPM
-    WinRPM.install("libfreetype6")
+    WinRPM.install("libfreetype6", yes=true)
 end
 
 const freetype = Libdl.find_library(
