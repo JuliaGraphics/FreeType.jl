@@ -493,7 +493,7 @@ end
 function FT_Render_Glyph(slot::FT_GlyphSlot,render_mode::FT_Render_Mode)
     ccall((:FT_Render_Glyph,freetype),FT_Error,(FT_GlyphSlot,FT_Render_Mode),slot,render_mode)
 end
-function FT_Get_Kerning(face::FT_Face,left_glyph::FT_UInt,right_glyph::FT_UInt,kern_mode::FT_UInt,akerning::Ptr{FT_Vector})
+function FT_Get_Kerning(face::FT_Face,left_glyph::FT_UInt,right_glyph::FT_UInt,kern_mode::FT_UInt, akerning)
     ccall((:FT_Get_Kerning,freetype),FT_Error,(FT_Face,FT_UInt,FT_UInt,FT_UInt,Ptr{FT_Vector}),face,left_glyph,right_glyph,kern_mode,akerning)
 end
 function FT_Get_Track_Kerning(face::FT_Face,point_size::FT_Fixed,degree::FT_Int,akerning::Ptr{FT_Fixed})
