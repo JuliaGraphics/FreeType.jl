@@ -1,6 +1,6 @@
 using Compat
 
-@windows_only begin
+if is_windows()
     using WinRPM
     WinRPM.install("libfreetype6", yes=true)
 end
