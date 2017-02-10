@@ -1,7 +1,7 @@
 sudo: false
 language: julia
 os:
-#    - osx
+    - osx
     - linux
 julia:
     - 0.4
@@ -9,8 +9,3 @@ julia:
     - nightly
 notifications:
     email: false
-script:
-    - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
-    - julia -e 'Pkg.clone(pwd()); Pkg.build("FreeType"); Pkg.test("FreeType"; coverage=true)'
-after_success:
-    - julia -e 'cd(Pkg.dir("FreeType")); Pkg.add("Coverage"); using Coverage; Coveralls.submit(process_folder()); Codecov.submit(process_folder())'
