@@ -1,8 +1,6 @@
 __precompile__(true)
 module FreeType
 
-using Compat
-
 isfile(joinpath(dirname(@__FILE__), "..", "deps", "deps.jl")) || error("FreeType was not build properly. Please run Pkg.build(\"FreeType\")")
 include(joinpath("..", "deps", "deps.jl"))
 
