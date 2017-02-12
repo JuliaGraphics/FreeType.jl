@@ -1,5 +1,6 @@
 using Compat
 
+
 using BinDeps
 @BinDeps.setup
 
@@ -11,9 +12,6 @@ if is_windows()
 end
 
 if is_apple()
-    if Pkg.installed("Homebrew") === nothing
-        error("Homebrew package not installed, please run Pkg.add(\"Homebrew\")")
-    end
     using Homebrew
     provides(Homebrew.HB, "freetype", libfreetype, os = :Darwin)
 end
@@ -21,5 +19,6 @@ end
 provides(AptGet, "libfreetype6", libfreetype)
 provides(Yum, "freetype", libfreetype)
 provides(Zypper, "freetype", libfreetype)
+provides(Pacman, "freetype2", libfreetype)
 
 @BinDeps.install Dict(:libfreetype => :freetype)
