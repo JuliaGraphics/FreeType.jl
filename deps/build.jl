@@ -18,7 +18,7 @@ end
 
 provides(AptGet, "libfreetype6", libfreetype)
 provides(Yum, "freetype", libfreetype)
-provides(Zypper, "freetype", libfreetype)
+provides(Zypper, "freetype2", libfreetype)
 provides(Pacman, "freetype2", libfreetype)
 
 @BinDeps.install Dict(:libfreetype => :freetype)
