@@ -12,22 +12,22 @@ function __init__()
 	Libdl.dlclose(dl_ptr)
 end
 
-typealias FT_Int16 Int16
-typealias FT_UInt16 UInt16
-typealias FT_Int32 Cint
-typealias FT_UInt32 UInt32
-typealias FT_Fast Cint
-typealias FT_UFast UInt32
-abstract FT_MemoryRec_
-typealias FT_Memory Ptr{FT_MemoryRec_}
-typealias FT_Alloc_Func Ptr{Void}
-typealias FT_Free_Func Ptr{Void}
-typealias FT_Realloc_Func Ptr{Void}
+const FT_Int16 = Int16
+const FT_UInt16 = UInt16
+const FT_Int32 = Cint
+const FT_UInt32 = UInt32
+const FT_Fast = Cint
+const FT_UFast = UInt32
+@compat abstract type FT_MemoryRec_ end
+const FT_Memory = Ptr{FT_MemoryRec_}
+const FT_Alloc_Func = Ptr{Void}
+const FT_Free_Func = Ptr{Void}
+const FT_Realloc_Func = Ptr{Void}
 type FT_StreamDesc
     _FT_StreamDesc::Ptr{Void}
 end
-typealias FT_Stream_IoFunc Ptr{Void}
-typealias FT_Stream_CloseFunc Ptr{Void}
+const FT_Stream_IoFunc = Ptr{Void}
+const FT_Stream_CloseFunc = Ptr{Void}
 type FT_StreamRec
     base::Ptr{Cuchar}
     size::Culong
@@ -40,8 +40,8 @@ type FT_StreamRec
     cursor::Ptr{Cuchar}
     limit::Ptr{Cuchar}
 end
-typealias FT_Stream Ptr{FT_StreamRec}
-typealias FT_Pos Clong
+const FT_Stream = Ptr{FT_StreamRec}
+const FT_Pos = Clong
 immutable FT_Vector
     x::FT_Pos
     y::FT_Pos
@@ -94,7 +94,7 @@ const FT_FACE_FLAG_TRICKY           = @compat Int32(1 << 13)
 const FT_FACE_FLAG_COLOR            = @compat Int32(1 << 14)
 
 # begin enum FT_Pixel_Mode
-typealias FT_Pixel_Mode UInt32
+const FT_Pixel_Mode = UInt32
 const FT_PIXEL_MODE_NONE = @compat UInt32(0)
 const FT_PIXEL_MODE_MONO = @compat UInt32(1)
 const FT_PIXEL_MODE_GRAY = @compat UInt32(2)
@@ -123,10 +123,10 @@ immutable FT_Outline
     contours::Ptr{Int16}
     flags::Cint
 end
-typealias FT_Outline_MoveToFunc Ptr{Void}
-typealias FT_Outline_LineToFunc Ptr{Void}
-typealias FT_Outline_ConicToFunc Ptr{Void}
-typealias FT_Outline_CubicToFunc Ptr{Void}
+const FT_Outline_MoveToFunc = Ptr{Void}
+const FT_Outline_LineToFunc = Ptr{Void}
+const FT_Outline_ConicToFunc = Ptr{Void}
+const FT_Outline_CubicToFunc = Ptr{Void}
 type FT_Outline_Funcs
     move_to::FT_Outline_MoveToFunc
     line_to::FT_Outline_LineToFunc
@@ -136,23 +136,23 @@ type FT_Outline_Funcs
     delta::FT_Pos
 end
 # begin enum FT_Glyph_Format
-typealias FT_Glyph_Format UInt32
+const FT_Glyph_Format = UInt32
 const FT_GLYPH_FORMAT_NONE = @compat UInt32(0)
 const FT_GLYPH_FORMAT_COMPOSITE = @compat UInt32(1668246896)
 const FT_GLYPH_FORMAT_BITMAP = @compat UInt32(1651078259)
 const FT_GLYPH_FORMAT_OUTLINE = @compat UInt32(1869968492)
 const FT_GLYPH_FORMAT_PLOTTER = @compat UInt32(1886154612)
 # end enum FT_Glyph_Format
-abstract FT_RasterRec_
-typealias FT_Raster Ptr{FT_RasterRec_}
+@compat abstract type FT_RasterRec_ end
+const FT_Raster = Ptr{FT_RasterRec_}
 type FT_Span
     x::Int16
     len::UInt16
     coverage::Cuchar
 end
-typealias FT_SpanFunc Ptr{Void}
-typealias FT_Raster_BitTest_Func Ptr{Void}
-typealias FT_Raster_BitSet_Func Ptr{Void}
+const FT_SpanFunc = Ptr{Void}
+const FT_Raster_BitTest_Func = Ptr{Void}
+const FT_Raster_BitSet_Func = Ptr{Void}
 type FT_Raster_Params
     target::Ptr{FT_Bitmap}
     source::Ptr{Void}
@@ -164,11 +164,11 @@ type FT_Raster_Params
     user::Ptr{Void}
     clip_box::FT_BBox
 end
-typealias FT_Raster_NewFunc Ptr{Void}
-typealias FT_Raster_DoneFunc Ptr{Void}
-typealias FT_Raster_ResetFunc Ptr{Void}
-typealias FT_Raster_SetModeFunc Ptr{Void}
-typealias FT_Raster_RenderFunc Ptr{Void}
+const FT_Raster_NewFunc = Ptr{Void}
+const FT_Raster_DoneFunc = Ptr{Void}
+const FT_Raster_ResetFunc = Ptr{Void}
+const FT_Raster_SetModeFunc = Ptr{Void}
+const FT_Raster_RenderFunc = Ptr{Void}
 type FT_Raster_Funcs
     glyph_format::FT_Glyph_Format
     raster_new::FT_Raster_NewFunc
@@ -177,27 +177,27 @@ type FT_Raster_Funcs
     raster_render::FT_Raster_RenderFunc
     raster_done::FT_Raster_DoneFunc
 end
-typealias FT_Bool Cuchar
-typealias FT_FWord Int16
-typealias FT_UFWord UInt16
-typealias FT_Char UInt8
-typealias FT_Byte Cuchar
-typealias FT_Bytes Ptr{FT_Byte}
-typealias FT_Tag FT_UInt32
-typealias FT_String UInt8
-typealias FT_Short Int16
-typealias FT_UShort UInt16
-typealias FT_Int Cint
-typealias FT_UInt UInt32
-typealias FT_Long Clong
-typealias FT_ULong Culong
-typealias FT_F2Dot14 Int16
-typealias FT_F26Dot6 Clong
-typealias FT_Fixed Clong
-typealias FT_Error Cint
-typealias FT_Pointer Ptr{Void}
-typealias FT_Offset Csize_t
-typealias FT_PtrDist Cptrdiff_t
+const FT_Bool = Cuchar
+const FT_FWord = Int16
+const FT_UFWord = UInt16
+const FT_Char = UInt8
+const FT_Byte = Cuchar
+const FT_Bytes = Ptr{FT_Byte}
+const FT_Tag = FT_UInt32
+const FT_String = UInt8
+const FT_Short = Int16
+const FT_UShort = UInt16
+const FT_Int = Cint
+const FT_UInt = UInt32
+const FT_Long = Clong
+const FT_ULong = Culong
+const FT_F2Dot14 = Int16
+const FT_F26Dot6 = Clong
+const FT_Fixed = Clong
+const FT_Error = Cint
+const FT_Pointer = Ptr{Void}
+const FT_Offset = Csize_t
+const FT_PtrDist = Cptrdiff_t
 type FT_UnitVector
     x::FT_F2Dot14
     y::FT_F2Dot14
@@ -212,13 +212,13 @@ type FT_Data
     pointer::Ptr{FT_Byte}
     length::FT_Int
 end
-typealias FT_Generic_Finalizer Ptr{Void}
+const FT_Generic_Finalizer = Ptr{Void}
 immutable FT_Generic
     data::Ptr{Void}
     finalizer::FT_Generic_Finalizer
 end
-abstract FT_ListNodeRec_
-typealias FT_ListNode Ptr{FT_ListNodeRec_}
+@compat abstract type FT_ListNodeRec_ end
+const FT_ListNode = Ptr{FT_ListNodeRec_}
 type FT_ListNodeRec <: FT_ListNodeRec_
     prev::FT_ListNode
     next::FT_ListNode
@@ -228,9 +228,9 @@ immutable FT_ListRec
     head::FT_ListNode
     tail::FT_ListNode
 end
-typealias FT_List Ptr{FT_ListRec}
+const FT_List = Ptr{FT_ListRec}
 # begin enum ANONYMOUS_1
-typealias ANONYMOUS_1 UInt32
+const ANONYMOUS_1 = UInt32
 const FT_Mod_Err_Base = @compat UInt32(0)
 const FT_Mod_Err_Autofit = @compat UInt32(0)
 const FT_Mod_Err_BDF = @compat UInt32(0)
@@ -273,20 +273,20 @@ type FT_Bitmap_Size
     x_ppem::FT_Pos
     y_ppem::FT_Pos
 end
-abstract FT_LibraryRec_
-typealias FT_Library Ptr{FT_LibraryRec_}
-abstract FT_ModuleRec_
-typealias FT_Module Ptr{FT_ModuleRec_}
-abstract FT_DriverRec_
-typealias FT_Driver Ptr{FT_DriverRec_}
-abstract FT_RendererRec_
-typealias FT_Renderer Ptr{FT_RendererRec_}
-abstract FT_SizeRec_
-typealias FT_Size Ptr{FT_SizeRec_}
-abstract FT_CharMapRec_
-typealias FT_CharMap Ptr{FT_CharMapRec_}
+@compat abstract type FT_LibraryRec_ end
+const FT_Library = Ptr{FT_LibraryRec_}
+@compat abstract type FT_ModuleRec_ end
+const FT_Module = Ptr{FT_ModuleRec_}
+@compat abstract type FT_DriverRec_ end
+const FT_Driver = Ptr{FT_DriverRec_}
+@compat abstract type FT_RendererRec_ end
+const FT_Renderer = Ptr{FT_RendererRec_}
+@compat abstract type FT_SizeRec_ end
+const FT_Size = Ptr{FT_SizeRec_}
+@compat abstract type FT_CharMapRec_ end
+const FT_CharMap = Ptr{FT_CharMapRec_}
 # begin enum FT_Encoding
-typealias FT_Encoding UInt32
+const FT_Encoding = UInt32
 const FT_ENCODING_NONE = @compat UInt32(0)
 const FT_ENCODING_MS_SYMBOL = @compat UInt32(1937337698)
 const FT_ENCODING_UNICODE = @compat UInt32(1970170211)
@@ -307,10 +307,10 @@ const FT_ENCODING_ADOBE_LATIN_1 = @compat UInt32(1818326065)
 const FT_ENCODING_OLD_LATIN_2 = @compat UInt32(1818326066)
 const FT_ENCODING_APPLE_ROMAN = @compat UInt32(1634889070)
 # end enum FT_Encoding
-abstract FT_Face_InternalRec_
-typealias FT_Face_Internal Ptr{FT_Face_InternalRec_}
-abstract FT_Size_InternalRec_
-typealias FT_Size_Internal Ptr{FT_Size_InternalRec_}
+@compat abstract type FT_Face_InternalRec_ end
+const FT_Face_Internal = Ptr{FT_Face_InternalRec_}
+@compat abstract type FT_Size_InternalRec_ end
+const FT_Size_Internal = Ptr{FT_Size_InternalRec_}
 immutable FT_Size_Metrics
     x_ppem::FT_UShort
     y_ppem::FT_UShort
@@ -321,10 +321,10 @@ immutable FT_Size_Metrics
     height::FT_Pos
     max_advance::FT_Pos
 end
-abstract FT_SubGlyphRec_
-typealias FT_SubGlyph Ptr{FT_SubGlyphRec_}
-abstract FT_Slot_InternalRec_
-typealias FT_Slot_Internal Ptr{FT_Slot_InternalRec_}
+@compat abstract type FT_SubGlyphRec_ end
+const FT_SubGlyph = Ptr{FT_SubGlyphRec_}
+@compat abstract type FT_Slot_InternalRec_ end
+const FT_Slot_Internal = Ptr{FT_Slot_InternalRec_}
 type FT_GlyphSlotRec
     library::FT_Library
     face::Ptr{Void}
@@ -349,7 +349,7 @@ type FT_GlyphSlotRec
     other::Ptr{Void}
     internal::FT_Slot_Internal
 end
-typealias FT_GlyphSlot Ptr{FT_GlyphSlotRec}
+const FT_GlyphSlot = Ptr{FT_GlyphSlotRec}
 type FT_FaceRec
     num_faces::FT_Long
     face_index::FT_Long
@@ -383,7 +383,7 @@ type FT_FaceRec
     extensions::Ptr{Void}
     internal::FT_Face_Internal
 end
-typealias FT_Face Ptr{FT_FaceRec}
+const FT_Face = Ptr{FT_FaceRec}
 type FT_CharMapRec <: FT_CharMapRec_
     face::FT_Face
     encoding::FT_Encoding
@@ -411,13 +411,13 @@ type FT_Open_Args
     params::Ptr{FT_Parameter}
 end
 # begin enum FT_Size_Request_Type
-typealias FT_Size_Request_Type UInt32
-const FT_SIZE_REQUEST_TYPE_NOMINAL = @compat UInt32(0)
-const FT_SIZE_REQUEST_TYPE_REAL_DIM = @compat UInt32(1)
-const FT_SIZE_REQUEST_TYPE_BBOX = @compat UInt32(2)
-const FT_SIZE_REQUEST_TYPE_CELL = @compat UInt32(3)
-const FT_SIZE_REQUEST_TYPE_SCALES = @compat UInt32(4)
-const FT_SIZE_REQUEST_TYPE_MAX = @compat UInt32(5)
+const FT_Size_Request_Type = UInt32
+const FT_SIZE_REQUEST_TYPE_NOMINAL = UInt32(0)
+const FT_SIZE_REQUEST_TYPE_REAL_DIM = UInt32(1)
+const FT_SIZE_REQUEST_TYPE_BBOX = UInt32(2)
+const FT_SIZE_REQUEST_TYPE_CELL = UInt32(3)
+const FT_SIZE_REQUEST_TYPE_SCALES = UInt32(4)
+const FT_SIZE_REQUEST_TYPE_MAX = UInt32(5)
 # end enum FT_Size_Request_Type
 type FT_Size_RequestRec
     _type::FT_Size_Request_Type
@@ -426,21 +426,21 @@ type FT_Size_RequestRec
     horiResolution::FT_UInt
     vertResolution::FT_UInt
 end
-typealias FT_Size_Request Ptr{FT_Size_RequestRec}
+const FT_Size_Request = Ptr{FT_Size_RequestRec}
 # begin enum FT_Render_Mode
-typealias FT_Render_Mode UInt32
-const FT_RENDER_MODE_NORMAL = @compat UInt32(0)
-const FT_RENDER_MODE_LIGHT = @compat UInt32(1)
-const FT_RENDER_MODE_MONO = @compat UInt32(2)
-const FT_RENDER_MODE_LCD = @compat UInt32(3)
-const FT_RENDER_MODE_LCD_V = @compat UInt32(4)
-const FT_RENDER_MODE_MAX = @compat UInt32(5)
+const FT_Render_Mode = UInt32
+const FT_RENDER_MODE_NORMAL = UInt32(0)
+const FT_RENDER_MODE_LIGHT = UInt32(1)
+const FT_RENDER_MODE_MONO = UInt32(2)
+const FT_RENDER_MODE_LCD = UInt32(3)
+const FT_RENDER_MODE_LCD_V = UInt32(4)
+const FT_RENDER_MODE_MAX = UInt32(5)
 # end enum FT_Render_Mode
 # begin enum FT_Kerning_Mode
-typealias FT_Kerning_Mode UInt32
-const FT_KERNING_DEFAULT = @compat UInt32(0)
-const FT_KERNING_UNFITTED = @compat UInt32(1)
-const FT_KERNING_UNSCALED = @compat UInt32(2)
+const FT_Kerning_Mode = UInt32
+const FT_KERNING_DEFAULT = UInt32(0)
+const FT_KERNING_UNFITTED = UInt32(1)
+const FT_KERNING_UNSCALED = UInt32(2)
 # end enum FT_Kerning_Mode
 function FT_Init_FreeType(alibrary)
     ccall((:FT_Init_FreeType,freetype),FT_Error,(Ptr{FT_Library},),alibrary)
