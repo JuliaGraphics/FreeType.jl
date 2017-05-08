@@ -574,6 +574,9 @@ end
 function FT_Face_SetUnpatentedHinting(face::FT_Face,value::FT_Bool)
     ccall((:FT_Face_SetUnpatentedHinting,freetype),FT_Bool,(FT_Face,FT_Bool),face,value)
 end
+function FT_Outline_Decompose(outline::FT_Outline,outline_funcs::FT_Outline_Funcs,user)
+    ccall((:FT_Outline_Decompose,freetype),FT_Error,(Ptr{FT_Outline},Ptr{FT_Outline_Funcs},Ptr{Void}),pointer_from_objref(outline),pointer_from_objref(outline_funcs),user)
+end
 
 export FT_Init_FreeType
 export FT_Done_FreeType
@@ -619,6 +622,7 @@ export FT_Vector_Transform
 export FT_Library_Version
 export FT_Face_CheckTrueTypePatents
 export FT_Face_SetUnpatentedHinting
+export FT_Outline_Decompose
 
 export FT_Int16
 export FT_UInt16
