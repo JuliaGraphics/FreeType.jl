@@ -19,13 +19,6 @@ function __init__()
     check_deps()
 end
 
-# define platform specific constants
-const SHRT_MAX = 32767
-const CHAR_BIT = 8
-
-# deine missing macros
-FT_MAKE_TAG(_x1, _x2, _x3, _x4) = UInt32((Culong(_x1) << 24) | (Culong(_x2) << 16) | (Culong(_x3) << 8) | Culong(_x4))
-
 include("CEnum.jl")
 using .CEnum
 

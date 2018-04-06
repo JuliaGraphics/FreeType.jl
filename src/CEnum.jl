@@ -1,6 +1,6 @@
 # This file is part of the VulkanCore.jl package which is licensed under the MIT "Expat" License:
 #Copyright (c) 2016: Valentin Churavy.
-# 
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy of
 # this software and associated documentation files (the "Software"), to deal in
 # the Software without restriction, including without limitation the rights to use,
@@ -22,6 +22,9 @@ module CEnum
 abstract type Cenum{T} end
 Base.:|(a::T, b::T) where {T<:Cenum} = UInt32(a) | UInt32(b)
 Base.:&(a::T, b::T) where {T<:Cenum} = UInt32(a) & UInt32(b)
+Base.:(==)(a::Integer, b::Cenum) = a == UInt32(b)
+Base.:(==)(a::Cenum, b::Integer) = b == a
+
 # typemin and typemax won't change for an enum, so we might as well inline them per type
 function Base.typemax{T<:Cenum}(::Type{T})
     last(enum_values(T))
