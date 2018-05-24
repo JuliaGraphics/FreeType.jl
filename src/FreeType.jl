@@ -3,13 +3,21 @@ module FreeType
 
 using Compat
 
-isfile(joinpath(dirname(@__FILE__), "..", "deps", "deps.jl")) || error("FreeType was not build properly. Please run Pkg.build(\"FreeType\")")
-include(joinpath("..", "deps", "deps.jl"))
+if VERSION >= v"0.7.0-DEV.3382"
+    import Libdl
+end
 
+# Load in `deps.jl`, complaining if it does not exist
+const depsjl_path = joinpath(dirname(@__FILE__), "..", "deps", "deps.jl")
+if !isfile(depsjl_path)
+    error("FreeType was not build properly. Please run Pkg.build(\"FreeType\")")
+end
+include(depsjl_path)
+
+# Module initialization function
 function __init__()
-    dl_ptr = Libdl.dlopen_e(freetype)
-	dl_ptr == C_NULL && error("FreeType library could not be loaded correctly. Please check library path ($freetype), or run Pkg.build(\"FreeType\")")
-	Libdl.dlclose(dl_ptr)
+    # Always check your dependencies from `deps.jl`
+    check_deps()
 end
 
 const FT_Int16 = Int16
@@ -443,136 +451,136 @@ const FT_KERNING_UNFITTED = UInt32(1)
 const FT_KERNING_UNSCALED = UInt32(2)
 # end enum FT_Kerning_Mode
 function FT_Init_FreeType(alibrary)
-    ccall((:FT_Init_FreeType,freetype),FT_Error,(Ptr{FT_Library},),alibrary)
+    ccall((:FT_Init_FreeType,libfreetype),FT_Error,(Ptr{FT_Library},),alibrary)
 end
 function FT_Done_FreeType(library::FT_Library)
-    ccall((:FT_Done_FreeType,freetype),FT_Error,(FT_Library,),library)
+    ccall((:FT_Done_FreeType,libfreetype),FT_Error,(FT_Library,),library)
 end
 function FT_New_Face(library::FT_Library,filepathname::AbstractString,face_index::Integer, aface)
-    ccall((:FT_New_Face,freetype),FT_Error,(FT_Library,Ptr{UInt8},FT_Long,Ptr{FT_Face}),library,filepathname,face_index,aface)
+    ccall((:FT_New_Face,libfreetype),FT_Error,(FT_Library,Ptr{UInt8},FT_Long,Ptr{FT_Face}),library,filepathname,face_index,aface)
 end
 function FT_New_Memory_Face(library::FT_Library,file_base::Ptr{FT_Byte},file_size::FT_Long,face_index::FT_Long,aface::Ptr{FT_Face})
-    ccall((:FT_New_Memory_Face,freetype),FT_Error,(FT_Library,Ptr{FT_Byte},FT_Long,FT_Long,Ptr{FT_Face}),library,file_base,file_size,face_index,aface)
+    ccall((:FT_New_Memory_Face,libfreetype),FT_Error,(FT_Library,Ptr{FT_Byte},FT_Long,FT_Long,Ptr{FT_Face}),library,file_base,file_size,face_index,aface)
 end
 function FT_Open_Face(library::FT_Library,args::Ptr{FT_Open_Args},face_index::FT_Long,aface::Ptr{FT_Face})
-    ccall((:FT_Open_Face,freetype),FT_Error,(FT_Library,Ptr{FT_Open_Args},FT_Long,Ptr{FT_Face}),library,args,face_index,aface)
+    ccall((:FT_Open_Face,libfreetype),FT_Error,(FT_Library,Ptr{FT_Open_Args},FT_Long,Ptr{FT_Face}),library,args,face_index,aface)
 end
 function FT_Attach_File(face::FT_Face,filepathname::AbstractString)
-    ccall((:FT_Attach_File,freetype),FT_Error,(FT_Face,Ptr{UInt8}),face,filepathname)
+    ccall((:FT_Attach_File,libfreetype),FT_Error,(FT_Face,Ptr{UInt8}),face,filepathname)
 end
 function FT_Attach_Stream(face::FT_Face,parameters::Ptr{FT_Open_Args})
-    ccall((:FT_Attach_Stream,freetype),FT_Error,(FT_Face,Ptr{FT_Open_Args}),face,parameters)
+    ccall((:FT_Attach_Stream,libfreetype),FT_Error,(FT_Face,Ptr{FT_Open_Args}),face,parameters)
 end
 function FT_Reference_Face(face::FT_Face)
-    ccall((:FT_Reference_Face,freetype),FT_Error,(FT_Face,),face)
+    ccall((:FT_Reference_Face,libfreetype),FT_Error,(FT_Face,),face)
 end
 function FT_Done_Face(face::FT_Face)
-    ccall((:FT_Done_Face,freetype),FT_Error,(FT_Face,),face)
+    ccall((:FT_Done_Face,libfreetype),FT_Error,(FT_Face,),face)
 end
 function FT_Select_Size(face::FT_Face,strike_index::FT_Int)
-    ccall((:FT_Select_Size,freetype),FT_Error,(FT_Face,FT_Int),face,strike_index)
+    ccall((:FT_Select_Size,libfreetype),FT_Error,(FT_Face,FT_Int),face,strike_index)
 end
 function FT_Request_Size(face::FT_Face,req::FT_Size_Request)
-    ccall((:FT_Request_Size,freetype),FT_Error,(FT_Face,FT_Size_Request),face,req)
+    ccall((:FT_Request_Size,libfreetype),FT_Error,(FT_Face,FT_Size_Request),face,req)
 end
 function FT_Set_Char_Size(face::FT_Face, char_width, char_height, horz_resolution, vert_resolution)
-    ccall((:FT_Set_Char_Size,freetype),FT_Error,(FT_Face,FT_F26Dot6,FT_F26Dot6,FT_UInt,FT_UInt),face,char_width,char_height,horz_resolution,vert_resolution)
+    ccall((:FT_Set_Char_Size,libfreetype),FT_Error,(FT_Face,FT_F26Dot6,FT_F26Dot6,FT_UInt,FT_UInt),face,char_width,char_height,horz_resolution,vert_resolution)
 end
 function FT_Set_Pixel_Sizes(face::FT_Face,pixel_width::FT_UInt,pixel_height::FT_UInt)
-    ccall((:FT_Set_Pixel_Sizes,freetype),FT_Error,(FT_Face,FT_UInt,FT_UInt),face,pixel_width,pixel_height)
+    ccall((:FT_Set_Pixel_Sizes,libfreetype),FT_Error,(FT_Face,FT_UInt,FT_UInt),face,pixel_width,pixel_height)
 end
 function FT_Load_Glyph(face::FT_Face,glyph_index::FT_UInt,load_flags::FT_Int32)
-    ccall((:FT_Load_Glyph,freetype),FT_Error,(FT_Face,FT_UInt,FT_Int32),face,glyph_index,load_flags)
+    ccall((:FT_Load_Glyph,libfreetype),FT_Error,(FT_Face,FT_UInt,FT_Int32),face,glyph_index,load_flags)
 end
 function FT_Load_Char(face::FT_Face,char_code::Char,load_flags::FT_Int32)
-    ccall((:FT_Load_Char,freetype),FT_Error,(FT_Face,FT_ULong,FT_Int32),face,char_code,load_flags)
+    ccall((:FT_Load_Char,libfreetype),FT_Error,(FT_Face,FT_ULong,FT_Int32),face,char_code,load_flags)
 end
 function FT_Set_Transform(face::FT_Face,matrix::Ptr{FT_Matrix},delta::Ptr{FT_Vector})
-    ccall((:FT_Set_Transform,freetype),Void,(FT_Face,Ptr{FT_Matrix},Ptr{FT_Vector}),face,matrix,delta)
+    ccall((:FT_Set_Transform,libfreetype),Void,(FT_Face,Ptr{FT_Matrix},Ptr{FT_Vector}),face,matrix,delta)
 end
 function FT_Render_Glyph(slot::FT_GlyphSlot,render_mode::FT_Render_Mode)
-    ccall((:FT_Render_Glyph,freetype),FT_Error,(FT_GlyphSlot,FT_Render_Mode),slot,render_mode)
+    ccall((:FT_Render_Glyph,libfreetype),FT_Error,(FT_GlyphSlot,FT_Render_Mode),slot,render_mode)
 end
 function FT_Get_Kerning(face::FT_Face,left_glyph::FT_UInt,right_glyph::FT_UInt,kern_mode::FT_UInt, akerning)
-    ccall((:FT_Get_Kerning,freetype),FT_Error,(FT_Face,FT_UInt,FT_UInt,FT_UInt,Ptr{FT_Vector}),face,left_glyph,right_glyph,kern_mode,akerning)
+    ccall((:FT_Get_Kerning,libfreetype),FT_Error,(FT_Face,FT_UInt,FT_UInt,FT_UInt,Ptr{FT_Vector}),face,left_glyph,right_glyph,kern_mode,akerning)
 end
 function FT_Get_Track_Kerning(face::FT_Face,point_size::FT_Fixed,degree::FT_Int,akerning::Ptr{FT_Fixed})
-    ccall((:FT_Get_Track_Kerning,freetype),FT_Error,(FT_Face,FT_Fixed,FT_Int,Ptr{FT_Fixed}),face,point_size,degree,akerning)
+    ccall((:FT_Get_Track_Kerning,libfreetype),FT_Error,(FT_Face,FT_Fixed,FT_Int,Ptr{FT_Fixed}),face,point_size,degree,akerning)
 end
 function FT_Get_Glyph_Name(face::FT_Face,glyph_index::FT_UInt,buffer::FT_Pointer,buffer_max::FT_UInt)
-    ccall((:FT_Get_Glyph_Name,freetype),FT_Error,(FT_Face,FT_UInt,FT_Pointer,FT_UInt),face,glyph_index,buffer,buffer_max)
+    ccall((:FT_Get_Glyph_Name,libfreetype),FT_Error,(FT_Face,FT_UInt,FT_Pointer,FT_UInt),face,glyph_index,buffer,buffer_max)
 end
 function FT_Get_Postscript_Name(face::FT_Face)
-    ccall((:FT_Get_Postscript_Name,freetype),Ptr{UInt8},(FT_Face,),face)
+    ccall((:FT_Get_Postscript_Name,libfreetype),Ptr{UInt8},(FT_Face,),face)
 end
 function FT_Select_Charmap(face::FT_Face,encoding::FT_Encoding)
-    ccall((:FT_Select_Charmap,freetype),FT_Error,(FT_Face,FT_Encoding),face,encoding)
+    ccall((:FT_Select_Charmap,libfreetype),FT_Error,(FT_Face,FT_Encoding),face,encoding)
 end
 function FT_Set_Charmap(face::FT_Face,charmap::FT_CharMap)
-    ccall((:FT_Set_Charmap,freetype),FT_Error,(FT_Face,FT_CharMap),face,charmap)
+    ccall((:FT_Set_Charmap,libfreetype),FT_Error,(FT_Face,FT_CharMap),face,charmap)
 end
 function FT_Get_Charmap_Index(charmap::FT_CharMap)
-    ccall((:FT_Get_Charmap_Index,freetype),FT_Int,(FT_CharMap,),charmap)
+    ccall((:FT_Get_Charmap_Index,libfreetype),FT_Int,(FT_CharMap,),charmap)
 end
 function FT_Get_Char_Index(face::FT_Face,charcode::Char)
-    ccall((:FT_Get_Char_Index,freetype),FT_UInt,(FT_Face,FT_ULong),face,charcode)
+    ccall((:FT_Get_Char_Index,libfreetype),FT_UInt,(FT_Face,FT_ULong),face,charcode)
 end
 function FT_Get_First_Char(face::FT_Face,agindex::Ptr{FT_UInt})
-    ccall((:FT_Get_First_Char,freetype),FT_ULong,(FT_Face,Ptr{FT_UInt}),face,agindex)
+    ccall((:FT_Get_First_Char,libfreetype),FT_ULong,(FT_Face,Ptr{FT_UInt}),face,agindex)
 end
 function FT_Get_Next_Char(face::FT_Face,char_code::FT_ULong,agindex::Ptr{FT_UInt})
-    ccall((:FT_Get_Next_Char,freetype),FT_ULong,(FT_Face,FT_ULong,Ptr{FT_UInt}),face,char_code,agindex)
+    ccall((:FT_Get_Next_Char,libfreetype),FT_ULong,(FT_Face,FT_ULong,Ptr{FT_UInt}),face,char_code,agindex)
 end
 function FT_Get_Name_Index(face::FT_Face,glyph_name::Ptr{FT_String})
-    ccall((:FT_Get_Name_Index,freetype),FT_UInt,(FT_Face,Ptr{FT_String}),face,glyph_name)
+    ccall((:FT_Get_Name_Index,libfreetype),FT_UInt,(FT_Face,Ptr{FT_String}),face,glyph_name)
 end
 function FT_Get_SubGlyph_Info(glyph::FT_GlyphSlot,sub_index::FT_UInt,p_index::Ptr{FT_Int},p_flags::Ptr{FT_UInt},p_arg1::Ptr{FT_Int},p_arg2::Ptr{FT_Int},p_transform::Ptr{FT_Matrix})
-    ccall((:FT_Get_SubGlyph_Info,freetype),FT_Error,(FT_GlyphSlot,FT_UInt,Ptr{FT_Int},Ptr{FT_UInt},Ptr{FT_Int},Ptr{FT_Int},Ptr{FT_Matrix}),glyph,sub_index,p_index,p_flags,p_arg1,p_arg2,p_transform)
+    ccall((:FT_Get_SubGlyph_Info,libfreetype),FT_Error,(FT_GlyphSlot,FT_UInt,Ptr{FT_Int},Ptr{FT_UInt},Ptr{FT_Int},Ptr{FT_Int},Ptr{FT_Matrix}),glyph,sub_index,p_index,p_flags,p_arg1,p_arg2,p_transform)
 end
 function FT_Get_FSType_Flags(face::FT_Face)
-    ccall((:FT_Get_FSType_Flags,freetype),FT_UShort,(FT_Face,),face)
+    ccall((:FT_Get_FSType_Flags,libfreetype),FT_UShort,(FT_Face,),face)
 end
 function FT_Face_GetCharVariantIndex(face::FT_Face,charcode::FT_ULong,variantSelector::FT_ULong)
-    ccall((:FT_Face_GetCharVariantIndex,freetype),FT_UInt,(FT_Face,FT_ULong,FT_ULong),face,charcode,variantSelector)
+    ccall((:FT_Face_GetCharVariantIndex,libfreetype),FT_UInt,(FT_Face,FT_ULong,FT_ULong),face,charcode,variantSelector)
 end
 function FT_Face_GetCharVariantIsDefault(face::FT_Face,charcode::FT_ULong,variantSelector::FT_ULong)
-    ccall((:FT_Face_GetCharVariantIsDefault,freetype),FT_Int,(FT_Face,FT_ULong,FT_ULong),face,charcode,variantSelector)
+    ccall((:FT_Face_GetCharVariantIsDefault,libfreetype),FT_Int,(FT_Face,FT_ULong,FT_ULong),face,charcode,variantSelector)
 end
 function FT_Face_GetVariantSelectors(face::FT_Face)
-    ccall((:FT_Face_GetVariantSelectors,freetype),Ptr{FT_UInt32},(FT_Face,),face)
+    ccall((:FT_Face_GetVariantSelectors,libfreetype),Ptr{FT_UInt32},(FT_Face,),face)
 end
 function FT_Face_GetVariantsOfChar(face::FT_Face,charcode::FT_ULong)
-    ccall((:FT_Face_GetVariantsOfChar,freetype),Ptr{FT_UInt32},(FT_Face,FT_ULong),face,charcode)
+    ccall((:FT_Face_GetVariantsOfChar,libfreetype),Ptr{FT_UInt32},(FT_Face,FT_ULong),face,charcode)
 end
 function FT_Face_GetCharsOfVariant(face::FT_Face,variantSelector::FT_ULong)
-    ccall((:FT_Face_GetCharsOfVariant,freetype),Ptr{FT_UInt32},(FT_Face,FT_ULong),face,variantSelector)
+    ccall((:FT_Face_GetCharsOfVariant,libfreetype),Ptr{FT_UInt32},(FT_Face,FT_ULong),face,variantSelector)
 end
 function FT_MulDiv(a::FT_Long,b::FT_Long,c::FT_Long)
-    ccall((:FT_MulDiv,freetype),FT_Long,(FT_Long,FT_Long,FT_Long),a,b,c)
+    ccall((:FT_MulDiv,libfreetype),FT_Long,(FT_Long,FT_Long,FT_Long),a,b,c)
 end
 function FT_DivFix(a::FT_Long,b::FT_Long)
-    ccall((:FT_DivFix,freetype),FT_Long,(FT_Long,FT_Long),a,b)
+    ccall((:FT_DivFix,libfreetype),FT_Long,(FT_Long,FT_Long),a,b)
 end
 function FT_RoundFix(a::FT_Fixed)
-    ccall((:FT_RoundFix,freetype),FT_Fixed,(FT_Fixed,),a)
+    ccall((:FT_RoundFix,libfreetype),FT_Fixed,(FT_Fixed,),a)
 end
 function FT_CeilFix(a::FT_Fixed)
-    ccall((:FT_CeilFix,freetype),FT_Fixed,(FT_Fixed,),a)
+    ccall((:FT_CeilFix,libfreetype),FT_Fixed,(FT_Fixed,),a)
 end
 function FT_FloorFix(a::FT_Fixed)
-    ccall((:FT_FloorFix,freetype),FT_Fixed,(FT_Fixed,),a)
+    ccall((:FT_FloorFix,libfreetype),FT_Fixed,(FT_Fixed,),a)
 end
 function FT_Vector_Transform(vec::Ptr{FT_Vector},matrix::Ptr{FT_Matrix})
-    ccall((:FT_Vector_Transform,freetype),Void,(Ptr{FT_Vector},Ptr{FT_Matrix}),vec,matrix)
+    ccall((:FT_Vector_Transform,libfreetype),Void,(Ptr{FT_Vector},Ptr{FT_Matrix}),vec,matrix)
 end
 function FT_Library_Version(library::FT_Library,amajor::Ptr{FT_Int},aminor::Ptr{FT_Int},apatch::Ptr{FT_Int})
-    ccall((:FT_Library_Version,freetype),Void,(FT_Library,Ptr{FT_Int},Ptr{FT_Int},Ptr{FT_Int}),library,amajor,aminor,apatch)
+    ccall((:FT_Library_Version,libfreetype),Void,(FT_Library,Ptr{FT_Int},Ptr{FT_Int},Ptr{FT_Int}),library,amajor,aminor,apatch)
 end
 function FT_Face_CheckTrueTypePatents(face::FT_Face)
-    ccall((:FT_Face_CheckTrueTypePatents,freetype),FT_Bool,(FT_Face,),face)
+    ccall((:FT_Face_CheckTrueTypePatents,libfreetype),FT_Bool,(FT_Face,),face)
 end
 function FT_Face_SetUnpatentedHinting(face::FT_Face,value::FT_Bool)
-    ccall((:FT_Face_SetUnpatentedHinting,freetype),FT_Bool,(FT_Face,FT_Bool),face,value)
+    ccall((:FT_Face_SetUnpatentedHinting,libfreetype),FT_Bool,(FT_Face,FT_Bool),face,value)
 end
 
 export FT_Init_FreeType
