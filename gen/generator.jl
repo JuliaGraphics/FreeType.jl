@@ -26,7 +26,7 @@ function rewriter(ex :: Expr)
     a3 = ex.args[3]
     if isempty(a3.args)
       objname = ex.args[2]
-      return :($objname = Void)
+      return :($objname = Nothing)
     end
   end
 

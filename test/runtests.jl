@@ -1,5 +1,5 @@
 using FreeType
-using Base.Test
+using Test
 
 library = Ref{FT_Library}()
 error = FT_Init_FreeType(library)
