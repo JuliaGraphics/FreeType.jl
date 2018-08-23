@@ -1,10 +1,6 @@
-__precompile__(true)
-
 module FreeType
 
-if VERSION >= v"0.7.0-DEV.3382"
-    import Libdl
-end
+import Libdl
 
 # Load in `deps.jl`, complaining if it does not exist
 const depsjl_path = joinpath(dirname(@__FILE__), "..", "deps", "deps.jl")
@@ -24,6 +20,8 @@ using .CEnum
 
 include(joinpath(@__DIR__, "..", "gen", "api", "ft_common.jl"))
 include(joinpath(@__DIR__, "..", "gen", "api", "ft_api.jl"))
+
+
 
 export FT_Init_FreeType
 export FT_Done_FreeType

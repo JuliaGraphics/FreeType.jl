@@ -109,6 +109,8 @@ macro cenum(name, args...)
 
     expr = quote
         primitive type $typename <: CEnum.Cenum{UInt32} 32 end
+        ($typename)(x::Integer) = convert($typename, x)
+        Base.UInt32(x::$typename) = convert(UInt32, x)
         function Base.convert(::Type{$typename}, x::Integer)
             is_member($typename, x) || Base.Enums.enum_argument_error($(Expr(:quote, name)), x)
             Base.bitcast($typename, convert(Int32, x))

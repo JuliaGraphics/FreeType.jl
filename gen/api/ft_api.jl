@@ -66,7 +66,7 @@ function FT_Load_Char(face, char_code, load_flags)
 end
 
 function FT_Set_Transform(face, matrix, delta)
-    ccall((:FT_Set_Transform, libfreetype), Void, (FT_Face, Ptr{FT_Matrix}, Ptr{FT_Vector}), face, matrix, delta)
+    ccall((:FT_Set_Transform, libfreetype), Cvoid, (FT_Face, Ptr{FT_Matrix}, Ptr{FT_Vector}), face, matrix, delta)
 end
 
 function FT_Render_Glyph(slot, render_mode)
@@ -174,11 +174,11 @@ function FT_FloorFix(a)
 end
 
 function FT_Vector_Transform(vec, matrix)
-    ccall((:FT_Vector_Transform, libfreetype), Void, (Ptr{FT_Vector}, Ptr{FT_Matrix}), vec, matrix)
+    ccall((:FT_Vector_Transform, libfreetype), Cvoid, (Ptr{FT_Vector}, Ptr{FT_Matrix}), vec, matrix)
 end
 
 function FT_Library_Version(library, amajor, aminor, apatch)
-    ccall((:FT_Library_Version, libfreetype), Void, (FT_Library, Ptr{FT_Int}, Ptr{FT_Int}, Ptr{FT_Int}), library, amajor, aminor, apatch)
+    ccall((:FT_Library_Version, libfreetype), Cvoid, (FT_Library, Ptr{FT_Int}, Ptr{FT_Int}, Ptr{FT_Int}), library, amajor, aminor, apatch)
 end
 
 function FT_Face_CheckTrueTypePatents(face)
@@ -211,7 +211,7 @@ function FT_Glyph_Transform(glyph, matrix, delta)
 end
 
 function FT_Glyph_Get_CBox(glyph, bbox_mode, acbox)
-    ccall((:FT_Glyph_Get_CBox, libfreetype), Void, (FT_Glyph, FT_UInt, Ptr{FT_BBox}), glyph, bbox_mode, acbox)
+    ccall((:FT_Glyph_Get_CBox, libfreetype), Cvoid, (FT_Glyph, FT_UInt, Ptr{FT_BBox}), glyph, bbox_mode, acbox)
 end
 
 function FT_Glyph_To_Bitmap(the_glyph, render_mode, origin, destroy)
@@ -219,11 +219,11 @@ function FT_Glyph_To_Bitmap(the_glyph, render_mode, origin, destroy)
 end
 
 function FT_Done_Glyph(glyph)
-    ccall((:FT_Done_Glyph, libfreetype), Void, (FT_Glyph,), glyph)
+    ccall((:FT_Done_Glyph, libfreetype), Cvoid, (FT_Glyph,), glyph)
 end
 
 function FT_Matrix_Multiply(a, b)
-    ccall((:FT_Matrix_Multiply, libfreetype), Void, (Ptr{FT_Matrix}, Ptr{FT_Matrix}), a, b)
+    ccall((:FT_Matrix_Multiply, libfreetype), Cvoid, (Ptr{FT_Matrix}, Ptr{FT_Matrix}), a, b)
 end
 
 function FT_Matrix_Invert(matrix)
@@ -249,15 +249,15 @@ function FT_Remove_Module(library, _module)
 end
 
 function FT_Property_Set(library, module_name, property_name, value)
-    ccall((:FT_Property_Set, libfreetype), FT_Error, (FT_Library, Ptr{FT_String}, Ptr{FT_String}, Ptr{Void}), library, module_name, property_name, value)
+    ccall((:FT_Property_Set, libfreetype), FT_Error, (FT_Library, Ptr{FT_String}, Ptr{FT_String}, Ptr{Cvoid}), library, module_name, property_name, value)
 end
 
 function FT_Property_Get(library, module_name, property_name, value)
-    ccall((:FT_Property_Get, libfreetype), FT_Error, (FT_Library, Ptr{FT_String}, Ptr{FT_String}, Ptr{Void}), library, module_name, property_name, value)
+    ccall((:FT_Property_Get, libfreetype), FT_Error, (FT_Library, Ptr{FT_String}, Ptr{FT_String}, Ptr{Cvoid}), library, module_name, property_name, value)
 end
 
 function FT_Set_Default_Properties(library)
-    ccall((:FT_Set_Default_Properties, libfreetype), Void, (FT_Library,), library)
+    ccall((:FT_Set_Default_Properties, libfreetype), Cvoid, (FT_Library,), library)
 end
 
 function FT_Reference_Library(library)
@@ -273,11 +273,11 @@ function FT_Done_Library(library)
 end
 
 function FT_Set_Debug_Hook(library, hook_index, debug_hook)
-    ccall((:FT_Set_Debug_Hook, libfreetype), Void, (FT_Library, FT_UInt, FT_DebugHook_Func), library, hook_index, debug_hook)
+    ccall((:FT_Set_Debug_Hook, libfreetype), Cvoid, (FT_Library, FT_UInt, FT_DebugHook_Func), library, hook_index, debug_hook)
 end
 
 function FT_Add_Default_Modules(library)
-    ccall((:FT_Add_Default_Modules, libfreetype), Void, (FT_Library,), library)
+    ccall((:FT_Add_Default_Modules, libfreetype), Cvoid, (FT_Library,), library)
 end
 
 function FT_Get_TrueType_Engine_Type(library)
@@ -291,7 +291,7 @@ end
 
 
 function FT_Outline_Decompose(outline, func_interface, user)
-    ccall((:FT_Outline_Decompose, libfreetype), FT_Error, (Ptr{FT_Outline}, Ptr{FT_Outline_Funcs}, Ptr{Void}), outline, func_interface, user)
+    ccall((:FT_Outline_Decompose, libfreetype), FT_Error, (Ptr{FT_Outline}, Ptr{FT_Outline_Funcs}, Ptr{Cvoid}), outline, func_interface, user)
 end
 
 function FT_Outline_New(library, numPoints, numContours, anoutline)
@@ -315,11 +315,11 @@ function FT_Outline_Check(outline)
 end
 
 function FT_Outline_Get_CBox(outline, acbox)
-    ccall((:FT_Outline_Get_CBox, libfreetype), Void, (Ptr{FT_Outline}, Ptr{FT_BBox}), outline, acbox)
+    ccall((:FT_Outline_Get_CBox, libfreetype), Cvoid, (Ptr{FT_Outline}, Ptr{FT_BBox}), outline, acbox)
 end
 
 function FT_Outline_Translate(outline, xOffset, yOffset)
-    ccall((:FT_Outline_Translate, libfreetype), Void, (Ptr{FT_Outline}, FT_Pos, FT_Pos), outline, xOffset, yOffset)
+    ccall((:FT_Outline_Translate, libfreetype), Cvoid, (Ptr{FT_Outline}, FT_Pos, FT_Pos), outline, xOffset, yOffset)
 end
 
 function FT_Outline_Copy(source, target)
@@ -327,7 +327,7 @@ function FT_Outline_Copy(source, target)
 end
 
 function FT_Outline_Transform(outline, matrix)
-    ccall((:FT_Outline_Transform, libfreetype), Void, (Ptr{FT_Outline}, Ptr{FT_Matrix}), outline, matrix)
+    ccall((:FT_Outline_Transform, libfreetype), Cvoid, (Ptr{FT_Outline}, Ptr{FT_Matrix}), outline, matrix)
 end
 
 function FT_Outline_Embolden(outline, strength)
@@ -339,7 +339,7 @@ function FT_Outline_EmboldenXY(outline, xstrength, ystrength)
 end
 
 function FT_Outline_Reverse(outline)
-    ccall((:FT_Outline_Reverse, libfreetype), Void, (Ptr{FT_Outline},), outline)
+    ccall((:FT_Outline_Reverse, libfreetype), Cvoid, (Ptr{FT_Outline},), outline)
 end
 
 function FT_Outline_Get_Bitmap(library, outline, abitmap)
@@ -379,7 +379,7 @@ function FT_Get_PS_Font_Private(face, afont_private)
 end
 
 function FT_Get_PS_Font_Value(face, key, idx, value, value_len)
-    ccall((:FT_Get_PS_Font_Value, libfreetype), FT_Long, (FT_Face, PS_Dict_Keys, FT_UInt, Ptr{Void}, FT_Long), face, key, idx, value, value_len)
+    ccall((:FT_Get_PS_Font_Value, libfreetype), FT_Long, (FT_Face, PS_Dict_Keys, FT_UInt, Ptr{Cvoid}, FT_Long), face, key, idx, value, value_len)
 end
 # Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/config/ftconfig.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
@@ -427,11 +427,11 @@ end
 
 
 function FT_Bitmap_Init(abitmap)
-    ccall((:FT_Bitmap_Init, libfreetype), Void, (Ptr{FT_Bitmap},), abitmap)
+    ccall((:FT_Bitmap_Init, libfreetype), Cvoid, (Ptr{FT_Bitmap},), abitmap)
 end
 
 function FT_Bitmap_New(abitmap)
-    ccall((:FT_Bitmap_New, libfreetype), Void, (Ptr{FT_Bitmap},), abitmap)
+    ccall((:FT_Bitmap_New, libfreetype), Cvoid, (Ptr{FT_Bitmap},), abitmap)
 end
 
 function FT_Bitmap_Copy(library, source, target)
@@ -469,11 +469,11 @@ function FTC_Manager_New(library, max_faces, max_sizes, max_bytes, requester, re
 end
 
 function FTC_Manager_Reset(manager)
-    ccall((:FTC_Manager_Reset, libfreetype), Void, (FTC_Manager,), manager)
+    ccall((:FTC_Manager_Reset, libfreetype), Cvoid, (FTC_Manager,), manager)
 end
 
 function FTC_Manager_Done(manager)
-    ccall((:FTC_Manager_Done, libfreetype), Void, (FTC_Manager,), manager)
+    ccall((:FTC_Manager_Done, libfreetype), Cvoid, (FTC_Manager,), manager)
 end
 
 function FTC_Manager_LookupFace(manager, face_id, aface)
@@ -485,11 +485,11 @@ function FTC_Manager_LookupSize(manager, scaler, asize)
 end
 
 function FTC_Node_Unref(node, manager)
-    ccall((:FTC_Node_Unref, libfreetype), Void, (FTC_Node, FTC_Manager), node, manager)
+    ccall((:FTC_Node_Unref, libfreetype), Cvoid, (FTC_Node, FTC_Manager), node, manager)
 end
 
 function FTC_Manager_RemoveFaceID(manager, face_id)
-    ccall((:FTC_Manager_RemoveFaceID, libfreetype), Void, (FTC_Manager, FTC_FaceID), manager, face_id)
+    ccall((:FTC_Manager_RemoveFaceID, libfreetype), Cvoid, (FTC_Manager, FTC_FaceID), manager, face_id)
 end
 
 function FTC_CMapCache_New(manager, acache)
@@ -571,7 +571,7 @@ function FT_TrueTypeGX_Validate(face, validation_flags, tables, table_length)
 end
 
 function FT_TrueTypeGX_Free(face, table)
-    ccall((:FT_TrueTypeGX_Free, libfreetype), Void, (FT_Face, FT_Bytes), face, table)
+    ccall((:FT_TrueTypeGX_Free, libfreetype), Cvoid, (FT_Face, FT_Bytes), face, table)
 end
 
 function FT_ClassicKern_Validate(face, validation_flags, ckern_table)
@@ -579,7 +579,7 @@ function FT_ClassicKern_Validate(face, validation_flags, ckern_table)
 end
 
 function FT_ClassicKern_Free(face, table)
-    ccall((:FT_ClassicKern_Free, libfreetype), Void, (FT_Face, FT_Bytes), face, table)
+    ccall((:FT_ClassicKern_Free, libfreetype), Cvoid, (FT_Face, FT_Bytes), face, table)
 end
 # Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ftgzip.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
@@ -611,31 +611,31 @@ end
 
 
 function FT_List_Find(list, data)
-    ccall((:FT_List_Find, libfreetype), FT_ListNode, (FT_List, Ptr{Void}), list, data)
+    ccall((:FT_List_Find, libfreetype), FT_ListNode, (FT_List, Ptr{Cvoid}), list, data)
 end
 
 function FT_List_Add(list, node)
-    ccall((:FT_List_Add, libfreetype), Void, (FT_List, FT_ListNode), list, node)
+    ccall((:FT_List_Add, libfreetype), Cvoid, (FT_List, FT_ListNode), list, node)
 end
 
 function FT_List_Insert(list, node)
-    ccall((:FT_List_Insert, libfreetype), Void, (FT_List, FT_ListNode), list, node)
+    ccall((:FT_List_Insert, libfreetype), Cvoid, (FT_List, FT_ListNode), list, node)
 end
 
 function FT_List_Remove(list, node)
-    ccall((:FT_List_Remove, libfreetype), Void, (FT_List, FT_ListNode), list, node)
+    ccall((:FT_List_Remove, libfreetype), Cvoid, (FT_List, FT_ListNode), list, node)
 end
 
 function FT_List_Up(list, node)
-    ccall((:FT_List_Up, libfreetype), Void, (FT_List, FT_ListNode), list, node)
+    ccall((:FT_List_Up, libfreetype), Cvoid, (FT_List, FT_ListNode), list, node)
 end
 
 function FT_List_Iterate(list, iterator, user)
-    ccall((:FT_List_Iterate, libfreetype), FT_Error, (FT_List, FT_List_Iterator, Ptr{Void}), list, iterator, user)
+    ccall((:FT_List_Iterate, libfreetype), FT_Error, (FT_List, FT_List_Iterator, Ptr{Cvoid}), list, iterator, user)
 end
 
 function FT_List_Finalize(list, destroy, memory, user)
-    ccall((:FT_List_Finalize, libfreetype), Void, (FT_List, FT_List_Destructor, FT_Memory, Ptr{Void}), list, destroy, memory, user)
+    ccall((:FT_List_Finalize, libfreetype), Cvoid, (FT_List, FT_List_Destructor, FT_Memory, Ptr{Cvoid}), list, destroy, memory, user)
 end
 # Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ftlzw.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
@@ -707,7 +707,7 @@ function FT_OpenType_Validate(face, validation_flags, BASE_table, GDEF_table, GP
 end
 
 function FT_OpenType_Free(face, table)
-    ccall((:FT_OpenType_Free, libfreetype), Void, (FT_Face, FT_Bytes), face, table)
+    ccall((:FT_OpenType_Free, libfreetype), Cvoid, (FT_Face, FT_Bytes), face, table)
 end
 # Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ftpfr.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
@@ -782,11 +782,11 @@ function FT_Stroker_New(library, astroker)
 end
 
 function FT_Stroker_Set(stroker, radius, line_cap, line_join, miter_limit)
-    ccall((:FT_Stroker_Set, libfreetype), Void, (FT_Stroker, FT_Fixed, FT_Stroker_LineCap, FT_Stroker_LineJoin, FT_Fixed), stroker, radius, line_cap, line_join, miter_limit)
+    ccall((:FT_Stroker_Set, libfreetype), Cvoid, (FT_Stroker, FT_Fixed, FT_Stroker_LineCap, FT_Stroker_LineJoin, FT_Fixed), stroker, radius, line_cap, line_join, miter_limit)
 end
 
 function FT_Stroker_Rewind(stroker)
-    ccall((:FT_Stroker_Rewind, libfreetype), Void, (FT_Stroker,), stroker)
+    ccall((:FT_Stroker_Rewind, libfreetype), Cvoid, (FT_Stroker,), stroker)
 end
 
 function FT_Stroker_ParseOutline(stroker, outline, opened)
@@ -818,7 +818,7 @@ function FT_Stroker_GetBorderCounts(stroker, border, anum_points, anum_contours)
 end
 
 function FT_Stroker_ExportBorder(stroker, border, outline)
-    ccall((:FT_Stroker_ExportBorder, libfreetype), Void, (FT_Stroker, FT_StrokerBorder, Ptr{FT_Outline}), stroker, border, outline)
+    ccall((:FT_Stroker_ExportBorder, libfreetype), Cvoid, (FT_Stroker, FT_StrokerBorder, Ptr{FT_Outline}), stroker, border, outline)
 end
 
 function FT_Stroker_GetCounts(stroker, anum_points, anum_contours)
@@ -826,11 +826,11 @@ function FT_Stroker_GetCounts(stroker, anum_points, anum_contours)
 end
 
 function FT_Stroker_Export(stroker, outline)
-    ccall((:FT_Stroker_Export, libfreetype), Void, (FT_Stroker, Ptr{FT_Outline}), stroker, outline)
+    ccall((:FT_Stroker_Export, libfreetype), Cvoid, (FT_Stroker, Ptr{FT_Outline}), stroker, outline)
 end
 
 function FT_Stroker_Done(stroker)
-    ccall((:FT_Stroker_Done, libfreetype), Void, (FT_Stroker,), stroker)
+    ccall((:FT_Stroker_Done, libfreetype), Cvoid, (FT_Stroker,), stroker)
 end
 
 function FT_Glyph_Stroke(pglyph, stroker, destroy)
@@ -845,11 +845,11 @@ end
 
 
 function FT_GlyphSlot_Embolden(slot)
-    ccall((:FT_GlyphSlot_Embolden, libfreetype), Void, (FT_GlyphSlot,), slot)
+    ccall((:FT_GlyphSlot_Embolden, libfreetype), Cvoid, (FT_GlyphSlot,), slot)
 end
 
 function FT_GlyphSlot_Oblique(slot)
-    ccall((:FT_GlyphSlot_Oblique, libfreetype), Void, (FT_GlyphSlot,), slot)
+    ccall((:FT_GlyphSlot_Oblique, libfreetype), Cvoid, (FT_GlyphSlot,), slot)
 end
 # Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/fttrigon.h
 # Automatically generated using Clang.jl wrap_c, version 0.0.0
@@ -869,7 +869,7 @@ end
 
 
 function FT_Get_Sfnt_Table(face, tag)
-    ccall((:FT_Get_Sfnt_Table, libfreetype), Ptr{Void}, (FT_Face, FT_Sfnt_Tag), face, tag)
+    ccall((:FT_Get_Sfnt_Table, libfreetype), Ptr{Cvoid}, (FT_Face, FT_Sfnt_Tag), face, tag)
 end
 
 function FT_Load_Sfnt_Table(face, tag, offset, buffer, length)

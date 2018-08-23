@@ -13,7 +13,7 @@ FT_HAS_FIXED_SIZES(face) = face.face_flags & FT_FACE_FLAG_FIXED_SIZES
 FT_HAS_FAST_GLYPHS(face) = 0
 FT_HAS_GLYPH_NAMES(face) = face.face_flags & FT_FACE_FLAG_GLYPH_NAMES
 FT_HAS_MULTIPLE_MASTERS(face) = face.face_flags & FT_FACE_FLAG_MULTIPLE_MASTERS
-FT_IS_NAMED_INSTANCE(face) = face.face_index & 0x7FFF0000L
+FT_IS_NAMED_INSTANCE(face) = face.face_index & 0x7FFF0000
 FT_IS_VARIATION(face) = face.face_flags & FT_FACE_FLAG_VARIATION
 FT_IS_CID_KEYED(face) = face.face_flags & FT_FACE_FLAG_CID_KEYED
 FT_IS_TRICKY(face) = face.face_flags & FT_FACE_FLAG_TRICKY
@@ -54,7 +54,7 @@ const FT_UShort = UInt16
 const FT_UInt = UInt32
 const FT_Fixed = Clong
 const FT_ULong = Culong
-const FT_Pointer = Ptr{Void}
+const FT_Pointer = Ptr{Cvoid}
 const FT_Byte = Cuchar
 const FT_OUTLINE_CONTOURS_MAX = SHRT_MAX
 const FT_OUTLINE_POINTS_MAX = SHRT_MAX
@@ -122,21 +122,21 @@ const FT_Curve_Tag_Conic = FT_CURVE_TAG_CONIC
 const FT_Curve_Tag_Cubic = FT_CURVE_TAG_CUBIC
 const FT_Curve_Tag_Touch_X = FT_CURVE_TAG_TOUCH_X
 const FT_Curve_Tag_Touch_Y = FT_CURVE_TAG_TOUCH_Y
-const FT_Outline_MoveToFunc = Ptr{Void}
+const FT_Outline_MoveToFunc = Ptr{Cvoid}
 const FT_Outline_MoveTo_Func = FT_Outline_MoveToFunc
-const FT_Outline_LineToFunc = Ptr{Void}
+const FT_Outline_LineToFunc = Ptr{Cvoid}
 const FT_Outline_LineTo_Func = FT_Outline_LineToFunc
-const FT_Outline_ConicToFunc = Ptr{Void}
+const FT_Outline_ConicToFunc = Ptr{Cvoid}
 const FT_Outline_ConicTo_Func = FT_Outline_ConicToFunc
-const FT_Outline_CubicToFunc = Ptr{Void}
+const FT_Outline_CubicToFunc = Ptr{Cvoid}
 const FT_Outline_CubicTo_Func = FT_Outline_CubicToFunc
-const FT_Glyph_InitFunc = Ptr{Void}
-const FT_Glyph_DoneFunc = Ptr{Void}
-const FT_Glyph_CopyFunc = Ptr{Void}
-const FT_Glyph_TransformFunc = Ptr{Void}
-const FT_Glyph_GetBBoxFunc = Ptr{Void}
-const FT_Glyph_PrepareFunc = Ptr{Void}
-const FT_SpanFunc = Ptr{Void}
+const FT_Glyph_InitFunc = Ptr{Cvoid}
+const FT_Glyph_DoneFunc = Ptr{Cvoid}
+const FT_Glyph_CopyFunc = Ptr{Cvoid}
+const FT_Glyph_TransformFunc = Ptr{Cvoid}
+const FT_Glyph_GetBBoxFunc = Ptr{Cvoid}
+const FT_Glyph_PrepareFunc = Ptr{Cvoid}
+const FT_SpanFunc = Ptr{Cvoid}
 const FT_Raster_Span_Func = FT_SpanFunc
 const FT_RASTER_FLAG_DEFAULT = 0x00
 const FT_RASTER_FLAG_AA = 0x01
@@ -146,15 +146,15 @@ const ft_raster_flag_default = FT_RASTER_FLAG_DEFAULT
 const ft_raster_flag_aa = FT_RASTER_FLAG_AA
 const ft_raster_flag_direct = FT_RASTER_FLAG_DIRECT
 const ft_raster_flag_clip = FT_RASTER_FLAG_CLIP
-const FT_Raster_NewFunc = Ptr{Void}
+const FT_Raster_NewFunc = Ptr{Cvoid}
 const FT_Raster_New_Func = FT_Raster_NewFunc
-const FT_Raster_DoneFunc = Ptr{Void}
+const FT_Raster_DoneFunc = Ptr{Cvoid}
 const FT_Raster_Done_Func = FT_Raster_DoneFunc
-const FT_Raster_ResetFunc = Ptr{Void}
+const FT_Raster_ResetFunc = Ptr{Cvoid}
 const FT_Raster_Reset_Func = FT_Raster_ResetFunc
-const FT_Raster_SetModeFunc = Ptr{Void}
+const FT_Raster_SetModeFunc = Ptr{Cvoid}
 const FT_Raster_Set_Mode_Func = FT_Raster_SetModeFunc
-const FT_Raster_RenderFunc = Ptr{Void}
+const FT_Raster_RenderFunc = Ptr{Cvoid}
 const FT_Raster_Render_Func = FT_Raster_RenderFunc
 const FT_MODULE_FONT_DRIVER = 1
 const FT_MODULE_RENDERER = 2
@@ -165,12 +165,12 @@ const FT_MODULE_DRIVER_NO_OUTLINES = 0x0200
 const FT_MODULE_DRIVER_HAS_HINTER = 0x0400
 const FT_MODULE_DRIVER_HINTS_LIGHTLY = 0x0800
 const FT_Module_Interface = FT_Pointer
-const FT_Module_Constructor = Ptr{Void}
-const FT_Module_Destructor = Ptr{Void}
-const FT_Module_Requester = Ptr{Void}
-const FT_Alloc_Func = Ptr{Void}
-const FT_Free_Func = Ptr{Void}
-const FT_Realloc_Func = Ptr{Void}
+const FT_Module_Constructor = Ptr{Cvoid}
+const FT_Module_Destructor = Ptr{Cvoid}
+const FT_Module_Requester = Ptr{Cvoid}
+const FT_Alloc_Func = Ptr{Cvoid}
+const FT_Free_Func = Ptr{Cvoid}
+const FT_Realloc_Func = Ptr{Cvoid}
 const FT_Bool = Cuchar
 const FT_FWord = Int16
 const FT_UFWord = UInt16
@@ -256,13 +256,13 @@ const FT_Glyph_Transform_Func = FT_Glyph_TransformFunc
 const FT_Glyph_BBox_Func = FT_Glyph_GetBBoxFunc
 const FT_Glyph_Copy_Func = FT_Glyph_CopyFunc
 const FT_Glyph_Prepare_Func = FT_Glyph_PrepareFunc
-const FT_Renderer_RenderFunc = Ptr{Void}
+const FT_Renderer_RenderFunc = Ptr{Cvoid}
 const FTRenderer_render = FT_Renderer_RenderFunc
-const FT_Renderer_TransformFunc = Ptr{Void}
+const FT_Renderer_TransformFunc = Ptr{Cvoid}
 const FTRenderer_transform = FT_Renderer_TransformFunc
-const FT_Renderer_GetCBoxFunc = Ptr{Void}
+const FT_Renderer_GetCBoxFunc = Ptr{Cvoid}
 const FTRenderer_getCBox = FT_Renderer_GetCBoxFunc
-const FT_Renderer_SetModeFunc = Ptr{Void}
+const FT_Renderer_SetModeFunc = Ptr{Cvoid}
 const FTRenderer_setMode = FT_Renderer_SetModeFunc
 const FT_ANGLE_PI = Int32(180) << 16
 const FT_ANGLE_2PI = FT_ANGLE_PI * 2
@@ -999,7 +999,7 @@ const TTAG_VVAR = FT_MAKE_TAG('V', 'V', 'A', 'R')
 const TTAG_wOFF = FT_MAKE_TAG('w', 'O', 'F', 'F')
 const TTAG_0xA5kbd = FT_MAKE_TAG(0xA5, 'k', 'b', 'd')
 const TTAG_0xA5lst = FT_MAKE_TAG(0xA5, 'l', 's', 't')
-const FT_DebugHook_Func = Ptr{Void}
+const FT_DebugHook_Func = Ptr{Cvoid}
 
 
 @cenum(FT_Encoding,
@@ -1067,24 +1067,24 @@ struct FT_Bitmap_Size
     y_ppem::FT_Pos
 end
 
-const FT_LibraryRec = Void
+const FT_LibraryRec = Nothing
 const FT_Library = Ptr{FT_LibraryRec}
 
-const FT_ModuleRec = Void
+const FT_ModuleRec = Nothing
 const FT_Module = Ptr{FT_ModuleRec}
 
-const FT_DriverRec = Void
+const FT_DriverRec = Nothing
 const FT_Driver = Ptr{FT_DriverRec}
 
-const FT_RendererRec = Void
+const FT_RendererRec = Nothing
 const FT_Renderer = Ptr{FT_RendererRec}
 
-const FT_Face_InternalRec = Void
+const FT_Face_InternalRec = Nothing
 const FT_Face_Internal = Ptr{FT_Face_InternalRec}
 
-const FT_Generic_Finalizer = Ptr{Void}
+const FT_Generic_Finalizer = Ptr{Cvoid}
 struct FT_Generic
-    data::Ptr{Void}
+    data::Ptr{Cvoid}
     finalizer::FT_Generic_Finalizer
 end
 
@@ -1095,11 +1095,11 @@ struct FT_BBox
     yMax::FT_Pos
 end
 
-const FT_ListNode = Ptr{Void}
+const FT_ListNode = Ptr{Cvoid}
 struct FT_ListNodeRec
     prev::FT_ListNode
     next::FT_ListNode
-    data::Ptr{Void}
+    data::Ptr{Cvoid}
 end
 
 struct FT_ListRec
@@ -1129,7 +1129,7 @@ struct FT_Bitmap
     num_grays::UInt16
     pixel_mode::Cuchar
     palette_mode::Cuchar
-    palette::Ptr{Void}
+    palette::Ptr{Cvoid}
 end
 
 struct FT_Outline
@@ -1141,14 +1141,14 @@ struct FT_Outline
     flags::Cint
 end
 
-const FT_SubGlyphRec = Void
+const FT_SubGlyphRec = Nothing
 const FT_SubGlyph = Ptr{FT_SubGlyphRec}
 
-const FT_Slot_InternalRec = Void
+const FT_Slot_InternalRec = Nothing
 const FT_Slot_Internal = Ptr{FT_Slot_InternalRec}
 
 struct FT_CharMapRec
-    face::Ptr{Void}
+    face::Ptr{Cvoid}
     encoding::FT_Encoding
     platform_id::FT_UShort
     encoding_id::FT_UShort
@@ -1157,7 +1157,7 @@ const FT_CharMap = Ptr{FT_CharMapRec}
 
 struct FT_GlyphSlotRec
     library::FT_Library
-    face::Ptr{Void}
+    face::Ptr{Cvoid}
     next::Ptr{FT_GlyphSlotRec}
     reserved::FT_UInt
     generic::FT_Generic
@@ -1172,16 +1172,16 @@ struct FT_GlyphSlotRec
     outline::FT_Outline
     num_subglyphs::FT_UInt
     subglyphs::FT_SubGlyph
-    control_data::Ptr{Void}
+    control_data::Ptr{Cvoid}
     control_len::Clong
     lsb_delta::FT_Pos
     rsb_delta::FT_Pos
-    other::Ptr{Void}
+    other::Ptr{Cvoid}
     internal::FT_Slot_Internal
 end
 const FT_GlyphSlot = Ptr{FT_GlyphSlotRec}
 
-const FT_Size_InternalRec = Void
+const FT_Size_InternalRec = Nothing
 const FT_Size_Internal = Ptr{FT_Size_InternalRec}
 
 struct FT_Size_Metrics
@@ -1196,7 +1196,7 @@ struct FT_Size_Metrics
 end
 
 struct FT_SizeRec
-    face::Ptr{Void}
+    face::Ptr{Cvoid}
     generic::FT_Generic
     metrics::FT_Size_Metrics
     internal::FT_Size_Internal
@@ -1204,7 +1204,7 @@ end
 const FT_Size = Ptr{FT_SizeRec}
 
 struct FT_MemoryRec
-    user::Ptr{Void}
+    user::Ptr{Cvoid}
     alloc::FT_Alloc_Func
     free::FT_Free_Func
     realloc::FT_Realloc_Func
@@ -1213,10 +1213,10 @@ const FT_Memory = Ptr{FT_MemoryRec}
 
 # TODO: is this right?
 struct FT_StreamDesc
-    _FT_StreamDesc_::Ptr{Void} # or Clong
+    _FT_StreamDesc_::Ptr{Cvoid} # or Clong
 end
-const FT_Stream_IoFunc = Ptr{Void}
-const FT_Stream_CloseFunc = Ptr{Void}
+const FT_Stream_IoFunc = Ptr{Cvoid}
+const FT_Stream_CloseFunc = Ptr{Cvoid}
 struct FT_StreamRec
     base::Ptr{Cuchar}
     size::Culong
@@ -1261,7 +1261,7 @@ struct FT_FaceRec
     stream::FT_Stream
     sizes_list::FT_ListRec
     autohint::FT_Generic
-    extensions::Ptr{Void}
+    extensions::Ptr{Cvoid}
     internal::FT_Face_Internal
 end
 const FT_Face = Ptr{FT_FaceRec}
@@ -1376,7 +1376,7 @@ struct FT_Outline_Funcs
     delta::FT_Pos
 end
 
-const FT_RasterRec = Void
+const FT_RasterRec = Nothing
 const FT_Raster = Ptr{FT_RasterRec}
 
 struct FT_Span
@@ -1385,17 +1385,17 @@ struct FT_Span
     coverage::Cuchar
 end
 
-const FT_Raster_BitTest_Func = Ptr{Void}
-const FT_Raster_BitSet_Func = Ptr{Void}
+const FT_Raster_BitTest_Func = Ptr{Cvoid}
+const FT_Raster_BitSet_Func = Ptr{Cvoid}
 struct FT_Raster_Params
     target::Ptr{FT_Bitmap}
-    source::Ptr{Void}
+    source::Ptr{Cvoid}
     flags::Cint
     gray_spans::FT_SpanFunc
     black_spans::FT_SpanFunc
     bit_test::FT_Raster_BitTest_Func
     bit_set::FT_Raster_BitSet_Func
-    user::Ptr{Void}
+    user::Ptr{Cvoid}
     clip_box::FT_BBox
 end
 
@@ -1414,7 +1414,7 @@ struct FT_Module_Class
     module_name::Ptr{FT_String}
     module_version::FT_Fixed
     module_requires::FT_Fixed
-    module_interface::Ptr{Void}
+    module_interface::Ptr{Cvoid}
     module_init::FT_Module_Constructor
     module_done::FT_Module_Destructor
     get_interface::FT_Module_Requester
@@ -1679,17 +1679,17 @@ const FT_ADVANCE_FLAG_FAST_ONLY = Int32(0x20000000)
 
 struct BDF_PropertyRec
     _type::BDF_PropertyType
-    u::Void
+    u::Nothing
 end
 const BDF_Property = Ptr{BDF_PropertyRec}
 
 const FTC_FaceID = FT_Pointer
-const FTC_Face_Requester = Ptr{Void}
+const FTC_Face_Requester = Ptr{Cvoid}
 
-const FTC_ManagerRec = Void
+const FTC_ManagerRec = Nothing
 const FTC_Manager = Ptr{FTC_ManagerRec}
 
-const FTC_NodeRec = Void
+const FTC_NodeRec = Nothing
 const FTC_Node = Ptr{FTC_NodeRec}
 
 struct FTC_ScalerRec
@@ -1702,7 +1702,7 @@ struct FTC_ScalerRec
 end
 const FTC_Scaler = Ptr{FTC_ScalerRec}
 
-const FTC_CMapCacheRec = Void
+const FTC_CMapCacheRec = Nothing
 const FTC_CMapCache = Ptr{FTC_CMapCacheRec}
 
 struct FTC_ImageTypeRec
@@ -1713,7 +1713,7 @@ struct FTC_ImageTypeRec
 end
 const FTC_ImageType = Ptr{FTC_ImageTypeRec}
 
-const FTC_ImageCacheRec = Void
+const FTC_ImageCacheRec = Nothing
 const FTC_ImageCache = Ptr{FTC_ImageCacheRec}
 
 struct FTC_SBitRec
@@ -1730,7 +1730,7 @@ struct FTC_SBitRec
 end
 const FTC_SBit = Ptr{FTC_SBitRec}
 
-const FTC_SBitCacheRec = Void
+const FTC_SBitCacheRec = Nothing
 const FTC_SBitCache = Ptr{FTC_SBitCacheRec}
 
 struct FT_Prop_GlyphToScriptMap
@@ -1762,7 +1762,7 @@ const FT_VALIDATE_MS = FT_VALIDATE_GX_START << 0
 const FT_VALIDATE_APPLE = FT_VALIDATE_GX_START << 1
 const FT_VALIDATE_CKERN = FT_VALIDATE_MS | FT_VALIDATE_APPLE
 
-const FT_IncrementalRec = Void
+const FT_IncrementalRec = Nothing
 const FT_Incremental = Ptr{FT_IncrementalRec}
 
 struct FT_Incremental_MetricsRec
@@ -1774,9 +1774,9 @@ end
 const FT_Incremental_Metrics = Ptr{FT_Incremental_MetricsRec}
 
 
-const FT_Incremental_GetGlyphDataFunc = Ptr{Void}
-const FT_Incremental_FreeGlyphDataFunc = Ptr{Void}
-const FT_Incremental_GetGlyphMetricsFunc = Ptr{Void}
+const FT_Incremental_GetGlyphDataFunc = Ptr{Cvoid}
+const FT_Incremental_FreeGlyphDataFunc = Ptr{Cvoid}
+const FT_Incremental_GetGlyphMetricsFunc = Ptr{Cvoid}
 struct FT_Incremental_FuncsRec
     get_glyph_data::FT_Incremental_GetGlyphDataFunc
     free_glyph_data::FT_Incremental_FreeGlyphDataFunc
@@ -1800,8 +1800,8 @@ const FT_LCD_FILTER_FIVE_TAPS = 5
 )
 
 const FT_LcdFiveTapFilter = NTuple{5, FT_Byte}
-const FT_List_Iterator = Ptr{Void}
-const FT_List_Destructor = Ptr{Void}
+const FT_List_Iterator = Ptr{Cvoid}
+const FT_List_Destructor = Ptr{Cvoid}
 
 const FT_VAR_AXIS_FLAG_HIDDEN = 1
 
@@ -1864,7 +1864,7 @@ struct FT_SfntLangTag
     string_len::FT_UInt
 end
 
-const FT_StrokerRec = Void
+const FT_StrokerRec = Nothing
 const FT_Stroker = Ptr{FT_StrokerRec}
 
 @cenum(FT_Stroker_LineJoin,
@@ -1972,8 +1972,8 @@ struct TT_HoriHeader
     Reserved::NTuple{4, FT_Short}
     metric_Data_Format::FT_Short
     number_Of_HMetrics::FT_UShort
-    long_metrics::Ptr{Void}
-    short_metrics::Ptr{Void}
+    long_metrics::Ptr{Cvoid}
+    short_metrics::Ptr{Cvoid}
 end
 
 struct TT_VertHeader
@@ -1991,8 +1991,8 @@ struct TT_VertHeader
     Reserved::NTuple{4, FT_Short}
     metric_Data_Format::FT_Short
     number_Of_VMetrics::FT_UShort
-    long_metrics::Ptr{Void}
-    short_metrics::Ptr{Void}
+    long_metrics::Ptr{Cvoid}
+    short_metrics::Ptr{Cvoid}
 end
 
 struct TT_OS2
