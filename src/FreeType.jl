@@ -15,12 +15,10 @@ function __init__()
     check_deps()
 end
 
-include("CEnum.jl")
-using .CEnum
+using CEnum
 
 include(joinpath(@__DIR__, "..", "gen", "api", "ft_common.jl"))
 include(joinpath(@__DIR__, "..", "gen", "api", "ft_api.jl"))
-
 
 
 export FT_Init_FreeType
