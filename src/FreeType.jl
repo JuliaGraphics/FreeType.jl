@@ -65,6 +65,7 @@ export FT_Vector_Transform
 export FT_Library_Version
 export FT_Face_CheckTrueTypePatents
 export FT_Face_SetUnpatentedHinting
+export FT_Outline_Decompose
 
 export FT_Int16
 export FT_UInt16
