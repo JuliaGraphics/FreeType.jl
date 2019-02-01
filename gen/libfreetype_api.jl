@@ -1,8 +1,8 @@
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/ft2build.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/ft2build.h
+# Automatically generated using Clang.jl
 
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/freetype.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/freetype.h
+# Automatically generated using Clang.jl
 
 
 function FT_Init_FreeType(alibrary)
@@ -188,14 +188,183 @@ end
 function FT_Face_SetUnpatentedHinting(face, value)
     ccall((:FT_Face_SetUnpatentedHinting, libfreetype), FT_Bool, (FT_Face, FT_Bool), face, value)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/fterrdef.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftadvanc.h
+# Automatically generated using Clang.jl
 
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/fterrors.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
 
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ftglyph.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
+function FT_Get_Advance(face, gindex, load_flags, padvance)
+    ccall((:FT_Get_Advance, libfreetype), FT_Error, (FT_Face, FT_UInt, FT_Int32, Ptr{FT_Fixed}), face, gindex, load_flags, padvance)
+end
+
+function FT_Get_Advances(face, start, count, load_flags, padvances)
+    ccall((:FT_Get_Advances, libfreetype), FT_Error, (FT_Face, FT_UInt, FT_UInt, FT_Int32, Ptr{FT_Fixed}), face, start, count, load_flags, padvances)
+end
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftbbox.h
+# Automatically generated using Clang.jl
+
+
+function FT_Outline_Get_BBox(outline, abbox)
+    ccall((:FT_Outline_Get_BBox, libfreetype), FT_Error, (Ptr{FT_Outline}, Ptr{FT_BBox}), outline, abbox)
+end
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftbdf.h
+# Automatically generated using Clang.jl
+
+
+function FT_Get_BDF_Charset_ID(face, acharset_encoding, acharset_registry)
+    ccall((:FT_Get_BDF_Charset_ID, libfreetype), FT_Error, (FT_Face, Ptr{Cstring}, Ptr{Cstring}), face, acharset_encoding, acharset_registry)
+end
+
+function FT_Get_BDF_Property(face, prop_name, aproperty)
+    ccall((:FT_Get_BDF_Property, libfreetype), FT_Error, (FT_Face, Cstring, Ptr{BDF_PropertyRec}), face, prop_name, aproperty)
+end
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftbitmap.h
+# Automatically generated using Clang.jl
+
+
+function FT_Bitmap_Init(abitmap)
+    ccall((:FT_Bitmap_Init, libfreetype), Cvoid, (Ptr{FT_Bitmap},), abitmap)
+end
+
+function FT_Bitmap_New(abitmap)
+    ccall((:FT_Bitmap_New, libfreetype), Cvoid, (Ptr{FT_Bitmap},), abitmap)
+end
+
+function FT_Bitmap_Copy(library, source, target)
+    ccall((:FT_Bitmap_Copy, libfreetype), FT_Error, (FT_Library, Ptr{FT_Bitmap}, Ptr{FT_Bitmap}), library, source, target)
+end
+
+function FT_Bitmap_Embolden(library, bitmap, xStrength, yStrength)
+    ccall((:FT_Bitmap_Embolden, libfreetype), FT_Error, (FT_Library, Ptr{FT_Bitmap}, FT_Pos, FT_Pos), library, bitmap, xStrength, yStrength)
+end
+
+function FT_Bitmap_Convert(library, source, target, alignment)
+    ccall((:FT_Bitmap_Convert, libfreetype), FT_Error, (FT_Library, Ptr{FT_Bitmap}, Ptr{FT_Bitmap}, FT_Int), library, source, target, alignment)
+end
+
+function FT_GlyphSlot_Own_Bitmap(slot)
+    ccall((:FT_GlyphSlot_Own_Bitmap, libfreetype), FT_Error, (FT_GlyphSlot,), slot)
+end
+
+function FT_Bitmap_Done(library, bitmap)
+    ccall((:FT_Bitmap_Done, libfreetype), FT_Error, (FT_Library, Ptr{FT_Bitmap}), library, bitmap)
+end
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftbzip2.h
+# Automatically generated using Clang.jl
+
+
+function FT_Stream_OpenBzip2(stream, source)
+    ccall((:FT_Stream_OpenBzip2, libfreetype), FT_Error, (FT_Stream, FT_Stream), stream, source)
+end
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftcache.h
+# Automatically generated using Clang.jl
+
+
+function FTC_Manager_New(library, max_faces, max_sizes, max_bytes, requester, req_data, amanager)
+    ccall((:FTC_Manager_New, libfreetype), FT_Error, (FT_Library, FT_UInt, FT_UInt, FT_ULong, FTC_Face_Requester, FT_Pointer, Ptr{FTC_Manager}), library, max_faces, max_sizes, max_bytes, requester, req_data, amanager)
+end
+
+function FTC_Manager_Reset(manager)
+    ccall((:FTC_Manager_Reset, libfreetype), Cvoid, (FTC_Manager,), manager)
+end
+
+function FTC_Manager_Done(manager)
+    ccall((:FTC_Manager_Done, libfreetype), Cvoid, (FTC_Manager,), manager)
+end
+
+function FTC_Manager_LookupFace(manager, face_id, aface)
+    ccall((:FTC_Manager_LookupFace, libfreetype), FT_Error, (FTC_Manager, FTC_FaceID, Ptr{FT_Face}), manager, face_id, aface)
+end
+
+function FTC_Manager_LookupSize(manager, scaler, asize)
+    ccall((:FTC_Manager_LookupSize, libfreetype), FT_Error, (FTC_Manager, FTC_Scaler, Ptr{FT_Size}), manager, scaler, asize)
+end
+
+function FTC_Node_Unref(node, manager)
+    ccall((:FTC_Node_Unref, libfreetype), Cvoid, (FTC_Node, FTC_Manager), node, manager)
+end
+
+function FTC_Manager_RemoveFaceID(manager, face_id)
+    ccall((:FTC_Manager_RemoveFaceID, libfreetype), Cvoid, (FTC_Manager, FTC_FaceID), manager, face_id)
+end
+
+function FTC_CMapCache_New(manager, acache)
+    ccall((:FTC_CMapCache_New, libfreetype), FT_Error, (FTC_Manager, Ptr{FTC_CMapCache}), manager, acache)
+end
+
+function FTC_CMapCache_Lookup(cache, face_id, cmap_index, char_code)
+    ccall((:FTC_CMapCache_Lookup, libfreetype), FT_UInt, (FTC_CMapCache, FTC_FaceID, FT_Int, FT_UInt32), cache, face_id, cmap_index, char_code)
+end
+
+function FTC_ImageCache_New(manager, acache)
+    ccall((:FTC_ImageCache_New, libfreetype), FT_Error, (FTC_Manager, Ptr{FTC_ImageCache}), manager, acache)
+end
+
+function FTC_ImageCache_Lookup(cache, type, gindex, aglyph, anode)
+    ccall((:FTC_ImageCache_Lookup, libfreetype), FT_Error, (FTC_ImageCache, FTC_ImageType, FT_UInt, Ptr{FT_Glyph}, Ptr{FTC_Node}), cache, type, gindex, aglyph, anode)
+end
+
+function FTC_ImageCache_LookupScaler(cache, scaler, load_flags, gindex, aglyph, anode)
+    ccall((:FTC_ImageCache_LookupScaler, libfreetype), FT_Error, (FTC_ImageCache, FTC_Scaler, FT_ULong, FT_UInt, Ptr{FT_Glyph}, Ptr{FTC_Node}), cache, scaler, load_flags, gindex, aglyph, anode)
+end
+
+function FTC_SBitCache_New(manager, acache)
+    ccall((:FTC_SBitCache_New, libfreetype), FT_Error, (FTC_Manager, Ptr{FTC_SBitCache}), manager, acache)
+end
+
+function FTC_SBitCache_Lookup(cache, type, gindex, sbit, anode)
+    ccall((:FTC_SBitCache_Lookup, libfreetype), FT_Error, (FTC_SBitCache, FTC_ImageType, FT_UInt, Ptr{FTC_SBit}, Ptr{FTC_Node}), cache, type, gindex, sbit, anode)
+end
+
+function FTC_SBitCache_LookupScaler(cache, scaler, load_flags, gindex, sbit, anode)
+    ccall((:FTC_SBitCache_LookupScaler, libfreetype), FT_Error, (FTC_SBitCache, FTC_Scaler, FT_ULong, FT_UInt, Ptr{FTC_SBit}, Ptr{FTC_Node}), cache, scaler, load_flags, gindex, sbit, anode)
+end
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftchapters.h
+# Automatically generated using Clang.jl
+
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftcid.h
+# Automatically generated using Clang.jl
+
+
+function FT_Get_CID_Registry_Ordering_Supplement(face, registry, ordering, supplement)
+    ccall((:FT_Get_CID_Registry_Ordering_Supplement, libfreetype), FT_Error, (FT_Face, Ptr{Cstring}, Ptr{Cstring}, Ptr{FT_Int}), face, registry, ordering, supplement)
+end
+
+function FT_Get_CID_Is_Internally_CID_Keyed(face, is_cid)
+    ccall((:FT_Get_CID_Is_Internally_CID_Keyed, libfreetype), FT_Error, (FT_Face, Ptr{FT_Bool}), face, is_cid)
+end
+
+function FT_Get_CID_From_Glyph_Index(face, glyph_index, cid)
+    ccall((:FT_Get_CID_From_Glyph_Index, libfreetype), FT_Error, (FT_Face, FT_UInt, Ptr{FT_UInt}), face, glyph_index, cid)
+end
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftdriver.h
+# Automatically generated using Clang.jl
+
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/fterrdef.h
+# Automatically generated using Clang.jl
+
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/fterrors.h
+# Automatically generated using Clang.jl
+
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftfntfmt.h
+# Automatically generated using Clang.jl
+
+
+function FT_Get_Font_Format(face)
+    ccall((:FT_Get_Font_Format, libfreetype), Cstring, (FT_Face,), face)
+end
+
+function FT_Get_X11_Font_Format(face)
+    ccall((:FT_Get_X11_Font_Format, libfreetype), Cstring, (FT_Face,), face)
+end
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftgasp.h
+# Automatically generated using Clang.jl
+
+
+function FT_Get_Gasp(face, ppem)
+    ccall((:FT_Get_Gasp, libfreetype), FT_Int, (FT_Face, FT_UInt), face, ppem)
+end
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftglyph.h
+# Automatically generated using Clang.jl
 
 
 function FT_Get_Glyph(slot, aglyph)
@@ -229,11 +398,147 @@ end
 function FT_Matrix_Invert(matrix)
     ccall((:FT_Matrix_Invert, libfreetype), FT_Error, (Ptr{FT_Matrix},), matrix)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ftimage.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftgxval.h
+# Automatically generated using Clang.jl
 
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ftmodapi.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
+
+function FT_TrueTypeGX_Validate(face, validation_flags, tables, table_length)
+    ccall((:FT_TrueTypeGX_Validate, libfreetype), FT_Error, (FT_Face, FT_UInt, NTuple{10, FT_Bytes}, FT_UInt), face, validation_flags, tables, table_length)
+end
+
+function FT_TrueTypeGX_Free(face, table)
+    ccall((:FT_TrueTypeGX_Free, libfreetype), Cvoid, (FT_Face, FT_Bytes), face, table)
+end
+
+function FT_ClassicKern_Validate(face, validation_flags, ckern_table)
+    ccall((:FT_ClassicKern_Validate, libfreetype), FT_Error, (FT_Face, FT_UInt, Ptr{FT_Bytes}), face, validation_flags, ckern_table)
+end
+
+function FT_ClassicKern_Free(face, table)
+    ccall((:FT_ClassicKern_Free, libfreetype), Cvoid, (FT_Face, FT_Bytes), face, table)
+end
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftgzip.h
+# Automatically generated using Clang.jl
+
+
+function FT_Stream_OpenGzip(stream, source)
+    ccall((:FT_Stream_OpenGzip, libfreetype), FT_Error, (FT_Stream, FT_Stream), stream, source)
+end
+
+function FT_Gzip_Uncompress(memory, output, output_len, input, input_len)
+    ccall((:FT_Gzip_Uncompress, libfreetype), FT_Error, (FT_Memory, Ptr{FT_Byte}, Ptr{FT_ULong}, Ptr{FT_Byte}, FT_ULong), memory, output, output_len, input, input_len)
+end
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftimage.h
+# Automatically generated using Clang.jl
+
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftincrem.h
+# Automatically generated using Clang.jl
+
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftlcdfil.h
+# Automatically generated using Clang.jl
+
+
+function FT_Library_SetLcdFilter(library, filter)
+    ccall((:FT_Library_SetLcdFilter, libfreetype), FT_Error, (FT_Library, FT_LcdFilter), library, filter)
+end
+
+function FT_Library_SetLcdFilterWeights(library, weights)
+    ccall((:FT_Library_SetLcdFilterWeights, libfreetype), FT_Error, (FT_Library, Ptr{Cuchar}), library, weights)
+end
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftlist.h
+# Automatically generated using Clang.jl
+
+
+function FT_List_Find(list, data)
+    ccall((:FT_List_Find, libfreetype), FT_ListNode, (FT_List, Ptr{Cvoid}), list, data)
+end
+
+function FT_List_Add(list, node)
+    ccall((:FT_List_Add, libfreetype), Cvoid, (FT_List, FT_ListNode), list, node)
+end
+
+function FT_List_Insert(list, node)
+    ccall((:FT_List_Insert, libfreetype), Cvoid, (FT_List, FT_ListNode), list, node)
+end
+
+function FT_List_Remove(list, node)
+    ccall((:FT_List_Remove, libfreetype), Cvoid, (FT_List, FT_ListNode), list, node)
+end
+
+function FT_List_Up(list, node)
+    ccall((:FT_List_Up, libfreetype), Cvoid, (FT_List, FT_ListNode), list, node)
+end
+
+function FT_List_Iterate(list, iterator, user)
+    ccall((:FT_List_Iterate, libfreetype), FT_Error, (FT_List, FT_List_Iterator, Ptr{Cvoid}), list, iterator, user)
+end
+
+function FT_List_Finalize(list, destroy, memory, user)
+    ccall((:FT_List_Finalize, libfreetype), Cvoid, (FT_List, FT_List_Destructor, FT_Memory, Ptr{Cvoid}), list, destroy, memory, user)
+end
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftlzw.h
+# Automatically generated using Clang.jl
+
+
+function FT_Stream_OpenLZW(stream, source)
+    ccall((:FT_Stream_OpenLZW, libfreetype), FT_Error, (FT_Stream, FT_Stream), stream, source)
+end
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftmac.h
+# Automatically generated using Clang.jl
+
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftmm.h
+# Automatically generated using Clang.jl
+
+
+function FT_Get_Multi_Master(face, amaster)
+    ccall((:FT_Get_Multi_Master, libfreetype), FT_Error, (FT_Face, Ptr{FT_Multi_Master}), face, amaster)
+end
+
+function FT_Get_MM_Var(face, amaster)
+    ccall((:FT_Get_MM_Var, libfreetype), FT_Error, (FT_Face, Ptr{Ptr{FT_MM_Var}}), face, amaster)
+end
+
+function FT_Done_MM_Var(library, amaster)
+    ccall((:FT_Done_MM_Var, libfreetype), FT_Error, (FT_Library, Ptr{FT_MM_Var}), library, amaster)
+end
+
+function FT_Set_MM_Design_Coordinates(face, num_coords, coords)
+    ccall((:FT_Set_MM_Design_Coordinates, libfreetype), FT_Error, (FT_Face, FT_UInt, Ptr{FT_Long}), face, num_coords, coords)
+end
+
+function FT_Set_Var_Design_Coordinates(face, num_coords, coords)
+    ccall((:FT_Set_Var_Design_Coordinates, libfreetype), FT_Error, (FT_Face, FT_UInt, Ptr{FT_Fixed}), face, num_coords, coords)
+end
+
+function FT_Get_Var_Design_Coordinates(face, num_coords, coords)
+    ccall((:FT_Get_Var_Design_Coordinates, libfreetype), FT_Error, (FT_Face, FT_UInt, Ptr{FT_Fixed}), face, num_coords, coords)
+end
+
+function FT_Set_MM_Blend_Coordinates(face, num_coords, coords)
+    ccall((:FT_Set_MM_Blend_Coordinates, libfreetype), FT_Error, (FT_Face, FT_UInt, Ptr{FT_Fixed}), face, num_coords, coords)
+end
+
+function FT_Get_MM_Blend_Coordinates(face, num_coords, coords)
+    ccall((:FT_Get_MM_Blend_Coordinates, libfreetype), FT_Error, (FT_Face, FT_UInt, Ptr{FT_Fixed}), face, num_coords, coords)
+end
+
+function FT_Set_Var_Blend_Coordinates(face, num_coords, coords)
+    ccall((:FT_Set_Var_Blend_Coordinates, libfreetype), FT_Error, (FT_Face, FT_UInt, Ptr{FT_Fixed}), face, num_coords, coords)
+end
+
+function FT_Get_Var_Blend_Coordinates(face, num_coords, coords)
+    ccall((:FT_Get_Var_Blend_Coordinates, libfreetype), FT_Error, (FT_Face, FT_UInt, Ptr{FT_Fixed}), face, num_coords, coords)
+end
+
+function FT_Get_Var_Axis_Flags(master, axis_index, flags)
+    ccall((:FT_Get_Var_Axis_Flags, libfreetype), FT_Error, (Ptr{FT_MM_Var}, FT_UInt, Ptr{FT_UInt}), master, axis_index, flags)
+end
+
+function FT_Set_Named_Instance(face, instance_index)
+    ccall((:FT_Set_Named_Instance, libfreetype), FT_Error, (FT_Face, FT_UInt), face, instance_index)
+end
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftmodapi.h
+# Automatically generated using Clang.jl
 
 
 function FT_Add_Module(library, clazz)
@@ -283,11 +588,22 @@ end
 function FT_Get_TrueType_Engine_Type(library)
     ccall((:FT_Get_TrueType_Engine_Type, libfreetype), FT_TrueTypeEngineType, (FT_Library,), library)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ftmoderr.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftmoderr.h
+# Automatically generated using Clang.jl
 
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ftoutln.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftotval.h
+# Automatically generated using Clang.jl
+
+
+function FT_OpenType_Validate(face, validation_flags, BASE_table, GDEF_table, GPOS_table, GSUB_table, JSTF_table)
+    ccall((:FT_OpenType_Validate, libfreetype), FT_Error, (FT_Face, FT_UInt, Ptr{FT_Bytes}, Ptr{FT_Bytes}, Ptr{FT_Bytes}, Ptr{FT_Bytes}, Ptr{FT_Bytes}), face, validation_flags, BASE_table, GDEF_table, GPOS_table, GSUB_table, JSTF_table)
+end
+
+function FT_OpenType_Free(face, table)
+    ccall((:FT_OpenType_Free, libfreetype), Cvoid, (FT_Face, FT_Bytes), face, table)
+end
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftoutln.h
+# Automatically generated using Clang.jl
 
 
 function FT_Outline_Decompose(outline, func_interface, user)
@@ -353,364 +669,11 @@ end
 function FT_Outline_Get_Orientation(outline)
     ccall((:FT_Outline_Get_Orientation, libfreetype), FT_Orientation, (Ptr{FT_Outline},), outline)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ftparams.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
-
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ftsystem.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
-
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/fttypes.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
-
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/t1tables.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
-
-
-function FT_Has_PS_Glyph_Names(face)
-    ccall((:FT_Has_PS_Glyph_Names, libfreetype), FT_Int, (FT_Face,), face)
-end
-
-function FT_Get_PS_Font_Info(face, afont_info)
-    ccall((:FT_Get_PS_Font_Info, libfreetype), FT_Error, (FT_Face, PS_FontInfo), face, afont_info)
-end
-
-function FT_Get_PS_Font_Private(face, afont_private)
-    ccall((:FT_Get_PS_Font_Private, libfreetype), FT_Error, (FT_Face, PS_Private), face, afont_private)
-end
-
-function FT_Get_PS_Font_Value(face, key, idx, value, value_len)
-    ccall((:FT_Get_PS_Font_Value, libfreetype), FT_Long, (FT_Face, PS_Dict_Keys, FT_UInt, Ptr{Cvoid}, FT_Long), face, key, idx, value, value_len)
-end
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/config/ftconfig.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
-
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/config/ftheader.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
-
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/config/ftoption.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
-
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/config/ftstdlib.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
-
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ftadvanc.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
-
-
-function FT_Get_Advance(face, gindex, load_flags, padvance)
-    ccall((:FT_Get_Advance, libfreetype), FT_Error, (FT_Face, FT_UInt, FT_Int32, Ptr{FT_Fixed}), face, gindex, load_flags, padvance)
-end
-
-function FT_Get_Advances(face, start, count, load_flags, padvances)
-    ccall((:FT_Get_Advances, libfreetype), FT_Error, (FT_Face, FT_UInt, FT_UInt, FT_Int32, Ptr{FT_Fixed}), face, start, count, load_flags, padvances)
-end
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ftbbox.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
-
-
-function FT_Outline_Get_BBox(outline, abbox)
-    ccall((:FT_Outline_Get_BBox, libfreetype), FT_Error, (Ptr{FT_Outline}, Ptr{FT_BBox}), outline, abbox)
-end
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ftbdf.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
-
-
-function FT_Get_BDF_Charset_ID(face, acharset_encoding, acharset_registry)
-    ccall((:FT_Get_BDF_Charset_ID, libfreetype), FT_Error, (FT_Face, Ptr{Cstring}, Ptr{Cstring}), face, acharset_encoding, acharset_registry)
-end
-
-function FT_Get_BDF_Property(face, prop_name, aproperty)
-    ccall((:FT_Get_BDF_Property, libfreetype), FT_Error, (FT_Face, Cstring, Ptr{BDF_PropertyRec}), face, prop_name, aproperty)
-end
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ftbitmap.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
-
-
-function FT_Bitmap_Init(abitmap)
-    ccall((:FT_Bitmap_Init, libfreetype), Cvoid, (Ptr{FT_Bitmap},), abitmap)
-end
-
-function FT_Bitmap_New(abitmap)
-    ccall((:FT_Bitmap_New, libfreetype), Cvoid, (Ptr{FT_Bitmap},), abitmap)
-end
-
-function FT_Bitmap_Copy(library, source, target)
-    ccall((:FT_Bitmap_Copy, libfreetype), FT_Error, (FT_Library, Ptr{FT_Bitmap}, Ptr{FT_Bitmap}), library, source, target)
-end
-
-function FT_Bitmap_Embolden(library, bitmap, xStrength, yStrength)
-    ccall((:FT_Bitmap_Embolden, libfreetype), FT_Error, (FT_Library, Ptr{FT_Bitmap}, FT_Pos, FT_Pos), library, bitmap, xStrength, yStrength)
-end
-
-function FT_Bitmap_Convert(library, source, target, alignment)
-    ccall((:FT_Bitmap_Convert, libfreetype), FT_Error, (FT_Library, Ptr{FT_Bitmap}, Ptr{FT_Bitmap}, FT_Int), library, source, target, alignment)
-end
-
-function FT_GlyphSlot_Own_Bitmap(slot)
-    ccall((:FT_GlyphSlot_Own_Bitmap, libfreetype), FT_Error, (FT_GlyphSlot,), slot)
-end
-
-function FT_Bitmap_Done(library, bitmap)
-    ccall((:FT_Bitmap_Done, libfreetype), FT_Error, (FT_Library, Ptr{FT_Bitmap}), library, bitmap)
-end
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ftbzip2.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
-
-
-function FT_Stream_OpenBzip2(stream, source)
-    ccall((:FT_Stream_OpenBzip2, libfreetype), FT_Error, (FT_Stream, FT_Stream), stream, source)
-end
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ftcache.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
-
-
-function FTC_Manager_New(library, max_faces, max_sizes, max_bytes, requester, req_data, amanager)
-    ccall((:FTC_Manager_New, libfreetype), FT_Error, (FT_Library, FT_UInt, FT_UInt, FT_ULong, FTC_Face_Requester, FT_Pointer, Ptr{FTC_Manager}), library, max_faces, max_sizes, max_bytes, requester, req_data, amanager)
-end
-
-function FTC_Manager_Reset(manager)
-    ccall((:FTC_Manager_Reset, libfreetype), Cvoid, (FTC_Manager,), manager)
-end
-
-function FTC_Manager_Done(manager)
-    ccall((:FTC_Manager_Done, libfreetype), Cvoid, (FTC_Manager,), manager)
-end
-
-function FTC_Manager_LookupFace(manager, face_id, aface)
-    ccall((:FTC_Manager_LookupFace, libfreetype), FT_Error, (FTC_Manager, FTC_FaceID, Ptr{FT_Face}), manager, face_id, aface)
-end
-
-function FTC_Manager_LookupSize(manager, scaler, asize)
-    ccall((:FTC_Manager_LookupSize, libfreetype), FT_Error, (FTC_Manager, FTC_Scaler, Ptr{FT_Size}), manager, scaler, asize)
-end
-
-function FTC_Node_Unref(node, manager)
-    ccall((:FTC_Node_Unref, libfreetype), Cvoid, (FTC_Node, FTC_Manager), node, manager)
-end
-
-function FTC_Manager_RemoveFaceID(manager, face_id)
-    ccall((:FTC_Manager_RemoveFaceID, libfreetype), Cvoid, (FTC_Manager, FTC_FaceID), manager, face_id)
-end
-
-function FTC_CMapCache_New(manager, acache)
-    ccall((:FTC_CMapCache_New, libfreetype), FT_Error, (FTC_Manager, Ptr{FTC_CMapCache}), manager, acache)
-end
-
-function FTC_CMapCache_Lookup(cache, face_id, cmap_index, char_code)
-    ccall((:FTC_CMapCache_Lookup, libfreetype), FT_UInt, (FTC_CMapCache, FTC_FaceID, FT_Int, FT_UInt32), cache, face_id, cmap_index, char_code)
-end
-
-function FTC_ImageCache_New(manager, acache)
-    ccall((:FTC_ImageCache_New, libfreetype), FT_Error, (FTC_Manager, Ptr{FTC_ImageCache}), manager, acache)
-end
-
-function FTC_ImageCache_Lookup(cache, _type, gindex, aglyph, anode)
-    ccall((:FTC_ImageCache_Lookup, libfreetype), FT_Error, (FTC_ImageCache, FTC_ImageType, FT_UInt, Ptr{FT_Glyph}, Ptr{FTC_Node}), cache, _type, gindex, aglyph, anode)
-end
-
-function FTC_ImageCache_LookupScaler(cache, scaler, load_flags, gindex, aglyph, anode)
-    ccall((:FTC_ImageCache_LookupScaler, libfreetype), FT_Error, (FTC_ImageCache, FTC_Scaler, FT_ULong, FT_UInt, Ptr{FT_Glyph}, Ptr{FTC_Node}), cache, scaler, load_flags, gindex, aglyph, anode)
-end
-
-function FTC_SBitCache_New(manager, acache)
-    ccall((:FTC_SBitCache_New, libfreetype), FT_Error, (FTC_Manager, Ptr{FTC_SBitCache}), manager, acache)
-end
-
-function FTC_SBitCache_Lookup(cache, _type, gindex, sbit, anode)
-    ccall((:FTC_SBitCache_Lookup, libfreetype), FT_Error, (FTC_SBitCache, FTC_ImageType, FT_UInt, Ptr{FTC_SBit}, Ptr{FTC_Node}), cache, _type, gindex, sbit, anode)
-end
-
-function FTC_SBitCache_LookupScaler(cache, scaler, load_flags, gindex, sbit, anode)
-    ccall((:FTC_SBitCache_LookupScaler, libfreetype), FT_Error, (FTC_SBitCache, FTC_Scaler, FT_ULong, FT_UInt, Ptr{FTC_SBit}, Ptr{FTC_Node}), cache, scaler, load_flags, gindex, sbit, anode)
-end
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ftchapters.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
-
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ftcid.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
-
-
-function FT_Get_CID_Registry_Ordering_Supplement(face, registry, ordering, supplement)
-    ccall((:FT_Get_CID_Registry_Ordering_Supplement, libfreetype), FT_Error, (FT_Face, Ptr{Cstring}, Ptr{Cstring}, Ptr{FT_Int}), face, registry, ordering, supplement)
-end
-
-function FT_Get_CID_Is_Internally_CID_Keyed(face, is_cid)
-    ccall((:FT_Get_CID_Is_Internally_CID_Keyed, libfreetype), FT_Error, (FT_Face, Ptr{FT_Bool}), face, is_cid)
-end
-
-function FT_Get_CID_From_Glyph_Index(face, glyph_index, cid)
-    ccall((:FT_Get_CID_From_Glyph_Index, libfreetype), FT_Error, (FT_Face, FT_UInt, Ptr{FT_UInt}), face, glyph_index, cid)
-end
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ftdriver.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
-
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ftfntfmt.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
-
-
-function FT_Get_Font_Format(face)
-    ccall((:FT_Get_Font_Format, libfreetype), Cstring, (FT_Face,), face)
-end
-
-function FT_Get_X11_Font_Format(face)
-    ccall((:FT_Get_X11_Font_Format, libfreetype), Cstring, (FT_Face,), face)
-end
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ftgasp.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
-
-
-function FT_Get_Gasp(face, ppem)
-    ccall((:FT_Get_Gasp, libfreetype), FT_Int, (FT_Face, FT_UInt), face, ppem)
-end
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ftgxval.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
-
-
-function FT_TrueTypeGX_Validate(face, validation_flags, tables, table_length)
-    ccall((:FT_TrueTypeGX_Validate, libfreetype), FT_Error, (FT_Face, FT_UInt, NTuple{10, FT_Bytes}, FT_UInt), face, validation_flags, tables, table_length)
-end
-
-function FT_TrueTypeGX_Free(face, table)
-    ccall((:FT_TrueTypeGX_Free, libfreetype), Cvoid, (FT_Face, FT_Bytes), face, table)
-end
-
-function FT_ClassicKern_Validate(face, validation_flags, ckern_table)
-    ccall((:FT_ClassicKern_Validate, libfreetype), FT_Error, (FT_Face, FT_UInt, Ptr{FT_Bytes}), face, validation_flags, ckern_table)
-end
-
-function FT_ClassicKern_Free(face, table)
-    ccall((:FT_ClassicKern_Free, libfreetype), Cvoid, (FT_Face, FT_Bytes), face, table)
-end
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ftgzip.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
-
-
-function FT_Stream_OpenGzip(stream, source)
-    ccall((:FT_Stream_OpenGzip, libfreetype), FT_Error, (FT_Stream, FT_Stream), stream, source)
-end
-
-function FT_Gzip_Uncompress(memory, output, output_len, input, input_len)
-    ccall((:FT_Gzip_Uncompress, libfreetype), FT_Error, (FT_Memory, Ptr{FT_Byte}, Ptr{FT_ULong}, Ptr{FT_Byte}, FT_ULong), memory, output, output_len, input, input_len)
-end
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ftincrem.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
-
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ftlcdfil.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
-
-
-function FT_Library_SetLcdFilter(library, filter)
-    ccall((:FT_Library_SetLcdFilter, libfreetype), FT_Error, (FT_Library, FT_LcdFilter), library, filter)
-end
-
-function FT_Library_SetLcdFilterWeights(library, weights)
-    ccall((:FT_Library_SetLcdFilterWeights, libfreetype), FT_Error, (FT_Library, Ptr{Cuchar}), library, weights)
-end
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ftlist.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
-
-
-function FT_List_Find(list, data)
-    ccall((:FT_List_Find, libfreetype), FT_ListNode, (FT_List, Ptr{Cvoid}), list, data)
-end
-
-function FT_List_Add(list, node)
-    ccall((:FT_List_Add, libfreetype), Cvoid, (FT_List, FT_ListNode), list, node)
-end
-
-function FT_List_Insert(list, node)
-    ccall((:FT_List_Insert, libfreetype), Cvoid, (FT_List, FT_ListNode), list, node)
-end
-
-function FT_List_Remove(list, node)
-    ccall((:FT_List_Remove, libfreetype), Cvoid, (FT_List, FT_ListNode), list, node)
-end
-
-function FT_List_Up(list, node)
-    ccall((:FT_List_Up, libfreetype), Cvoid, (FT_List, FT_ListNode), list, node)
-end
-
-function FT_List_Iterate(list, iterator, user)
-    ccall((:FT_List_Iterate, libfreetype), FT_Error, (FT_List, FT_List_Iterator, Ptr{Cvoid}), list, iterator, user)
-end
-
-function FT_List_Finalize(list, destroy, memory, user)
-    ccall((:FT_List_Finalize, libfreetype), Cvoid, (FT_List, FT_List_Destructor, FT_Memory, Ptr{Cvoid}), list, destroy, memory, user)
-end
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ftlzw.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
-
-
-function FT_Stream_OpenLZW(stream, source)
-    ccall((:FT_Stream_OpenLZW, libfreetype), FT_Error, (FT_Stream, FT_Stream), stream, source)
-end
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ftmac.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
-
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ftmm.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
-
-
-function FT_Get_Multi_Master(face, amaster)
-    ccall((:FT_Get_Multi_Master, libfreetype), FT_Error, (FT_Face, Ptr{FT_Multi_Master}), face, amaster)
-end
-
-function FT_Get_MM_Var(face, amaster)
-    ccall((:FT_Get_MM_Var, libfreetype), FT_Error, (FT_Face, Ptr{Ptr{FT_MM_Var}}), face, amaster)
-end
-
-function FT_Done_MM_Var(library, amaster)
-    ccall((:FT_Done_MM_Var, libfreetype), FT_Error, (FT_Library, Ptr{FT_MM_Var}), library, amaster)
-end
-
-function FT_Set_MM_Design_Coordinates(face, num_coords, coords)
-    ccall((:FT_Set_MM_Design_Coordinates, libfreetype), FT_Error, (FT_Face, FT_UInt, Ptr{FT_Long}), face, num_coords, coords)
-end
-
-function FT_Set_Var_Design_Coordinates(face, num_coords, coords)
-    ccall((:FT_Set_Var_Design_Coordinates, libfreetype), FT_Error, (FT_Face, FT_UInt, Ptr{FT_Fixed}), face, num_coords, coords)
-end
-
-function FT_Get_Var_Design_Coordinates(face, num_coords, coords)
-    ccall((:FT_Get_Var_Design_Coordinates, libfreetype), FT_Error, (FT_Face, FT_UInt, Ptr{FT_Fixed}), face, num_coords, coords)
-end
-
-function FT_Set_MM_Blend_Coordinates(face, num_coords, coords)
-    ccall((:FT_Set_MM_Blend_Coordinates, libfreetype), FT_Error, (FT_Face, FT_UInt, Ptr{FT_Fixed}), face, num_coords, coords)
-end
-
-function FT_Get_MM_Blend_Coordinates(face, num_coords, coords)
-    ccall((:FT_Get_MM_Blend_Coordinates, libfreetype), FT_Error, (FT_Face, FT_UInt, Ptr{FT_Fixed}), face, num_coords, coords)
-end
-
-function FT_Set_Var_Blend_Coordinates(face, num_coords, coords)
-    ccall((:FT_Set_Var_Blend_Coordinates, libfreetype), FT_Error, (FT_Face, FT_UInt, Ptr{FT_Fixed}), face, num_coords, coords)
-end
-
-function FT_Get_Var_Blend_Coordinates(face, num_coords, coords)
-    ccall((:FT_Get_Var_Blend_Coordinates, libfreetype), FT_Error, (FT_Face, FT_UInt, Ptr{FT_Fixed}), face, num_coords, coords)
-end
-
-function FT_Get_Var_Axis_Flags(master, axis_index, flags)
-    ccall((:FT_Get_Var_Axis_Flags, libfreetype), FT_Error, (Ptr{FT_MM_Var}, FT_UInt, Ptr{FT_UInt}), master, axis_index, flags)
-end
-
-function FT_Set_Named_Instance(face, instance_index)
-    ccall((:FT_Set_Named_Instance, libfreetype), FT_Error, (FT_Face, FT_UInt), face, instance_index)
-end
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ftotval.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
-
-
-function FT_OpenType_Validate(face, validation_flags, BASE_table, GDEF_table, GPOS_table, GSUB_table, JSTF_table)
-    ccall((:FT_OpenType_Validate, libfreetype), FT_Error, (FT_Face, FT_UInt, Ptr{FT_Bytes}, Ptr{FT_Bytes}, Ptr{FT_Bytes}, Ptr{FT_Bytes}, Ptr{FT_Bytes}), face, validation_flags, BASE_table, GDEF_table, GPOS_table, GSUB_table, JSTF_table)
-end
-
-function FT_OpenType_Free(face, table)
-    ccall((:FT_OpenType_Free, libfreetype), Cvoid, (FT_Face, FT_Bytes), face, table)
-end
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ftpfr.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftparams.h
+# Automatically generated using Clang.jl
+
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftpfr.h
+# Automatically generated using Clang.jl
 
 
 function FT_Get_PFR_Metrics(face, aoutline_resolution, ametrics_resolution, ametrics_x_scale, ametrics_y_scale)
@@ -724,8 +687,8 @@ end
 function FT_Get_PFR_Advance(face, gindex, aadvance)
     ccall((:FT_Get_PFR_Advance, libfreetype), FT_Error, (FT_Face, FT_UInt, Ptr{FT_Pos}), face, gindex, aadvance)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ftrender.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftrender.h
+# Automatically generated using Clang.jl
 
 
 function FT_Get_Renderer(library, format)
@@ -735,8 +698,8 @@ end
 function FT_Set_Renderer(library, renderer, num_params, parameters)
     ccall((:FT_Set_Renderer, libfreetype), FT_Error, (FT_Library, FT_Renderer, FT_UInt, Ptr{FT_Parameter}), library, renderer, num_params, parameters)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ftsizes.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftsizes.h
+# Automatically generated using Clang.jl
 
 
 function FT_New_Size(face, size)
@@ -750,8 +713,8 @@ end
 function FT_Activate_Size(size)
     ccall((:FT_Activate_Size, libfreetype), FT_Error, (FT_Size,), size)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ftsnames.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftsnames.h
+# Automatically generated using Clang.jl
 
 
 function FT_Get_Sfnt_Name_Count(face)
@@ -765,8 +728,8 @@ end
 function FT_Get_Sfnt_LangTag(face, langID, alangTag)
     ccall((:FT_Get_Sfnt_LangTag, libfreetype), FT_Error, (FT_Face, FT_UInt, Ptr{FT_SfntLangTag}), face, langID, alangTag)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ftstroke.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftstroke.h
+# Automatically generated using Clang.jl
 
 
 function FT_Outline_GetInsideBorder(outline)
@@ -840,8 +803,8 @@ end
 function FT_Glyph_StrokeBorder(pglyph, stroker, inside, destroy)
     ccall((:FT_Glyph_StrokeBorder, libfreetype), FT_Error, (Ptr{FT_Glyph}, FT_Stroker, FT_Bool, FT_Bool), pglyph, stroker, inside, destroy)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ftsynth.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftsynth.h
+# Automatically generated using Clang.jl
 
 
 function FT_GlyphSlot_Embolden(slot)
@@ -851,21 +814,46 @@ end
 function FT_GlyphSlot_Oblique(slot)
     ccall((:FT_GlyphSlot_Oblique, libfreetype), Cvoid, (FT_GlyphSlot,), slot)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/fttrigon.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftsystem.h
+# Automatically generated using Clang.jl
 
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ftwinfnt.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/fttrigon.h
+# Automatically generated using Clang.jl
+
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/fttypes.h
+# Automatically generated using Clang.jl
+
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftwinfnt.h
+# Automatically generated using Clang.jl
 
 
 function FT_Get_WinFNT_Header(face, aheader)
     ccall((:FT_Get_WinFNT_Header, libfreetype), FT_Error, (FT_Face, Ptr{FT_WinFNT_HeaderRec}), face, aheader)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/ttnameid.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/t1tables.h
+# Automatically generated using Clang.jl
 
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/tttables.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
+
+function FT_Has_PS_Glyph_Names(face)
+    ccall((:FT_Has_PS_Glyph_Names, libfreetype), FT_Int, (FT_Face,), face)
+end
+
+function FT_Get_PS_Font_Info(face, afont_info)
+    ccall((:FT_Get_PS_Font_Info, libfreetype), FT_Error, (FT_Face, PS_FontInfo), face, afont_info)
+end
+
+function FT_Get_PS_Font_Private(face, afont_private)
+    ccall((:FT_Get_PS_Font_Private, libfreetype), FT_Error, (FT_Face, PS_Private), face, afont_private)
+end
+
+function FT_Get_PS_Font_Value(face, key, idx, value, value_len)
+    ccall((:FT_Get_PS_Font_Value, libfreetype), FT_Long, (FT_Face, PS_Dict_Keys, FT_UInt, Ptr{Cvoid}, FT_Long), face, key, idx, value, value_len)
+end
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ttnameid.h
+# Automatically generated using Clang.jl
+
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/tttables.h
+# Automatically generated using Clang.jl
 
 
 function FT_Get_Sfnt_Table(face, tag)
@@ -887,8 +875,21 @@ end
 function FT_Get_CMap_Format(charmap)
     ccall((:FT_Get_CMap_Format, libfreetype), FT_Long, (FT_CharMap,), charmap)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/tttags.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/tttags.h
+# Automatically generated using Clang.jl
 
-# Julia wrapper for header: /Users/gnimuc/.julia/v0.6/FreeType/deps/usr/include/freetype2/freetype/config/ftmodule.h
-# Automatically generated using Clang.jl wrap_c, version 0.0.0
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/config/ftconfig.h
+# Automatically generated using Clang.jl
+
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/config/ftheader.h
+# Automatically generated using Clang.jl
+
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/config/ftmodule.h
+# Automatically generated using Clang.jl
+
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/config/ftoption.h
+# Automatically generated using Clang.jl
+
+# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/config/ftstdlib.h
+# Automatically generated using Clang.jl
+

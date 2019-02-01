@@ -1,69 +1,57 @@
-# This script is tweaked from https://github.com/JuliaGPU/VulkanCore.jl/blob/master/gen/generator.jl.
-# All credits there.
-using Clang.wrap_c
-using Clang.cindex
+using Clang
 
-llvmcfg = "llvm-config"
+const FREETYPE_INCLUDE = joinpath(@__DIR__, "..", "deps", "usr", "include", "freetype2") |> normpath
+const FREETYPE_HEADERS = [joinpath(root, header) for (root, dirs, files) in walkdir(FREETYPE_INCLUDE) for header in files]
 
-@static if is_apple()
-    using Homebrew
-    !Homebrew.installed("llvm") && Homebrew.add("llvm")
-    llvmcfg = joinpath(Homebrew.prefix(), "opt/llvm/bin/llvm-config")
-end
+# create a work context
+ctx = DefaultContext()
 
-const LLVM_VERSION = readchomp(`$llvmcfg --version`)
-const LLVM_LIBDIR  = readchomp(`$llvmcfg --libdir`)
-const LLVM_INCLUDE = joinpath(LLVM_LIBDIR, "clang", LLVM_VERSION, "include")
+# parse headers
+parse_headers!(ctx, FREETYPE_HEADERS, args=["-I", joinpath(FREETYPE_INCLUDE, "..")],
+               includes=vcat(FREETYPE_INCLUDE, CLANG_INCLUDE))
 
-const FT_INCLUDE = joinpath(@__DIR__, "..", "deps", "usr", "include", "freetype2") |> normpath
-const FT_HEADERS = [joinpath(root, file) for (root, dirs, files) in walkdir(FT_INCLUDE) for file in files]
+# settings
+ctx.libname = "libfreetype"
+ctx.options["is_function_strictly_typed"] = false
+ctx.options["is_struct_mutable"] = false
 
-# These rewriters are taken from CUDArt.jl
-function rewriter(ex :: Expr)
-  # Empty types get converted to Void
-  # This is important for opaque handles
-  if ex.head == :type
-    a3 = ex.args[3]
-    if isempty(a3.args)
-      objname = ex.args[2]
-      return :($objname = Nothing)
+# write output
+api_file = joinpath(@__DIR__, "libfreetype_api.jl")
+api_stream = open(api_file, "w")
+
+for trans_unit in ctx.trans_units
+    root_cursor = getcursor(trans_unit)
+    push!(ctx.cursor_stack, root_cursor)
+    header = spelling(root_cursor)
+    @info "wrapping header: $header ..."
+    # loop over all of the child cursors and wrap them, if appropriate.
+    ctx.children = children(root_cursor)
+    for (i, child) in enumerate(ctx.children)
+        child_name = name(child)
+        child_header = filename(child)
+        ctx.children_index = i
+        # choose which cursor to wrap
+        startswith(child_name, "__") && continue  # skip compiler definitions
+        child_name in keys(ctx.common_buffer) && continue  # already wrapped
+        child_header != header && continue  # skip if cursor filename is not in the headers to be wrapped
+
+        wrap!(ctx, child)
     end
-  end
+    @info "writing $(api_file)"
+    println(api_stream, "# Julia wrapper for header: $header")
+    println(api_stream, "# Automatically generated using Clang.jl\n")
+    print_buffer(api_stream, ctx.api_buffer)
+    empty!(ctx.api_buffer)  # clean up api_buffer for the next header
+end
+close(api_stream)
 
-  # Early exit for everything but functions
-  ex.head == :function || return ex
-
-  decl, body = ex.args[1], ex.args[2]
-  # omit types from function prototypes
-  for i = 2:length(decl.args)
-    a = decl.args[i]
-    # a can be a symbol (and thus already have no type information attached)
-    if !(typeof(a) == Symbol) && a.head == :(::)
-      decl.args[i] = a.args[1]
-    end
-  end
-
-  return ex
+# write "common" definitions: types, typealiases, etc.
+common_file = joinpath(@__DIR__, "libfreetype_common.jl")
+open(common_file, "w") do f
+    println(f, "# Automatically generated using Clang.jl\n")
+    print_buffer(f, dump_to_buffer(ctx.common_buffer))
 end
 
-rewriter(A::Array) = [rewriter(a) for a in A]
-
-rewriter(arg) = arg
-
-function wrap_header(top_hdr::String, cursor_header::String)
-    startswith(dirname(cursor_header), FT_INCLUDE) && (top_hdr == cursor_header)
-end
-
-wc = wrap_c.init(;
-                headers = FT_HEADERS,
-                output_file = joinpath(@__DIR__, "api", "ft_api.jl"),
-                common_file = joinpath(@__DIR__, "api", "ft_common.jl"),
-                clang_includes = vcat(LLVM_INCLUDE, FT_INCLUDE),
-                header_wrapped = wrap_header,
-                header_library = x->"libfreetype",
-                clang_diagnostics = true,
-                rewriter=rewriter)
-
-# wrap_structs, immutable_structs
-wc.options = wrap_c.InternalOptions(true, true)
-run(wc)
+# uncomment the following code to generate dependency and template files
+# copydeps(dirname(api_file))
+# print_template(joinpath(dirname(api_file), "LibTemplate.jl"))
