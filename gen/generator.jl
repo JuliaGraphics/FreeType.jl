@@ -5,10 +5,10 @@ const FREETYPE_HEADERS = [joinpath(root, header) for (root, dirs, files) in walk
 
 # create a work context
 ctx = DefaultContext()
-
 # parse headers
-parse_headers!(ctx, FREETYPE_HEADERS, args=["-I", joinpath(FREETYPE_INCLUDE, "..")],
-               includes=vcat(FREETYPE_INCLUDE, CLANG_INCLUDE))
+args = ["-I", joinpath(FREETYPE_INCLUDE, "..")]
+@static Sys.isapple() && push!(args, "-I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.14.sdk/usr/include")
+parse_headers!(ctx, FREETYPE_HEADERS, args=args, includes=vcat(FREETYPE_INCLUDE, CLANG_INCLUDE))
 
 # settings
 ctx.libname = "libfreetype"

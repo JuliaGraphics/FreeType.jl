@@ -403,7 +403,7 @@ end
 
 
 function FT_TrueTypeGX_Validate(face, validation_flags, tables, table_length)
-    ccall((:FT_TrueTypeGX_Validate, libfreetype), FT_Error, (FT_Face, FT_UInt, NTuple{10, FT_Bytes}, FT_UInt), face, validation_flags, tables, table_length)
+    ccall((:FT_TrueTypeGX_Validate, libfreetype), FT_Error, (FT_Face, FT_UInt, Ptr{FT_Bytes}, FT_UInt), face, validation_flags, tables, table_length)
 end
 
 function FT_TrueTypeGX_Free(face, table)

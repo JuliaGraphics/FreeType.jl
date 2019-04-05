@@ -463,11 +463,21 @@ const FT_ADVANCE_FLAG_FAST_ONLY = Int32(0x20000000)
 
 const BDF_PropertyType = BDF_PropertyType_
 
+struct ANONYMOUS1_u
+    atom::Cstring
+end
+
 struct BDF_PropertyRec_
     type::BDF_PropertyType
-    u::Cvoid
+    u::ANONYMOUS1_u
 end
+
 const BDF_Property = Ptr{BDF_PropertyRec_}
+
+struct ANONYMOUS2_u
+    atom::Cstring
+end
+
 const BDF_PropertyRec = BDF_PropertyRec_
 
 # Skipping MacroDefinition: FTC_IMAGE_TYPE_COMPARE ( d1 , d2 ) ( ( d1 ) -> face_id == ( d2 ) -> face_id && ( d1 ) -> width == ( d2 ) -> width && ( d1 ) -> flags == ( d2 ) -> flags )
@@ -549,7 +559,7 @@ struct FT_Prop_IncreaseXHeight_
 end
 
 const FT_Prop_IncreaseXHeight = FT_Prop_IncreaseXHeight_
-# const FT_ERR_PREFIX = FT_Err_
+const FT_ERR_PREFIX = FT_Err_
 const FT_ERR_BASE = 0
 
 # Skipping MacroDefinition: FT_ERRORDEF ( e , v , s ) e = v ,
@@ -651,7 +661,7 @@ const FT_VALIDATE_GX_START = 0x4000
 # Skipping MacroDefinition: FT_VALIDATE_prop FT_VALIDATE_GX_BITFIELD ( prop )
 # Skipping MacroDefinition: FT_VALIDATE_lcar FT_VALIDATE_GX_BITFIELD ( lcar )
 
-# const FT_VALIDATE_GX = ((((((((FT_VALIDATE_feat | FT_VALIDATE_mort) | FT_VALIDATE_morx) | FT_VALIDATE_bsln) | FT_VALIDATE_just) | FT_VALIDATE_kern) | FT_VALIDATE_opbd) | FT_VALIDATE_trak) | FT_VALIDATE_prop) | FT_VALIDATE_lcar
+const FT_VALIDATE_GX = ((((((((FT_VALIDATE_feat | FT_VALIDATE_mort) | FT_VALIDATE_morx) | FT_VALIDATE_bsln) | FT_VALIDATE_just) | FT_VALIDATE_kern) | FT_VALIDATE_opbd) | FT_VALIDATE_trak) | FT_VALIDATE_prop) | FT_VALIDATE_lcar
 const FT_VALIDATE_MS = FT_VALIDATE_GX_START << 0
 const FT_VALIDATE_APPLE = FT_VALIDATE_GX_START << 1
 const FT_VALIDATE_CKERN = FT_VALIDATE_MS | FT_VALIDATE_APPLE
