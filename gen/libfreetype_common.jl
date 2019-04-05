@@ -1,5 +1,14 @@
 # Automatically generated using Clang.jl
-
+const FT_Bool = Cuchar
+const FT_FWord = Int16
+const FT_UFWord = UInt16
+const FT_UInt32 = UInt32
+const FT_Tag = FT_UInt32
+const FT_F2Dot14 = Int16
+const FT_F26Dot6 = Clong
+const FT_Error = Cint
+const FT_Offset = Csize_t
+const FT_PtrDist = Cptrdiff_t
 
 # Skipping MacroDefinition: FT_ENC_TAG ( value , a , b , c , d ) value = ( ( ( FT_UInt32 ) ( a ) << 24 ) | ( ( FT_UInt32 ) ( b ) << 16 ) | ( ( FT_UInt32 ) ( c ) << 8 ) | ( FT_UInt32 ) ( d ) )
 
@@ -191,8 +200,8 @@ const FT_Int = Cint
 const FT_Encoding = FT_Encoding_
 const FT_UShort = UInt16
 
-struct FT_CharMapRec_{FT_Face}
-    face::FT_Face
+struct FT_CharMapRec_
+    face::Ptr{Cvoid}
     encoding::FT_Encoding
     platform_id::FT_UShort
     encoding_id::FT_UShort
@@ -264,10 +273,10 @@ const FT_SubGlyph = Ptr{FT_SubGlyphRec_}
 const FT_Slot_InternalRec_ = Cvoid
 const FT_Slot_Internal = Ptr{FT_Slot_InternalRec_}
 
-struct FT_GlyphSlotRec_{FT_Face,FT_GlyphSlot}
+struct FT_GlyphSlotRec_
     library::FT_Library
-    face::FT_Face
-    next::FT_GlyphSlot
+    face::Ptr{Cvoid}
+    next::Ptr{Cvoid}
     reserved::FT_UInt
     generic::FT_Generic
     metrics::FT_Glyph_Metrics
@@ -306,8 +315,8 @@ const FT_Size_Metrics = FT_Size_Metrics_
 const FT_Size_InternalRec_ = Cvoid
 const FT_Size_Internal = Ptr{FT_Size_InternalRec_}
 
-struct FT_SizeRec_{FT_Face}
-    face::FT_Face
+struct FT_SizeRec_
+    face::Ptr{Cvoid}
     generic::FT_Generic
     metrics::FT_Size_Metrics
     internal::FT_Size_Internal
@@ -559,7 +568,7 @@ struct FT_Prop_IncreaseXHeight_
 end
 
 const FT_Prop_IncreaseXHeight = FT_Prop_IncreaseXHeight_
-const FT_ERR_PREFIX = FT_Err_
+#const FT_ERR_PREFIX = FT_Err_
 const FT_ERR_BASE = 0
 
 # Skipping MacroDefinition: FT_ERRORDEF ( e , v , s ) e = v ,
@@ -661,7 +670,10 @@ const FT_VALIDATE_GX_START = 0x4000
 # Skipping MacroDefinition: FT_VALIDATE_prop FT_VALIDATE_GX_BITFIELD ( prop )
 # Skipping MacroDefinition: FT_VALIDATE_lcar FT_VALIDATE_GX_BITFIELD ( lcar )
 
-const FT_VALIDATE_GX = ((((((((FT_VALIDATE_feat | FT_VALIDATE_mort) | FT_VALIDATE_morx) | FT_VALIDATE_bsln) | FT_VALIDATE_just) | FT_VALIDATE_kern) | FT_VALIDATE_opbd) | FT_VALIDATE_trak) | FT_VALIDATE_prop) | FT_VALIDATE_lcar
+# const FT_VALIDATE_GX = ((((((((FT_VALIDATE_feat | FT_VALIDATE_mort) | FT_VALIDATE_morx) | FT_VALIDATE_bsln) | FT_VALIDATE_just) | FT_VALIDATE_kern) | FT_VALIDATE_opbd) | FT_VALIDATE_trak) | FT_VALIDATE_prop) | FT_VALIDATE_lcar
+# const FT_VALIDATE_MS = FT_VALIDATE_GX_START << 0
+# const FT_VALIDATE_APPLE = FT_VALIDATE_GX_START << 1
+# const FT_VALIDATE_CKERN = FT_VALIDATE_MS | FT_VALIDATE_APPLE
 const FT_VALIDATE_MS = FT_VALIDATE_GX_START << 0
 const FT_VALIDATE_APPLE = FT_VALIDATE_GX_START << 1
 const FT_VALIDATE_CKERN = FT_VALIDATE_MS | FT_VALIDATE_APPLE
@@ -677,9 +689,6 @@ const FT_VALIDATE_CKERN = FT_VALIDATE_MS | FT_VALIDATE_APPLE
     FT_PIXEL_MODE_BGRA = 7,
     FT_PIXEL_MODE_MAX = 8,
 )
-
-const SHRT_MAX = 32767
-const CHAR_BIT = 8
 
 const ft_pixel_mode_none = FT_PIXEL_MODE_NONE
 const ft_pixel_mode_mono = FT_PIXEL_MODE_MONO
@@ -706,6 +715,7 @@ const ft_outline_high_precision = FT_OUTLINE_HIGH_PRECISION
 const ft_outline_single_pass = FT_OUTLINE_SINGLE_PASS
 
 # Skipping MacroDefinition: FT_CURVE_TAG ( flag ) ( flag & 3 )
+FT_CURVE_TAG(flag) = flag & 3
 
 const FT_CURVE_TAG_ON = 1
 const FT_CURVE_TAG_CONIC = 0
@@ -965,12 +975,14 @@ const FT_VALIDATE_OT = ((((FT_VALIDATE_BASE | FT_VALIDATE_GDEF) | FT_VALIDATE_GP
 
 const FT_Orientation = FT_Orientation_
 
-# Skipping MacroDefinition: FT_PARAM_TAG_IGNORE_TYPOGRAPHIC_FAMILY FT_MAKE_TAG ( 'i' , 'g' , 'p' , 'f' )
+FT_MAKE_TAG(_x1, _x2, _x3, _x4) = UInt32((Culong(_x1) << 24) | (Culong(_x2) << 16) | (Culong(_x3) << 8) | Culong(_x4))
 
+# Skipping MacroDefinition: FT_PARAM_TAG_IGNORE_TYPOGRAPHIC_FAMILY FT_MAKE_TAG ( 'i' , 'g' , 'p' , 'f' )
+const FT_PARAM_TAG_IGNORE_TYPOGRAPHIC_FAMILY = FT_MAKE_TAG('i', 'g', 'p', 'f')
 const FT_PARAM_TAG_IGNORE_PREFERRED_FAMILY = FT_PARAM_TAG_IGNORE_TYPOGRAPHIC_FAMILY
 
 # Skipping MacroDefinition: FT_PARAM_TAG_IGNORE_TYPOGRAPHIC_SUBFAMILY FT_MAKE_TAG ( 'i' , 'g' , 'p' , 's' )
-
+const FT_PARAM_TAG_IGNORE_TYPOGRAPHIC_SUBFAMILY = FT_MAKE_TAG('i', 'g', 'p', 's')
 const FT_PARAM_TAG_IGNORE_PREFERRED_SUBFAMILY = FT_PARAM_TAG_IGNORE_TYPOGRAPHIC_SUBFAMILY
 
 # Skipping MacroDefinition: FT_PARAM_TAG_INCREMENTAL FT_MAKE_TAG ( 'i' , 'n' , 'c' , 'r' )
@@ -978,6 +990,11 @@ const FT_PARAM_TAG_IGNORE_PREFERRED_SUBFAMILY = FT_PARAM_TAG_IGNORE_TYPOGRAPHIC_
 # Skipping MacroDefinition: FT_PARAM_TAG_RANDOM_SEED FT_MAKE_TAG ( 's' , 'e' , 'e' , 'd' )
 # Skipping MacroDefinition: FT_PARAM_TAG_STEM_DARKENING FT_MAKE_TAG ( 'd' , 'a' , 'r' , 'k' )
 # Skipping MacroDefinition: FT_PARAM_TAG_UNPATENTED_HINTING FT_MAKE_TAG ( 'u' , 'n' , 'p' , 'a' )
+const FT_PARAM_TAG_INCREMENTAL = FT_MAKE_TAG('i', 'n', 'c', 'r')
+const FT_PARAM_TAG_LCD_FILTER_WEIGHTS = FT_MAKE_TAG('l', 'c', 'd', 'f')
+const FT_PARAM_TAG_RANDOM_SEED = FT_MAKE_TAG('s', 'e', 'e', 'd')
+const FT_PARAM_TAG_STEM_DARKENING = FT_MAKE_TAG('d', 'a', 'r', 'k')
+const FT_PARAM_TAG_UNPATENTED_HINTING = FT_MAKE_TAG('u', 'n', 'p', 'a')
 
 const FT_Glyph_Init_Func = FT_Glyph_InitFunc
 const FT_Glyph_Done_Func = FT_Glyph_DoneFunc
@@ -1049,6 +1066,8 @@ const FT_Stroker_LineCap = FT_Stroker_LineCap_
     FT_STROKER_BORDER_RIGHT = 1,
 )
 
+const FT_Bytes = Ptr{FT_Byte}
+
 const FT_StrokerBorder = FT_StrokerBorder_
 const FT_StreamRec = FT_StreamRec_
 const FT_ANGLE_PI = Int32(180) << 16
@@ -1066,18 +1085,8 @@ const FT_ANGLE_PI4 = FT_ANGLE_PI / 4
 # Skipping MacroDefinition: FT_ERROR_MODULE ( x ) ( ( x ) & 0xFF00U )
 # Skipping MacroDefinition: FT_ERR_EQ ( x , e ) ( FT_ERROR_BASE ( x ) == FT_ERROR_BASE ( FT_ERR ( e ) ) )
 # Skipping MacroDefinition: FT_ERR_NEQ ( x , e ) ( FT_ERROR_BASE ( x ) != FT_ERROR_BASE ( FT_ERR ( e ) ) )
-
-const FT_Bool = Cuchar
-const FT_FWord = Int16
-const FT_UFWord = UInt16
-const FT_Bytes = Ptr{FT_Byte}
-const FT_UInt32 = UInt32
-const FT_Tag = FT_UInt32
-const FT_F2Dot14 = Int16
-const FT_F26Dot6 = Clong
-const FT_Error = Cint
-const FT_Offset = Csize_t
-const FT_PtrDist = Cptrdiff_t
+FT_IS_EMPTY(list) = list.head == 0
+FT_BOOL(x) = FT_Bool(x)
 
 struct FT_UnitVector_
     x::FT_F2Dot14
@@ -1715,7 +1724,7 @@ const TT_MS_LANGID_MALAY_BRUNEI_DARUSSALAM = 0x083e
 const TT_MS_LANGID_KAZAKH_KAZAKHSTAN = Float32(0x0043)
 
 # Skipping MacroDefinition: TT_MS_LANGID_KYRGYZ_KYRGYZSTAN /* Cyrillic*/ 0x0440
-
+const TT_MS_LANGID_KYRGYZ_KYRGYZSTAN = 0x0440
 const TT_MS_LANGID_KISWAHILI_KENYA = 0x0441
 const TT_MS_LANGID_TURKMEN_TURKMENISTAN = 0x0442
 const TT_MS_LANGID_UZBEK_UZBEKISTAN_LATIN = 0x0443
@@ -1735,7 +1744,7 @@ const TT_MS_LANGID_MARATHI_INDIA = 0x044e
 const TT_MS_LANGID_SANSKRIT_INDIA = Float32(0x0044)
 
 # Skipping MacroDefinition: TT_MS_LANGID_MONGOLIAN_MONGOLIA /* Cyrillic */ 0x0450
-
+const TT_MS_LANGID_MONGOLIAN_MONGOLIA = 0x0450
 const TT_MS_LANGID_MONGOLIAN_PRC = 0x0850
 const TT_MS_LANGID_TIBETAN_PRC = 0x0451
 const TT_MS_LANGID_WELSH_UNITED_KINGDOM = 0x0452
@@ -1837,17 +1846,18 @@ const TT_MS_LANGID_GALICIAN_SPAIN = TT_MS_LANGID_GALICIAN_GALICIAN
 
 # Skipping MacroDefinition: TT_MS_LANGID_MANIPURI_INDIA /* Bengali */ 0x0458
 # Skipping MacroDefinition: TT_MS_LANGID_SINDHI_INDIA /* Arabic */ 0x0459
-
+const TT_MS_LANGID_MANIPURI_INDIA = 0x0458
+const TT_MS_LANGID_SINDHI_INDIA = 0x0459
 const TT_MS_LANGID_SINDHI_PAKISTAN = 0x0859
 const TT_MS_LANGID_SINHALESE_SRI_LANKA = TT_MS_LANGID_SINHALA_SRI_LANKA
 const TT_MS_LANGID_CHEROKEE_UNITED_STATES = 0x045c
 
 # Skipping MacroDefinition: TT_MS_LANGID_TAMAZIGHT_MOROCCO /* Arabic */ 0x045F
-
+const TT_MS_LANGID_TAMAZIGHT_MOROCCO = 0x045F
 const TT_MS_LANGID_TAMAZIGHT_MOROCCO_LATIN = TT_MS_LANGID_TAMAZIGHT_ALGERIA
 
 # Skipping MacroDefinition: TT_MS_LANGID_KASHMIRI_PAKISTAN /* Arabic */ 0x0460
-
+const TT_MS_LANGID_KASHMIRI_PAKISTAN = 0x0460
 const TT_MS_LANGID_KASHMIRI_SASIA = 0x0860
 const TT_MS_LANGID_KASHMIRI_INDIA = TT_MS_LANGID_KASHMIRI_SASIA
 const TT_MS_LANGID_NEPALI_INDIA = 0x0861
@@ -2282,6 +2292,80 @@ const FT_Sfnt_Tag = FT_Sfnt_Tag_
 # Skipping MacroDefinition: TTAG_wOFF FT_MAKE_TAG ( 'w' , 'O' , 'F' , 'F' )
 # Skipping MacroDefinition: TTAG_0xA5kbd FT_MAKE_TAG ( 0xA5 , 'k' , 'b' , 'd' )
 # Skipping MacroDefinition: TTAG_0xA5lst FT_MAKE_TAG ( 0xA5 , 'l' , 's' , 't' )
+const TTAG_avar = FT_MAKE_TAG('a', 'v', 'a', 'r')
+const TTAG_BASE = FT_MAKE_TAG('B', 'A', 'S', 'E')
+const TTAG_bdat = FT_MAKE_TAG('b', 'd', 'a', 't')
+const TTAG_BDF = FT_MAKE_TAG('B', 'D', 'F', ' ')
+const TTAG_bhed = FT_MAKE_TAG('b', 'h', 'e', 'd')
+const TTAG_bloc = FT_MAKE_TAG('b', 'l', 'o', 'c')
+const TTAG_bsln = FT_MAKE_TAG('b', 's', 'l', 'n')
+const TTAG_CBDT = FT_MAKE_TAG('C', 'B', 'D', 'T')
+const TTAG_CBLC = FT_MAKE_TAG('C', 'B', 'L', 'C')
+const TTAG_CFF = FT_MAKE_TAG('C', 'F', 'F', ' ')
+const TTAG_CFF2 = FT_MAKE_TAG('C', 'F', 'F', '2')
+const TTAG_CID = FT_MAKE_TAG('C', 'I', 'D', ' ')
+const TTAG_cmap = FT_MAKE_TAG('c', 'm', 'a', 'p')
+const TTAG_cvar = FT_MAKE_TAG('c', 'v', 'a', 'r')
+const TTAG_cvt = FT_MAKE_TAG('c', 'v', 't', ' ')
+const TTAG_DSIG = FT_MAKE_TAG('D', 'S', 'I', 'G')
+const TTAG_EBDT = FT_MAKE_TAG('E', 'B', 'D', 'T')
+const TTAG_EBLC = FT_MAKE_TAG('E', 'B', 'L', 'C')
+const TTAG_EBSC = FT_MAKE_TAG('E', 'B', 'S', 'C')
+const TTAG_feat = FT_MAKE_TAG('f', 'e', 'a', 't')
+const TTAG_FOND = FT_MAKE_TAG('F', 'O', 'N', 'D')
+const TTAG_fpgm = FT_MAKE_TAG('f', 'p', 'g', 'm')
+const TTAG_fvar = FT_MAKE_TAG('f', 'v', 'a', 'r')
+const TTAG_gasp = FT_MAKE_TAG('g', 'a', 's', 'p')
+const TTAG_GDEF = FT_MAKE_TAG('G', 'D', 'E', 'F')
+const TTAG_glyf = FT_MAKE_TAG('g', 'l', 'y', 'f')
+const TTAG_GPOS = FT_MAKE_TAG('G', 'P', 'O', 'S')
+const TTAG_GSUB = FT_MAKE_TAG('G', 'S', 'U', 'B')
+const TTAG_gvar = FT_MAKE_TAG('g', 'v', 'a', 'r')
+const TTAG_HVAR = FT_MAKE_TAG('H', 'V', 'A', 'R')
+const TTAG_hdmx = FT_MAKE_TAG('h', 'd', 'm', 'x')
+const TTAG_head = FT_MAKE_TAG('h', 'e', 'a', 'd')
+const TTAG_hhea = FT_MAKE_TAG('h', 'h', 'e', 'a')
+const TTAG_hmtx = FT_MAKE_TAG('h', 'm', 't', 'x')
+const TTAG_JSTF = FT_MAKE_TAG('J', 'S', 'T', 'F')
+const TTAG_just = FT_MAKE_TAG('j', 'u', 's', 't')
+const TTAG_kern = FT_MAKE_TAG('k', 'e', 'r', 'n')
+const TTAG_lcar = FT_MAKE_TAG('l', 'c', 'a', 'r')
+const TTAG_loca = FT_MAKE_TAG('l', 'o', 'c', 'a')
+const TTAG_LTSH = FT_MAKE_TAG('L', 'T', 'S', 'H')
+const TTAG_LWFN = FT_MAKE_TAG('L', 'W', 'F', 'N')
+const TTAG_MATH = FT_MAKE_TAG('M', 'A', 'T', 'H')
+const TTAG_maxp = FT_MAKE_TAG('m', 'a', 'x', 'p')
+const TTAG_META = FT_MAKE_TAG('M', 'E', 'T', 'A')
+const TTAG_MMFX = FT_MAKE_TAG('M', 'M', 'F', 'X')
+const TTAG_MMSD = FT_MAKE_TAG('M', 'M', 'S', 'D')
+const TTAG_mort = FT_MAKE_TAG('m', 'o', 'r', 't')
+const TTAG_morx = FT_MAKE_TAG('m', 'o', 'r', 'x')
+const TTAG_MVAR = FT_MAKE_TAG('M', 'V', 'A', 'R')
+const TTAG_name = FT_MAKE_TAG('n', 'a', 'm', 'e')
+const TTAG_opbd = FT_MAKE_TAG('o', 'p', 'b', 'd')
+const TTAG_OS2 = FT_MAKE_TAG('O', 'S', '/', '2')
+const TTAG_OTTO = FT_MAKE_TAG('O', 'T', 'T', 'O')
+const TTAG_PCLT = FT_MAKE_TAG('P', 'C', 'L', 'T')
+const TTAG_POST = FT_MAKE_TAG('P', 'O', 'S', 'T')
+const TTAG_post = FT_MAKE_TAG('p', 'o', 's', 't')
+const TTAG_prep = FT_MAKE_TAG('p', 'r', 'e', 'p')
+const TTAG_prop = FT_MAKE_TAG('p', 'r', 'o', 'p')
+const TTAG_sbix = FT_MAKE_TAG('s', 'b', 'i', 'x')
+const TTAG_sfnt = FT_MAKE_TAG('s', 'f', 'n', 't')
+const TTAG_SING = FT_MAKE_TAG('S', 'I', 'N', 'G')
+const TTAG_trak = FT_MAKE_TAG('t', 'r', 'a', 'k')
+const TTAG_true = FT_MAKE_TAG('t', 'r', 'u', 'e')
+const TTAG_ttc = FT_MAKE_TAG('t', 't', 'c', ' ')
+const TTAG_ttcf = FT_MAKE_TAG('t', 't', 'c', 'f')
+const TTAG_TYP1 = FT_MAKE_TAG('T', 'Y', 'P', '1')
+const TTAG_typ1 = FT_MAKE_TAG('t', 'y', 'p', '1')
+const TTAG_VDMX = FT_MAKE_TAG('V', 'D', 'M', 'X')
+const TTAG_vhea = FT_MAKE_TAG('v', 'h', 'e', 'a')
+const TTAG_vmtx = FT_MAKE_TAG('v', 'm', 't', 'x')
+const TTAG_VVAR = FT_MAKE_TAG('V', 'V', 'A', 'R')
+const TTAG_wOFF = FT_MAKE_TAG('w', 'O', 'F', 'F')
+const TTAG_0xA5kbd = FT_MAKE_TAG(0xA5, 'k', 'b', 'd')
+const TTAG_0xA5lst = FT_MAKE_TAG(0xA5, 'l', 's', 't')
 
 const HAVE_UNISTD_H = 1
 const HAVE_FCNTL_H = 1
@@ -2295,7 +2379,7 @@ const FT_SIZEOF_LONG = 32 / FT_CHAR_BIT
 # Skipping MacroDefinition: FT_BEGIN_STMNT do {
 # Skipping MacroDefinition: FT_END_STMNT } while ( 0 )
 
-const FT_DUMMY_STMNT = FT_BEGIN_STMNT
+# const FT_DUMMY_STMNT = FT_BEGIN_STMNT
 
 # Skipping MacroDefinition: FT_TYPEOF ( type ) ( __typeof__ ( type ) )
 # Skipping MacroDefinition: FT_LOCAL ( x ) extern x
@@ -2333,10 +2417,10 @@ const FT_UFast = UInt32
 # Skipping MacroDefinition: FT_RENDER_H < freetype / ftrender . h >
 # Skipping MacroDefinition: FT_DRIVER_H < freetype / ftdriver . h >
 
-const FT_AUTOHINTER_H = FT_DRIVER_H
-const FT_CFF_DRIVER_H = FT_DRIVER_H
-const FT_TRUETYPE_DRIVER_H = FT_DRIVER_H
-const FT_PCF_DRIVER_H = FT_DRIVER_H
+# const FT_AUTOHINTER_H = FT_DRIVER_H
+# const FT_CFF_DRIVER_H = FT_DRIVER_H
+# const FT_TRUETYPE_DRIVER_H = FT_DRIVER_H
+# const FT_PCF_DRIVER_H = FT_DRIVER_H
 
 # Skipping MacroDefinition: FT_TYPE1_TABLES_H < freetype / t1tables . h >
 # Skipping MacroDefinition: FT_TRUETYPE_IDS_H < freetype / ttnameid . h >
@@ -2362,7 +2446,7 @@ const FT_PCF_DRIVER_H = FT_DRIVER_H
 # Skipping MacroDefinition: FT_SYNTHESIS_H < freetype / ftsynth . h >
 # Skipping MacroDefinition: FT_FONT_FORMATS_H < freetype / ftfntfmt . h >
 
-const FT_XFREE86_H = FT_FONT_FORMATS_H
+# const FT_XFREE86_H = FT_FONT_FORMATS_H
 
 # Skipping MacroDefinition: FT_TRIGONOMETRY_H < freetype / fttrigon . h >
 # Skipping MacroDefinition: FT_LCD_FILTER_H < freetype / ftlcdfil . h >
@@ -2374,16 +2458,16 @@ const FT_XFREE86_H = FT_FONT_FORMATS_H
 # Skipping MacroDefinition: FT_UNPATENTED_HINTING_H < freetype / ftparams . h >
 # Skipping MacroDefinition: FT_TRUETYPE_UNPATENTED_H < freetype / ftparams . h >
 
-const FT_CACHE_IMAGE_H = FT_CACHE_H
-const FT_CACHE_SMALL_BITMAPS_H = FT_CACHE_H
-const FT_CACHE_CHARMAP_H = FT_CACHE_H
-const FT_CACHE_MANAGER_H = FT_CACHE_H
-const FT_CACHE_INTERNAL_MRU_H = FT_CACHE_H
-const FT_CACHE_INTERNAL_MANAGER_H = FT_CACHE_H
-const FT_CACHE_INTERNAL_CACHE_H = FT_CACHE_H
-const FT_CACHE_INTERNAL_GLYPH_H = FT_CACHE_H
-const FT_CACHE_INTERNAL_IMAGE_H = FT_CACHE_H
-const FT_CACHE_INTERNAL_SBITS_H = FT_CACHE_H
+# const FT_CACHE_IMAGE_H = FT_CACHE_H
+# const FT_CACHE_SMALL_BITMAPS_H = FT_CACHE_H
+# const FT_CACHE_CHARMAP_H = FT_CACHE_H
+# const FT_CACHE_MANAGER_H = FT_CACHE_H
+# const FT_CACHE_INTERNAL_MRU_H = FT_CACHE_H
+# const FT_CACHE_INTERNAL_MANAGER_H = FT_CACHE_H
+# const FT_CACHE_INTERNAL_CACHE_H = FT_CACHE_H
+# const FT_CACHE_INTERNAL_GLYPH_H = FT_CACHE_H
+# const FT_CACHE_INTERNAL_IMAGE_H = FT_CACHE_H
+# const FT_CACHE_INTERNAL_SBITS_H = FT_CACHE_H
 const FT_RENDER_POOL_SIZE = Int32(16384)
 const FT_MAX_MODULES = 32
 const TT_CONFIG_OPTION_SUBPIXEL_HINTING = 2
@@ -2407,34 +2491,5 @@ const FT_UINT_MAX = UINT_MAX
 const FT_LONG_MIN = LONG_MIN
 const FT_LONG_MAX = LONG_MAX
 const FT_ULONG_MAX = ULONG_MAX
-const ft_memchr = memchr
-const ft_memcmp = memcmp
-const ft_memcpy = memcpy
-const ft_memmove = memmove
-const ft_memset = memset
-const ft_strcat = strcat
-const ft_strcmp = strcmp
-const ft_strcpy = strcpy
-const ft_strlen = strlen
-const ft_strncmp = strncmp
-const ft_strncpy = strncpy
-const ft_strrchr = strrchr
-const ft_strstr = strstr
-const FT_FILE = FILE
-const ft_fclose = fclose
-const ft_fopen = fopen
-const ft_fread = fread
-const ft_fseek = fseek
-const ft_ftell = ftell
-const ft_sprintf = sprintf
-const ft_qsort = qsort
-const ft_scalloc = calloc
-const ft_sfree = free
-const ft_smalloc = malloc
-const ft_srealloc = realloc
-const ft_strtol = strtol
-const ft_getenv = getenv
-const ft_jmp_buf = jmp_buf
-const ft_longjmp = longjmp
 
 # Skipping MacroDefinition: ft_setjmp ( b ) setjmp ( * ( ft_jmp_buf * ) & ( b ) )
