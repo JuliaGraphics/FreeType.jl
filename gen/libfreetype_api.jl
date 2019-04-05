@@ -1,7 +1,7 @@
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/ft2build.h
+# Julia wrapper for header: ft2build.h
 # Automatically generated using Clang.jl
 
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/freetype.h
+# Julia wrapper for header: freetype.h
 # Automatically generated using Clang.jl
 
 
@@ -188,7 +188,7 @@ end
 function FT_Face_SetUnpatentedHinting(face, value)
     ccall((:FT_Face_SetUnpatentedHinting, libfreetype), FT_Bool, (FT_Face, FT_Bool), face, value)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftadvanc.h
+# Julia wrapper for header: ftadvanc.h
 # Automatically generated using Clang.jl
 
 
@@ -199,14 +199,14 @@ end
 function FT_Get_Advances(face, start, count, load_flags, padvances)
     ccall((:FT_Get_Advances, libfreetype), FT_Error, (FT_Face, FT_UInt, FT_UInt, FT_Int32, Ptr{FT_Fixed}), face, start, count, load_flags, padvances)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftbbox.h
+# Julia wrapper for header: ftbbox.h
 # Automatically generated using Clang.jl
 
 
 function FT_Outline_Get_BBox(outline, abbox)
     ccall((:FT_Outline_Get_BBox, libfreetype), FT_Error, (Ptr{FT_Outline}, Ptr{FT_BBox}), outline, abbox)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftbdf.h
+# Julia wrapper for header: ftbdf.h
 # Automatically generated using Clang.jl
 
 
@@ -217,7 +217,7 @@ end
 function FT_Get_BDF_Property(face, prop_name, aproperty)
     ccall((:FT_Get_BDF_Property, libfreetype), FT_Error, (FT_Face, Cstring, Ptr{BDF_PropertyRec}), face, prop_name, aproperty)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftbitmap.h
+# Julia wrapper for header: ftbitmap.h
 # Automatically generated using Clang.jl
 
 
@@ -248,14 +248,14 @@ end
 function FT_Bitmap_Done(library, bitmap)
     ccall((:FT_Bitmap_Done, libfreetype), FT_Error, (FT_Library, Ptr{FT_Bitmap}), library, bitmap)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftbzip2.h
+# Julia wrapper for header: ftbzip2.h
 # Automatically generated using Clang.jl
 
 
 function FT_Stream_OpenBzip2(stream, source)
     ccall((:FT_Stream_OpenBzip2, libfreetype), FT_Error, (FT_Stream, FT_Stream), stream, source)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftcache.h
+# Julia wrapper for header: ftcache.h
 # Automatically generated using Clang.jl
 
 
@@ -318,10 +318,10 @@ end
 function FTC_SBitCache_LookupScaler(cache, scaler, load_flags, gindex, sbit, anode)
     ccall((:FTC_SBitCache_LookupScaler, libfreetype), FT_Error, (FTC_SBitCache, FTC_Scaler, FT_ULong, FT_UInt, Ptr{FTC_SBit}, Ptr{FTC_Node}), cache, scaler, load_flags, gindex, sbit, anode)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftchapters.h
+# Julia wrapper for header: ftchapters.h
 # Automatically generated using Clang.jl
 
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftcid.h
+# Julia wrapper for header: ftcid.h
 # Automatically generated using Clang.jl
 
 
@@ -336,16 +336,16 @@ end
 function FT_Get_CID_From_Glyph_Index(face, glyph_index, cid)
     ccall((:FT_Get_CID_From_Glyph_Index, libfreetype), FT_Error, (FT_Face, FT_UInt, Ptr{FT_UInt}), face, glyph_index, cid)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftdriver.h
+# Julia wrapper for header: ftdriver.h
 # Automatically generated using Clang.jl
 
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/fterrdef.h
+# Julia wrapper for header: fterrdef.h
 # Automatically generated using Clang.jl
 
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/fterrors.h
+# Julia wrapper for header: fterrors.h
 # Automatically generated using Clang.jl
 
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftfntfmt.h
+# Julia wrapper for header: ftfntfmt.h
 # Automatically generated using Clang.jl
 
 
@@ -356,14 +356,14 @@ end
 function FT_Get_X11_Font_Format(face)
     ccall((:FT_Get_X11_Font_Format, libfreetype), Cstring, (FT_Face,), face)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftgasp.h
+# Julia wrapper for header: ftgasp.h
 # Automatically generated using Clang.jl
 
 
 function FT_Get_Gasp(face, ppem)
     ccall((:FT_Get_Gasp, libfreetype), FT_Int, (FT_Face, FT_UInt), face, ppem)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftglyph.h
+# Julia wrapper for header: ftglyph.h
 # Automatically generated using Clang.jl
 
 
@@ -398,7 +398,7 @@ end
 function FT_Matrix_Invert(matrix)
     ccall((:FT_Matrix_Invert, libfreetype), FT_Error, (Ptr{FT_Matrix},), matrix)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftgxval.h
+# Julia wrapper for header: ftgxval.h
 # Automatically generated using Clang.jl
 
 
@@ -417,7 +417,7 @@ end
 function FT_ClassicKern_Free(face, table)
     ccall((:FT_ClassicKern_Free, libfreetype), Cvoid, (FT_Face, FT_Bytes), face, table)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftgzip.h
+# Julia wrapper for header: ftgzip.h
 # Automatically generated using Clang.jl
 
 
@@ -428,13 +428,13 @@ end
 function FT_Gzip_Uncompress(memory, output, output_len, input, input_len)
     ccall((:FT_Gzip_Uncompress, libfreetype), FT_Error, (FT_Memory, Ptr{FT_Byte}, Ptr{FT_ULong}, Ptr{FT_Byte}, FT_ULong), memory, output, output_len, input, input_len)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftimage.h
+# Julia wrapper for header: ftimage.h
 # Automatically generated using Clang.jl
 
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftincrem.h
+# Julia wrapper for header: ftincrem.h
 # Automatically generated using Clang.jl
 
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftlcdfil.h
+# Julia wrapper for header: ftlcdfil.h
 # Automatically generated using Clang.jl
 
 
@@ -445,7 +445,7 @@ end
 function FT_Library_SetLcdFilterWeights(library, weights)
     ccall((:FT_Library_SetLcdFilterWeights, libfreetype), FT_Error, (FT_Library, Ptr{Cuchar}), library, weights)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftlist.h
+# Julia wrapper for header: ftlist.h
 # Automatically generated using Clang.jl
 
 
@@ -476,17 +476,17 @@ end
 function FT_List_Finalize(list, destroy, memory, user)
     ccall((:FT_List_Finalize, libfreetype), Cvoid, (FT_List, FT_List_Destructor, FT_Memory, Ptr{Cvoid}), list, destroy, memory, user)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftlzw.h
+# Julia wrapper for header: ftlzw.h
 # Automatically generated using Clang.jl
 
 
 function FT_Stream_OpenLZW(stream, source)
     ccall((:FT_Stream_OpenLZW, libfreetype), FT_Error, (FT_Stream, FT_Stream), stream, source)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftmac.h
+# Julia wrapper for header: ftmac.h
 # Automatically generated using Clang.jl
 
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftmm.h
+# Julia wrapper for header: ftmm.h
 # Automatically generated using Clang.jl
 
 
@@ -537,7 +537,7 @@ end
 function FT_Set_Named_Instance(face, instance_index)
     ccall((:FT_Set_Named_Instance, libfreetype), FT_Error, (FT_Face, FT_UInt), face, instance_index)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftmodapi.h
+# Julia wrapper for header: ftmodapi.h
 # Automatically generated using Clang.jl
 
 
@@ -588,10 +588,10 @@ end
 function FT_Get_TrueType_Engine_Type(library)
     ccall((:FT_Get_TrueType_Engine_Type, libfreetype), FT_TrueTypeEngineType, (FT_Library,), library)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftmoderr.h
+# Julia wrapper for header: ftmoderr.h
 # Automatically generated using Clang.jl
 
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftotval.h
+# Julia wrapper for header: ftotval.h
 # Automatically generated using Clang.jl
 
 
@@ -602,7 +602,7 @@ end
 function FT_OpenType_Free(face, table)
     ccall((:FT_OpenType_Free, libfreetype), Cvoid, (FT_Face, FT_Bytes), face, table)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftoutln.h
+# Julia wrapper for header: ftoutln.h
 # Automatically generated using Clang.jl
 
 
@@ -669,10 +669,10 @@ end
 function FT_Outline_Get_Orientation(outline)
     ccall((:FT_Outline_Get_Orientation, libfreetype), FT_Orientation, (Ptr{FT_Outline},), outline)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftparams.h
+# Julia wrapper for header: ftparams.h
 # Automatically generated using Clang.jl
 
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftpfr.h
+# Julia wrapper for header: ftpfr.h
 # Automatically generated using Clang.jl
 
 
@@ -687,7 +687,7 @@ end
 function FT_Get_PFR_Advance(face, gindex, aadvance)
     ccall((:FT_Get_PFR_Advance, libfreetype), FT_Error, (FT_Face, FT_UInt, Ptr{FT_Pos}), face, gindex, aadvance)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftrender.h
+# Julia wrapper for header: ftrender.h
 # Automatically generated using Clang.jl
 
 
@@ -698,7 +698,7 @@ end
 function FT_Set_Renderer(library, renderer, num_params, parameters)
     ccall((:FT_Set_Renderer, libfreetype), FT_Error, (FT_Library, FT_Renderer, FT_UInt, Ptr{FT_Parameter}), library, renderer, num_params, parameters)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftsizes.h
+# Julia wrapper for header: ftsizes.h
 # Automatically generated using Clang.jl
 
 
@@ -713,7 +713,7 @@ end
 function FT_Activate_Size(size)
     ccall((:FT_Activate_Size, libfreetype), FT_Error, (FT_Size,), size)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftsnames.h
+# Julia wrapper for header: ftsnames.h
 # Automatically generated using Clang.jl
 
 
@@ -728,7 +728,7 @@ end
 function FT_Get_Sfnt_LangTag(face, langID, alangTag)
     ccall((:FT_Get_Sfnt_LangTag, libfreetype), FT_Error, (FT_Face, FT_UInt, Ptr{FT_SfntLangTag}), face, langID, alangTag)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftstroke.h
+# Julia wrapper for header: ftstroke.h
 # Automatically generated using Clang.jl
 
 
@@ -803,7 +803,7 @@ end
 function FT_Glyph_StrokeBorder(pglyph, stroker, inside, destroy)
     ccall((:FT_Glyph_StrokeBorder, libfreetype), FT_Error, (Ptr{FT_Glyph}, FT_Stroker, FT_Bool, FT_Bool), pglyph, stroker, inside, destroy)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftsynth.h
+# Julia wrapper for header: ftsynth.h
 # Automatically generated using Clang.jl
 
 
@@ -814,23 +814,23 @@ end
 function FT_GlyphSlot_Oblique(slot)
     ccall((:FT_GlyphSlot_Oblique, libfreetype), Cvoid, (FT_GlyphSlot,), slot)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftsystem.h
+# Julia wrapper for header: ftsystem.h
 # Automatically generated using Clang.jl
 
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/fttrigon.h
+# Julia wrapper for header: fttrigon.h
 # Automatically generated using Clang.jl
 
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/fttypes.h
+# Julia wrapper for header: fttypes.h
 # Automatically generated using Clang.jl
 
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ftwinfnt.h
+# Julia wrapper for header: ftwinfnt.h
 # Automatically generated using Clang.jl
 
 
 function FT_Get_WinFNT_Header(face, aheader)
     ccall((:FT_Get_WinFNT_Header, libfreetype), FT_Error, (FT_Face, Ptr{FT_WinFNT_HeaderRec}), face, aheader)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/t1tables.h
+# Julia wrapper for header: t1tables.h
 # Automatically generated using Clang.jl
 
 
@@ -849,10 +849,10 @@ end
 function FT_Get_PS_Font_Value(face, key, idx, value, value_len)
     ccall((:FT_Get_PS_Font_Value, libfreetype), FT_Long, (FT_Face, PS_Dict_Keys, FT_UInt, Ptr{Cvoid}, FT_Long), face, key, idx, value, value_len)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/ttnameid.h
+# Julia wrapper for header: ttnameid.h
 # Automatically generated using Clang.jl
 
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/tttables.h
+# Julia wrapper for header: tttables.h
 # Automatically generated using Clang.jl
 
 
@@ -875,21 +875,21 @@ end
 function FT_Get_CMap_Format(charmap)
     ccall((:FT_Get_CMap_Format, libfreetype), FT_Long, (FT_CharMap,), charmap)
 end
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/tttags.h
+# Julia wrapper for header: tttags.h
 # Automatically generated using Clang.jl
 
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/config/ftconfig.h
+# Julia wrapper for header: ftconfig.h
 # Automatically generated using Clang.jl
 
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/config/ftheader.h
+# Julia wrapper for header: ftheader.h
 # Automatically generated using Clang.jl
 
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/config/ftmodule.h
+# Julia wrapper for header: ftmodule.h
 # Automatically generated using Clang.jl
 
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/config/ftoption.h
+# Julia wrapper for header: ftoption.h
 # Automatically generated using Clang.jl
 
-# Julia wrapper for header: /Users/gnimuc/.julia/dev/FreeType/deps/usr/include/freetype2/freetype/config/ftstdlib.h
+# Julia wrapper for header: ftstdlib.h
 # Automatically generated using Clang.jl
 
