@@ -1,19 +1,7 @@
 module LibFreeType
 
-import Libdl
-
-# Load in `deps.jl`, complaining if it does not exist
-const depsjl_path = joinpath(@__DIR__, "..", "deps", "deps.jl")
-if !isfile(depsjl_path)
-    error("FreeType was not build properly. Please run Pkg.build(\"FreeType\").")
-end
-include(depsjl_path)
-# Module initialization function
-function __init__()
-    check_deps()
-end
-
 using CEnum
+using FreeType2_jll
 
 const ptrdiff_t = Cint
 const SHRT_MAX = 32767
