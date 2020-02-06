@@ -8,6 +8,9 @@ if !isfile(depsjl_path)
     error("FreeType was not build properly. Please run Pkg.build(\"FreeType\").")
 end
 include(depsjl_path)
+
+const libfreetypename = basename(libfreetype)
+
 # Module initialization function
 function __init__()
     check_deps()
