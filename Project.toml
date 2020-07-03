@@ -1,6 +1,6 @@
 name = "FreeType"
 uuid = "b38be410-82b0-50bf-ab77-7b57e271db43"
-version = "3.0.0"
+version = "3.0.1"
 
 [deps]
 CEnum = "fa961155-64e5-5f13-b03f-caf6b980ea82"
