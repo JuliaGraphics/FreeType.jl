@@ -1,0 +1,10 @@
+[general]
+library_name = "libfreetype"
+output_file_path = "./src/LibFreeType.jl"
+module_name = "LibFreeType"
+jll_pkg_name = "FreeType2_jll"
+export_symbol_prefixes = ["FREETYPE_", "FT_", "ft_", "TT_", "TTAG_", "CFF_", "T1_", "CID_", "PS_", "t1_"]
+
+[codegen.macro]
+macro_mode = "none"
+
