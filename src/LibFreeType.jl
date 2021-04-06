@@ -929,6 +929,72 @@ function FT_Face_SetUnpatentedHinting(face, value)
     ccall((:FT_Face_SetUnpatentedHinting, libfreetype), FT_Bool, (FT_Face, FT_Bool), face, value)
 end
 
+function FT_Outline_Decompose(outline, func_interface, user)
+    ccall((:FT_Outline_Decompose, libfreetype), FT_Error, (Ptr{FT_Outline}, Ptr{FT_Outline_Funcs}, Ptr{Cvoid}), outline, func_interface, user)
+end
+
+function FT_Outline_New(library, numPoints, numContours, anoutline)
+    ccall((:FT_Outline_New, libfreetype), FT_Error, (FT_Library, FT_UInt, FT_Int, Ptr{FT_Outline}), library, numPoints, numContours, anoutline)
+end
+
+function FT_Outline_Done(library, outline)
+    ccall((:FT_Outline_Done, libfreetype), FT_Error, (FT_Library, Ptr{FT_Outline}), library, outline)
+end
+
+function FT_Outline_Check(outline)
+    ccall((:FT_Outline_Check, libfreetype), FT_Error, (Ptr{FT_Outline},), outline)
+end
+
+function FT_Outline_Get_CBox(outline, acbox)
+    ccall((:FT_Outline_Get_CBox, libfreetype), Cvoid, (Ptr{FT_Outline}, Ptr{FT_BBox}), outline, acbox)
+end
+
+function FT_Outline_Translate(outline, xOffset, yOffset)
+    ccall((:FT_Outline_Translate, libfreetype), Cvoid, (Ptr{FT_Outline}, FT_Pos, FT_Pos), outline, xOffset, yOffset)
+end
+
+function FT_Outline_Copy(source, target)
+    ccall((:FT_Outline_Copy, libfreetype), FT_Error, (Ptr{FT_Outline}, Ptr{FT_Outline}), source, target)
+end
+
+function FT_Outline_Transform(outline, matrix)
+    ccall((:FT_Outline_Transform, libfreetype), Cvoid, (Ptr{FT_Outline}, Ptr{FT_Matrix}), outline, matrix)
+end
+
+function FT_Outline_Embolden(outline, strength)
+    ccall((:FT_Outline_Embolden, libfreetype), FT_Error, (Ptr{FT_Outline}, FT_Pos), outline, strength)
+end
+
+function FT_Outline_EmboldenXY(outline, xstrength, ystrength)
+    ccall((:FT_Outline_EmboldenXY, libfreetype), FT_Error, (Ptr{FT_Outline}, FT_Pos, FT_Pos), outline, xstrength, ystrength)
+end
+
+function FT_Outline_Reverse(outline)
+    ccall((:FT_Outline_Reverse, libfreetype), Cvoid, (Ptr{FT_Outline},), outline)
+end
+
+function FT_Outline_Get_Bitmap(library, outline, abitmap)
+    ccall((:FT_Outline_Get_Bitmap, libfreetype), FT_Error, (FT_Library, Ptr{FT_Outline}, Ptr{FT_Bitmap}), library, outline, abitmap)
+end
+
+function FT_Outline_Render(library, outline, params)
+    ccall((:FT_Outline_Render, libfreetype), FT_Error, (FT_Library, Ptr{FT_Outline}, Ptr{FT_Raster_Params}), library, outline, params)
+end
+
+@cenum FT_Orientation_::UInt32 begin
+    FT_ORIENTATION_TRUETYPE = 0
+    FT_ORIENTATION_POSTSCRIPT = 1
+    FT_ORIENTATION_FILL_RIGHT = 0
+    FT_ORIENTATION_FILL_LEFT = 1
+    FT_ORIENTATION_NONE = 2
+end
+
+const FT_Orientation = FT_Orientation_
+
+function FT_Outline_Get_Orientation(outline)
+    ccall((:FT_Outline_Get_Orientation, libfreetype), FT_Orientation, (Ptr{FT_Outline},), outline)
+end
+
 const FREETYPE_H_ = nothing
 
 const FT2BUILD_H_ = nothing
@@ -1398,6 +1464,8 @@ const FREETYPE_MAJOR = 2
 const FREETYPE_MINOR = 10
 
 const FREETYPE_PATCH = 1
+
+const FTOUTLN_H_ = nothing
 
 # exports
 const PREFIXES = ["FREETYPE_", "FT_", "ft_", "TT_", "TTAG_", "CFF_", "T1_", "CID_", "PS_", "t1_"]
