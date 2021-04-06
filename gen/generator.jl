@@ -1,6 +1,7 @@
-using Clang
 using Clang.Generators
 using FreeType.FreeType2_jll
+
+cd(@__DIR__)
 
 include_dir = joinpath(FreeType2_jll.artifact_dir, "include", "freetype2") |> normpath
 freetype_h = joinpath(include_dir, "freetype", "freetype.h") |> normpath

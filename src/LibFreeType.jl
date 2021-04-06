@@ -5,6 +5,20 @@ export FreeType2_jll
 
 using CEnum
 
+const ptrdiff_t = Cptrdiff_t
+const FILE = Libc.FILE
+const SHRT_MAX = 32767
+const USHRT_MAX = 65535
+const CHAR_BIT = 8
+const INT_MAX = typemax(Cint)
+const INT_MIN = typemin(Cint)
+const UINT_MAX = typemax(Cuint)
+const UINT_MIN = typemin(Cuint)
+const LONG_MAX = typemax(Clong)
+const LONG_MIN = typemin(Clong)
+const ULONG_MAX = typemax(Culong)
+
+
 const FT_Int16 = Cshort
 
 const FT_UInt16 = Cushort
@@ -44,6 +58,23 @@ const FT_Memory = Ptr{FT_MemoryRec_}
 
 struct FT_StreamDesc_
     data::NTuple{8, UInt8}
+end
+
+function Base.getproperty(x::Ptr{FT_StreamDesc_}, f::Symbol)
+    f === :value && return Ptr{Clong}(x + 0)
+    f === :pointer && return Ptr{Ptr{Cvoid}}(x + 0)
+    return getfield(x, f)
+end
+
+function Base.getproperty(x::FT_StreamDesc_, f::Symbol)
+    r = Ref{FT_StreamDesc_}(x)
+    ptr = Base.unsafe_convert(Ptr{FT_StreamDesc_}, r)
+    fptr = getproperty(ptr, f)
+    GC.@preserve r unsafe_load(fptr)
+end
+
+function Base.setproperty!(x::Ptr{FT_StreamDesc_}, f::Symbol, v)
+    unsafe_store!(getproperty(x, f), v)
 end
 
 const FT_StreamDesc = FT_StreamDesc_
@@ -330,7 +361,7 @@ const FT_ListNodeRec = FT_ListNodeRec_
 
 const FT_ListRec = FT_ListRec_
 
-@cenum var"##Ctag#253"::UInt32 begin
+@cenum var"##Ctag#260"::UInt32 begin
     FT_Mod_Err_Base = 0
     FT_Mod_Err_Autofit = 0
     FT_Mod_Err_BDF = 0
@@ -357,7 +388,7 @@ const FT_ListRec = FT_ListRec_
     FT_Mod_Err_Max = 1
 end
 
-@cenum var"##Ctag#254"::UInt32 begin
+@cenum var"##Ctag#261"::UInt32 begin
     FT_Err_Ok = 0
     FT_Err_Cannot_Open_Resource = 1
     FT_Err_Unknown_File_Format = 2
@@ -897,6 +928,476 @@ end
 function FT_Face_SetUnpatentedHinting(face, value)
     ccall((:FT_Face_SetUnpatentedHinting, libfreetype), FT_Bool, (FT_Face, FT_Bool), face, value)
 end
+
+const FREETYPE_H_ = nothing
+
+const FT2BUILD_H_ = nothing
+
+const FTHEADER_H_ = nothing
+
+const FT_BEGIN_HEADER = nothing
+
+const FT_END_HEADER = nothing
+
+const FTCONFIG_H_ = nothing
+
+const FTOPTION_H_ = nothing
+
+const FT_CONFIG_OPTION_ENVIRONMENT_PROPERTIES = nothing
+
+const FT_CONFIG_OPTION_INLINE_MULFIX = nothing
+
+const FT_CONFIG_OPTION_USE_LZW = nothing
+
+const FT_CONFIG_OPTION_USE_ZLIB = nothing
+
+const FT_CONFIG_OPTION_SYSTEM_ZLIB = nothing
+
+const FT_CONFIG_OPTION_USE_BZIP2 = nothing
+
+const FT_CONFIG_OPTION_POSTSCRIPT_NAMES = nothing
+
+const FT_CONFIG_OPTION_ADOBE_GLYPH_LIST = nothing
+
+const FT_CONFIG_OPTION_MAC_FONTS = nothing
+
+const FT_CONFIG_OPTION_GUESSING_EMBEDDED_RFORK = nothing
+
+const FT_CONFIG_OPTION_INCREMENTAL = nothing
+
+const FT_RENDER_POOL_SIZE = Clong(16384)
+
+const FT_MAX_MODULES = 32
+
+const TT_CONFIG_OPTION_EMBEDDED_BITMAPS = nothing
+
+const TT_CONFIG_OPTION_COLOR_LAYERS = nothing
+
+const TT_CONFIG_OPTION_POSTSCRIPT_NAMES = nothing
+
+const TT_CONFIG_OPTION_SFNT_NAMES = nothing
+
+const TT_CONFIG_CMAP_FORMAT_0 = nothing
+
+const TT_CONFIG_CMAP_FORMAT_2 = nothing
+
+const TT_CONFIG_CMAP_FORMAT_4 = nothing
+
+const TT_CONFIG_CMAP_FORMAT_6 = nothing
+
+const TT_CONFIG_CMAP_FORMAT_8 = nothing
+
+const TT_CONFIG_CMAP_FORMAT_10 = nothing
+
+const TT_CONFIG_CMAP_FORMAT_12 = nothing
+
+const TT_CONFIG_CMAP_FORMAT_13 = nothing
+
+const TT_CONFIG_CMAP_FORMAT_14 = nothing
+
+const TT_CONFIG_OPTION_BYTECODE_INTERPRETER = nothing
+
+const TT_CONFIG_OPTION_SUBPIXEL_HINTING = 2
+
+const TT_CONFIG_OPTION_GX_VAR_SUPPORT = nothing
+
+const TT_CONFIG_OPTION_BDF = nothing
+
+const TT_CONFIG_OPTION_MAX_RUNNABLE_OPCODES = Clong(1000000)
+
+const T1_MAX_DICT_DEPTH = 5
+
+const T1_MAX_SUBRS_CALLS = 16
+
+const T1_MAX_CHARSTRINGS_OPERANDS = 256
+
+const CFF_CONFIG_OPTION_DARKENING_PARAMETER_X1 = 500
+
+const CFF_CONFIG_OPTION_DARKENING_PARAMETER_Y1 = 400
+
+const CFF_CONFIG_OPTION_DARKENING_PARAMETER_X2 = 1000
+
+const CFF_CONFIG_OPTION_DARKENING_PARAMETER_Y2 = 275
+
+const CFF_CONFIG_OPTION_DARKENING_PARAMETER_X3 = 1667
+
+const CFF_CONFIG_OPTION_DARKENING_PARAMETER_Y3 = 275
+
+const CFF_CONFIG_OPTION_DARKENING_PARAMETER_X4 = 2333
+
+const CFF_CONFIG_OPTION_DARKENING_PARAMETER_Y4 = 0
+
+const AF_CONFIG_OPTION_CJK = nothing
+
+const AF_CONFIG_OPTION_INDIC = nothing
+
+const AF_CONFIG_OPTION_USE_WARPER = nothing
+
+const TT_USE_BYTECODE_INTERPRETER = nothing
+
+const TT_SUPPORT_SUBPIXEL_HINTING_MINIMAL = nothing
+
+const FTSTDLIB_H_ = nothing
+
+const ft_ptrdiff_t = ptrdiff_t
+
+const FT_CHAR_BIT = CHAR_BIT
+
+const FT_USHORT_MAX = USHRT_MAX
+
+const FT_INT_MAX = INT_MAX
+
+const FT_INT_MIN = INT_MIN
+
+const FT_UINT_MAX = UINT_MAX
+
+const FT_LONG_MIN = LONG_MIN
+
+const FT_LONG_MAX = LONG_MAX
+
+const FT_ULONG_MAX = ULONG_MAX
+
+const FT_FILE = FILE
+
+# Skipping MacroDefinition: FT_SIZEOF_INT ( 32 / FT_CHAR_BIT )
+
+# Skipping MacroDefinition: FT_SIZEOF_LONG ( 64 / FT_CHAR_BIT )
+
+const FT_LONG64 = nothing
+
+const FT_INT64 = Clong
+
+const FT_UINT64 = Culong
+
+# Skipping MacroDefinition: FT_BEGIN_STMNT do {
+
+# Skipping MacroDefinition: FT_END_STMNT } while ( 0 )
+
+# Skipping MacroDefinition: FT_DUMMY_STMNT FT_BEGIN_STMNT FT_END_STMNT
+
+# Skipping MacroDefinition: FT_CALLBACK_TABLE extern
+
+const FT_CALLBACK_TABLE_DEF = nothing
+
+const FTTYPES_H_ = nothing
+
+const FTSYSTEM_H_ = nothing
+
+const FTIMAGE_H_ = nothing
+
+const ft_pixel_mode_none = FT_PIXEL_MODE_NONE
+
+const ft_pixel_mode_mono = FT_PIXEL_MODE_MONO
+
+const ft_pixel_mode_grays = FT_PIXEL_MODE_GRAY
+
+const ft_pixel_mode_pal2 = FT_PIXEL_MODE_GRAY2
+
+const ft_pixel_mode_pal4 = FT_PIXEL_MODE_GRAY4
+
+const FT_OUTLINE_NONE = 0x00
+
+const FT_OUTLINE_OWNER = 0x01
+
+const FT_OUTLINE_EVEN_ODD_FILL = 0x02
+
+const FT_OUTLINE_REVERSE_FILL = 0x04
+
+const FT_OUTLINE_IGNORE_DROPOUTS = 0x08
+
+const FT_OUTLINE_SMART_DROPOUTS = 0x10
+
+const FT_OUTLINE_INCLUDE_STUBS = 0x20
+
+const FT_OUTLINE_HIGH_PRECISION = 0x0100
+
+const FT_OUTLINE_SINGLE_PASS = 0x0200
+
+const ft_outline_none = FT_OUTLINE_NONE
+
+const ft_outline_owner = FT_OUTLINE_OWNER
+
+const ft_outline_even_odd_fill = FT_OUTLINE_EVEN_ODD_FILL
+
+const ft_outline_reverse_fill = FT_OUTLINE_REVERSE_FILL
+
+const ft_outline_ignore_dropouts = FT_OUTLINE_IGNORE_DROPOUTS
+
+const ft_outline_high_precision = FT_OUTLINE_HIGH_PRECISION
+
+const ft_outline_single_pass = FT_OUTLINE_SINGLE_PASS
+
+const FT_CURVE_TAG_ON = 0x01
+
+const FT_CURVE_TAG_CONIC = 0x00
+
+const FT_CURVE_TAG_CUBIC = 0x02
+
+const FT_CURVE_TAG_HAS_SCANMODE = 0x04
+
+const FT_CURVE_TAG_TOUCH_X = 0x08
+
+const FT_CURVE_TAG_TOUCH_Y = 0x10
+
+# Skipping MacroDefinition: FT_CURVE_TAG_TOUCH_BOTH ( FT_CURVE_TAG_TOUCH_X | FT_CURVE_TAG_TOUCH_Y )
+
+const FT_Curve_Tag_On = FT_CURVE_TAG_ON
+
+const FT_Curve_Tag_Conic = FT_CURVE_TAG_CONIC
+
+const FT_Curve_Tag_Cubic = FT_CURVE_TAG_CUBIC
+
+const FT_Curve_Tag_Touch_X = FT_CURVE_TAG_TOUCH_X
+
+const FT_Curve_Tag_Touch_Y = FT_CURVE_TAG_TOUCH_Y
+
+const FT_Outline_MoveTo_Func = FT_Outline_MoveToFunc
+
+const FT_Outline_LineTo_Func = FT_Outline_LineToFunc
+
+const FT_Outline_ConicTo_Func = FT_Outline_ConicToFunc
+
+const FT_Outline_CubicTo_Func = FT_Outline_CubicToFunc
+
+const ft_glyph_format_none = FT_GLYPH_FORMAT_NONE
+
+const ft_glyph_format_composite = FT_GLYPH_FORMAT_COMPOSITE
+
+const ft_glyph_format_bitmap = FT_GLYPH_FORMAT_BITMAP
+
+const ft_glyph_format_outline = FT_GLYPH_FORMAT_OUTLINE
+
+const ft_glyph_format_plotter = FT_GLYPH_FORMAT_PLOTTER
+
+const FT_Raster_Span_Func = FT_SpanFunc
+
+const FT_RASTER_FLAG_DEFAULT = 0x00
+
+const FT_RASTER_FLAG_AA = 0x01
+
+const FT_RASTER_FLAG_DIRECT = 0x02
+
+const FT_RASTER_FLAG_CLIP = 0x04
+
+const ft_raster_flag_default = FT_RASTER_FLAG_DEFAULT
+
+const ft_raster_flag_aa = FT_RASTER_FLAG_AA
+
+const ft_raster_flag_direct = FT_RASTER_FLAG_DIRECT
+
+const ft_raster_flag_clip = FT_RASTER_FLAG_CLIP
+
+const FT_Raster_New_Func = FT_Raster_NewFunc
+
+const FT_Raster_Done_Func = FT_Raster_DoneFunc
+
+const FT_Raster_Reset_Func = FT_Raster_ResetFunc
+
+const FT_Raster_Set_Mode_Func = FT_Raster_SetModeFunc
+
+const FT_Raster_Render_Func = FT_Raster_RenderFunc
+
+const FTERRORS_H_ = nothing
+
+const FTMODERR_H_ = nothing
+
+# Skipping MacroDefinition: FT_MODERRDEF ( e , v , s ) FT_Mod_Err_ ## e = 0 ,
+
+# Skipping MacroDefinition: FT_MODERR_START_LIST enum {
+
+# Skipping MacroDefinition: FT_MODERR_END_LIST FT_Mod_Err_Max } ;
+
+const FT_ERR_BASE = 0
+
+const FT_INCLUDE_ERR_PROTOS = nothing
+
+# Skipping MacroDefinition: FT_ERRORDEF ( e , v , s ) e = v ,
+
+# Skipping MacroDefinition: FT_ERROR_START_LIST enum {
+
+# Skipping MacroDefinition: FT_ERROR_END_LIST FT_ERR_CAT ( FT_ERR_PREFIX , Max ) } ;
+
+# Skipping MacroDefinition: FT_ERRORDEF_ ( e , v , s ) FT_ERRORDEF ( FT_ERR_CAT ( FT_ERR_PREFIX , e ) , v + FT_ERR_BASE , s )
+
+# Skipping MacroDefinition: FT_NOERRORDEF_ ( e , v , s ) FT_ERRORDEF ( FT_ERR_CAT ( FT_ERR_PREFIX , e ) , v , s )
+
+const FT_ERR_PROTOS_DEFINED = nothing
+
+const ft_encoding_none = FT_ENCODING_NONE
+
+const ft_encoding_unicode = FT_ENCODING_UNICODE
+
+const ft_encoding_symbol = FT_ENCODING_MS_SYMBOL
+
+const ft_encoding_latin_1 = FT_ENCODING_ADOBE_LATIN_1
+
+const ft_encoding_latin_2 = FT_ENCODING_OLD_LATIN_2
+
+const ft_encoding_sjis = FT_ENCODING_SJIS
+
+const ft_encoding_gb2312 = FT_ENCODING_PRC
+
+const ft_encoding_big5 = FT_ENCODING_BIG5
+
+const ft_encoding_wansung = FT_ENCODING_WANSUNG
+
+const ft_encoding_johab = FT_ENCODING_JOHAB
+
+const ft_encoding_adobe_standard = FT_ENCODING_ADOBE_STANDARD
+
+const ft_encoding_adobe_expert = FT_ENCODING_ADOBE_EXPERT
+
+const ft_encoding_adobe_custom = FT_ENCODING_ADOBE_CUSTOM
+
+const ft_encoding_apple_roman = FT_ENCODING_APPLE_ROMAN
+
+# Skipping MacroDefinition: FT_FACE_FLAG_SCALABLE ( 1L << 0 )
+
+# Skipping MacroDefinition: FT_FACE_FLAG_FIXED_SIZES ( 1L << 1 )
+
+# Skipping MacroDefinition: FT_FACE_FLAG_FIXED_WIDTH ( 1L << 2 )
+
+# Skipping MacroDefinition: FT_FACE_FLAG_SFNT ( 1L << 3 )
+
+# Skipping MacroDefinition: FT_FACE_FLAG_HORIZONTAL ( 1L << 4 )
+
+# Skipping MacroDefinition: FT_FACE_FLAG_VERTICAL ( 1L << 5 )
+
+# Skipping MacroDefinition: FT_FACE_FLAG_KERNING ( 1L << 6 )
+
+# Skipping MacroDefinition: FT_FACE_FLAG_FAST_GLYPHS ( 1L << 7 )
+
+# Skipping MacroDefinition: FT_FACE_FLAG_MULTIPLE_MASTERS ( 1L << 8 )
+
+# Skipping MacroDefinition: FT_FACE_FLAG_GLYPH_NAMES ( 1L << 9 )
+
+# Skipping MacroDefinition: FT_FACE_FLAG_EXTERNAL_STREAM ( 1L << 10 )
+
+# Skipping MacroDefinition: FT_FACE_FLAG_HINTER ( 1L << 11 )
+
+# Skipping MacroDefinition: FT_FACE_FLAG_CID_KEYED ( 1L << 12 )
+
+# Skipping MacroDefinition: FT_FACE_FLAG_TRICKY ( 1L << 13 )
+
+# Skipping MacroDefinition: FT_FACE_FLAG_COLOR ( 1L << 14 )
+
+# Skipping MacroDefinition: FT_FACE_FLAG_VARIATION ( 1L << 15 )
+
+# Skipping MacroDefinition: FT_STYLE_FLAG_ITALIC ( 1 << 0 )
+
+# Skipping MacroDefinition: FT_STYLE_FLAG_BOLD ( 1 << 1 )
+
+const FT_OPEN_MEMORY = 0x01
+
+const FT_OPEN_STREAM = 0x02
+
+const FT_OPEN_PATHNAME = 0x04
+
+const FT_OPEN_DRIVER = 0x08
+
+const FT_OPEN_PARAMS = 0x10
+
+const ft_open_memory = FT_OPEN_MEMORY
+
+const ft_open_stream = FT_OPEN_STREAM
+
+const ft_open_pathname = FT_OPEN_PATHNAME
+
+const ft_open_driver = FT_OPEN_DRIVER
+
+const ft_open_params = FT_OPEN_PARAMS
+
+const FT_LOAD_DEFAULT = 0x00
+
+# Skipping MacroDefinition: FT_LOAD_NO_SCALE ( 1L << 0 )
+
+# Skipping MacroDefinition: FT_LOAD_NO_HINTING ( 1L << 1 )
+
+# Skipping MacroDefinition: FT_LOAD_RENDER ( 1L << 2 )
+
+# Skipping MacroDefinition: FT_LOAD_NO_BITMAP ( 1L << 3 )
+
+# Skipping MacroDefinition: FT_LOAD_VERTICAL_LAYOUT ( 1L << 4 )
+
+# Skipping MacroDefinition: FT_LOAD_FORCE_AUTOHINT ( 1L << 5 )
+
+# Skipping MacroDefinition: FT_LOAD_CROP_BITMAP ( 1L << 6 )
+
+# Skipping MacroDefinition: FT_LOAD_PEDANTIC ( 1L << 7 )
+
+# Skipping MacroDefinition: FT_LOAD_IGNORE_GLOBAL_ADVANCE_WIDTH ( 1L << 9 )
+
+# Skipping MacroDefinition: FT_LOAD_NO_RECURSE ( 1L << 10 )
+
+# Skipping MacroDefinition: FT_LOAD_IGNORE_TRANSFORM ( 1L << 11 )
+
+# Skipping MacroDefinition: FT_LOAD_MONOCHROME ( 1L << 12 )
+
+# Skipping MacroDefinition: FT_LOAD_LINEAR_DESIGN ( 1L << 13 )
+
+# Skipping MacroDefinition: FT_LOAD_NO_AUTOHINT ( 1L << 15 )
+
+# Skipping MacroDefinition: FT_LOAD_COLOR ( 1L << 20 )
+
+# Skipping MacroDefinition: FT_LOAD_COMPUTE_METRICS ( 1L << 21 )
+
+# Skipping MacroDefinition: FT_LOAD_BITMAP_METRICS_ONLY ( 1L << 22 )
+
+# Skipping MacroDefinition: FT_LOAD_ADVANCE_ONLY ( 1L << 8 )
+
+# Skipping MacroDefinition: FT_LOAD_SBITS_ONLY ( 1L << 14 )
+
+# Skipping MacroDefinition: FT_LOAD_TARGET_NORMAL FT_LOAD_TARGET_ ( FT_RENDER_MODE_NORMAL )
+
+# Skipping MacroDefinition: FT_LOAD_TARGET_LIGHT FT_LOAD_TARGET_ ( FT_RENDER_MODE_LIGHT )
+
+# Skipping MacroDefinition: FT_LOAD_TARGET_MONO FT_LOAD_TARGET_ ( FT_RENDER_MODE_MONO )
+
+# Skipping MacroDefinition: FT_LOAD_TARGET_LCD FT_LOAD_TARGET_ ( FT_RENDER_MODE_LCD )
+
+# Skipping MacroDefinition: FT_LOAD_TARGET_LCD_V FT_LOAD_TARGET_ ( FT_RENDER_MODE_LCD_V )
+
+const ft_render_mode_normal = FT_RENDER_MODE_NORMAL
+
+const ft_render_mode_mono = FT_RENDER_MODE_MONO
+
+const ft_kerning_default = FT_KERNING_DEFAULT
+
+const ft_kerning_unfitted = FT_KERNING_UNFITTED
+
+const ft_kerning_unscaled = FT_KERNING_UNSCALED
+
+const FT_SUBGLYPH_FLAG_ARGS_ARE_WORDS = 1
+
+const FT_SUBGLYPH_FLAG_ARGS_ARE_XY_VALUES = 2
+
+const FT_SUBGLYPH_FLAG_ROUND_XY_TO_GRID = 4
+
+const FT_SUBGLYPH_FLAG_SCALE = 8
+
+const FT_SUBGLYPH_FLAG_XY_SCALE = 0x40
+
+const FT_SUBGLYPH_FLAG_2X2 = 0x80
+
+const FT_SUBGLYPH_FLAG_USE_MY_METRICS = 0x0200
+
+const FT_FSTYPE_INSTALLABLE_EMBEDDING = 0x0000
+
+const FT_FSTYPE_RESTRICTED_LICENSE_EMBEDDING = 0x0002
+
+const FT_FSTYPE_PREVIEW_AND_PRINT_EMBEDDING = 0x0004
+
+const FT_FSTYPE_EDITABLE_EMBEDDING = 0x0008
+
+const FT_FSTYPE_NO_SUBSETTING = 0x0100
+
+const FT_FSTYPE_BITMAP_EMBEDDING_ONLY = 0x0200
+
+const FREETYPE_MAJOR = 2
+
+const FREETYPE_MINOR = 10
+
+const FREETYPE_PATCH = 1
 
 # exports
 const PREFIXES = ["FREETYPE_", "FT_", "ft_", "TT_", "TTAG_", "CFF_", "T1_", "CID_", "PS_", "t1_"]

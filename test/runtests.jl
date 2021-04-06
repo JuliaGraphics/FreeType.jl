@@ -1,5 +1,4 @@
 using FreeType, FreeTypeAbstraction
-using FreeType: FT_Vector
 using Test
 
 library = Ref{FT_Library}()

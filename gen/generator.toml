@@ -1,10 +1,45 @@
 [general]
 library_name = "libfreetype"
-output_file_path = "./src/LibFreeType.jl"
+output_file_path = "../src/LibFreeType.jl"
 module_name = "LibFreeType"
 jll_pkg_name = "FreeType2_jll"
 export_symbol_prefixes = ["FREETYPE_", "FT_", "ft_", "TT_", "TTAG_", "CFF_", "T1_", "CID_", "PS_", "t1_"]
+prologue_file_path = "./prologue.jl"
+
+printer_blacklist = [
+    "ft_memchr",
+    "ft_memcmp",
+    "ft_memcpy",
+    "ft_memmove",
+    "ft_memset",
+    "ft_strcat",
+    "ft_strcmp",
+    "ft_strcpy",
+    "ft_strlen",
+    "ft_strncmp",
+    "ft_strncpy",
+    "ft_strrchr",
+    "ft_strstr",
+    "ft_fclose",
+    "ft_fopen",
+    "ft_fread",
+    "ft_fseek",
+    "ft_ftell",
+    "ft_sprintf",
+    "ft_qsort",
+    "ft_scalloc",
+    "ft_sfree",
+    "ft_smalloc",
+    "ft_srealloc",
+    "ft_strtol",
+    "ft_getenv",
+    "ft_jmp_buf",
+    "ft_longjmp",
+    "FT_OUTLINE_CONTOURS_MAX",
+    "FT_OUTLINE_POINTS_MAX",
+    "FT_ERR_PREFIX",
+]
 
 [codegen.macro]
-macro_mode = "none"
+macro_mode = "basic"
 
