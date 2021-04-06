@@ -1059,9 +1059,9 @@ const FT_ULONG_MAX = ULONG_MAX
 
 const FT_FILE = FILE
 
-# Skipping MacroDefinition: FT_SIZEOF_INT ( 32 / FT_CHAR_BIT )
+const FT_SIZEOF_INT = 32 / FT_CHAR_BIT
 
-# Skipping MacroDefinition: FT_SIZEOF_LONG ( 64 / FT_CHAR_BIT )
+const FT_SIZEOF_LONG = 32 / FT_CHAR_BIT
 
 const FT_LONG64 = nothing
 
@@ -1139,7 +1139,7 @@ const FT_CURVE_TAG_TOUCH_X = 0x08
 
 const FT_CURVE_TAG_TOUCH_Y = 0x10
 
-# Skipping MacroDefinition: FT_CURVE_TAG_TOUCH_BOTH ( FT_CURVE_TAG_TOUCH_X | FT_CURVE_TAG_TOUCH_Y )
+const FT_CURVE_TAG_TOUCH_BOTH = FT_CURVE_TAG_TOUCH_X | FT_CURVE_TAG_TOUCH_Y
 
 const FT_Curve_Tag_On = FT_CURVE_TAG_ON
 
@@ -1251,41 +1251,41 @@ const ft_encoding_adobe_custom = FT_ENCODING_ADOBE_CUSTOM
 
 const ft_encoding_apple_roman = FT_ENCODING_APPLE_ROMAN
 
-# Skipping MacroDefinition: FT_FACE_FLAG_SCALABLE ( 1L << 0 )
+const FT_FACE_FLAG_SCALABLE = Int32(1) << 0
 
-# Skipping MacroDefinition: FT_FACE_FLAG_FIXED_SIZES ( 1L << 1 )
+const FT_FACE_FLAG_FIXED_SIZES = Int32(1) << 1
 
-# Skipping MacroDefinition: FT_FACE_FLAG_FIXED_WIDTH ( 1L << 2 )
+const FT_FACE_FLAG_FIXED_WIDTH = Int32(1) << 2
 
-# Skipping MacroDefinition: FT_FACE_FLAG_SFNT ( 1L << 3 )
+const FT_FACE_FLAG_SFNT = Int32(1) << 3
 
-# Skipping MacroDefinition: FT_FACE_FLAG_HORIZONTAL ( 1L << 4 )
+const FT_FACE_FLAG_HORIZONTAL = Int32(1) << 4
 
-# Skipping MacroDefinition: FT_FACE_FLAG_VERTICAL ( 1L << 5 )
+const FT_FACE_FLAG_VERTICAL = Int32(1) << 5
 
-# Skipping MacroDefinition: FT_FACE_FLAG_KERNING ( 1L << 6 )
+const FT_FACE_FLAG_KERNING = Int32(1) << 6
 
-# Skipping MacroDefinition: FT_FACE_FLAG_FAST_GLYPHS ( 1L << 7 )
+const FT_FACE_FLAG_FAST_GLYPHS = Int32(1) << 7
 
-# Skipping MacroDefinition: FT_FACE_FLAG_MULTIPLE_MASTERS ( 1L << 8 )
+const FT_FACE_FLAG_MULTIPLE_MASTERS = Int32(1) << 8
 
-# Skipping MacroDefinition: FT_FACE_FLAG_GLYPH_NAMES ( 1L << 9 )
+const FT_FACE_FLAG_GLYPH_NAMES = Int32(1) << 9
 
-# Skipping MacroDefinition: FT_FACE_FLAG_EXTERNAL_STREAM ( 1L << 10 )
+const FT_FACE_FLAG_EXTERNAL_STREAM = Int32(1) << 10
 
-# Skipping MacroDefinition: FT_FACE_FLAG_HINTER ( 1L << 11 )
+const FT_FACE_FLAG_HINTER = Int32(1) << 11
 
-# Skipping MacroDefinition: FT_FACE_FLAG_CID_KEYED ( 1L << 12 )
+const FT_FACE_FLAG_CID_KEYED = Int32(1) << 12
 
-# Skipping MacroDefinition: FT_FACE_FLAG_TRICKY ( 1L << 13 )
+const FT_FACE_FLAG_TRICKY = Int32(1) << 13
 
-# Skipping MacroDefinition: FT_FACE_FLAG_COLOR ( 1L << 14 )
+const FT_FACE_FLAG_COLOR = Int32(1) << 14
 
-# Skipping MacroDefinition: FT_FACE_FLAG_VARIATION ( 1L << 15 )
+const FT_FACE_FLAG_VARIATION = Int32(1) << 15
 
-# Skipping MacroDefinition: FT_STYLE_FLAG_ITALIC ( 1 << 0 )
+const FT_STYLE_FLAG_ITALIC = Int32(1) << 0
 
-# Skipping MacroDefinition: FT_STYLE_FLAG_BOLD ( 1 << 1 )
+const FT_STYLE_FLAG_BOLD = Int32(1) << 1
 
 const FT_OPEN_MEMORY = 0x01
 
@@ -1309,43 +1309,43 @@ const ft_open_params = FT_OPEN_PARAMS
 
 const FT_LOAD_DEFAULT = 0x00
 
-# Skipping MacroDefinition: FT_LOAD_NO_SCALE ( 1L << 0 )
+const FT_LOAD_NO_SCALE = Int32(1) << 0
 
-# Skipping MacroDefinition: FT_LOAD_NO_HINTING ( 1L << 1 )
+const FT_LOAD_NO_HINTING = Int32(1) << 1
 
-# Skipping MacroDefinition: FT_LOAD_RENDER ( 1L << 2 )
+const FT_LOAD_RENDER = Int32(1) << 2
 
-# Skipping MacroDefinition: FT_LOAD_NO_BITMAP ( 1L << 3 )
+const FT_LOAD_NO_BITMAP = Int32(1) << 3
 
-# Skipping MacroDefinition: FT_LOAD_VERTICAL_LAYOUT ( 1L << 4 )
+const FT_LOAD_VERTICAL_LAYOUT = Int32(1) << 4
 
-# Skipping MacroDefinition: FT_LOAD_FORCE_AUTOHINT ( 1L << 5 )
+const FT_LOAD_FORCE_AUTOHINT = Int32(1) << 5
 
-# Skipping MacroDefinition: FT_LOAD_CROP_BITMAP ( 1L << 6 )
+const FT_LOAD_CROP_BITMAP = Int32(1) << 6
 
-# Skipping MacroDefinition: FT_LOAD_PEDANTIC ( 1L << 7 )
+const FT_LOAD_PEDANTIC = Int32(1) << 7
 
-# Skipping MacroDefinition: FT_LOAD_IGNORE_GLOBAL_ADVANCE_WIDTH ( 1L << 9 )
+const FT_LOAD_IGNORE_GLOBAL_ADVANCE_WIDTH = Int32(1) << 9
 
-# Skipping MacroDefinition: FT_LOAD_NO_RECURSE ( 1L << 10 )
+const FT_LOAD_NO_RECURSE = Int32(1) << 10
 
-# Skipping MacroDefinition: FT_LOAD_IGNORE_TRANSFORM ( 1L << 11 )
+const FT_LOAD_IGNORE_TRANSFORM = Int32(1) << 11
 
-# Skipping MacroDefinition: FT_LOAD_MONOCHROME ( 1L << 12 )
+const FT_LOAD_MONOCHROME = Int32(1) << 12
 
-# Skipping MacroDefinition: FT_LOAD_LINEAR_DESIGN ( 1L << 13 )
+const FT_LOAD_LINEAR_DESIGN = Int32(1) << 13
 
-# Skipping MacroDefinition: FT_LOAD_NO_AUTOHINT ( 1L << 15 )
+const FT_LOAD_NO_AUTOHINT = Int32(1) << 15
 
-# Skipping MacroDefinition: FT_LOAD_COLOR ( 1L << 20 )
+const FT_LOAD_COLOR = Int32(1) << 20
 
-# Skipping MacroDefinition: FT_LOAD_COMPUTE_METRICS ( 1L << 21 )
+const FT_LOAD_COMPUTE_METRICS = Int32(1) << 21
 
-# Skipping MacroDefinition: FT_LOAD_BITMAP_METRICS_ONLY ( 1L << 22 )
+const FT_LOAD_BITMAP_METRICS_ONLY = Int32(1) << 22
 
-# Skipping MacroDefinition: FT_LOAD_ADVANCE_ONLY ( 1L << 8 )
+const FT_LOAD_ADVANCE_ONLY = Int32(1) << 8
 
-# Skipping MacroDefinition: FT_LOAD_SBITS_ONLY ( 1L << 14 )
+const FT_LOAD_SBITS_ONLY = Int32(1) << 14
 
 # Skipping MacroDefinition: FT_LOAD_TARGET_NORMAL FT_LOAD_TARGET_ ( FT_RENDER_MODE_NORMAL )
 
