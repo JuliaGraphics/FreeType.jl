@@ -1,5 +1,5 @@
 using FreeType, FreeTypeAbstraction
-using FreeType: FT_Vector, FT_FaceRec, FT_GlyphSlotRec
+using FreeType: FT_Vector
 using Test
 
 library = Ref{FT_Library}()
@@ -46,8 +46,8 @@ conic_f = @cfunction $conic_to_func Cint (Ptr{FT_Vector}, Ptr{FT_Vector}, Ptr{Cv
 cubic_f = @cfunction $cubic_to_func Cint (Ptr{FT_Vector}, Ptr{FT_Vector}, Ptr{FT_Vector}, Ptr{Cvoid})
 
 GC.@preserve move_f line_f conic_f cubic_f begin
-face = unsafe_load(Ptr{FT_FaceRec}(refface[]))
-glyph = unsafe_load(Ptr{FT_GlyphSlotRec}(face.glyph))
+face = unsafe_load(refface[])
+glyph = unsafe_load(face.glyph)
 outline_funcs = FreeType.FT_Outline_Funcs(Base.unsafe_convert.(Ptr{Cvoid}, (move_f, line_f, conic_f, cubic_f))..., 0, 0)
 FT_Outline_Decompose(pointer_from_objref.((Ref(glyph.outline), Ref(outline_funcs)))..., C_NULL)
 end
