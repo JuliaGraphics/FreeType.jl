@@ -35,15 +35,12 @@ const FT_Int64 = Clong
 
 const FT_UInt64 = Culong
 
-# C code:
 # typedef void * ( * FT_Alloc_Func ) ( FT_Memory memory , long size )
 const FT_Alloc_Func = Ptr{Cvoid}
 
-# C code:
 # typedef void ( * FT_Free_Func ) ( FT_Memory memory , void * block )
 const FT_Free_Func = Ptr{Cvoid}
 
-# C code:
 # typedef void * ( * FT_Realloc_Func ) ( FT_Memory memory , long cur_size , long new_size , void * block )
 const FT_Realloc_Func = Ptr{Cvoid}
 
@@ -79,11 +76,9 @@ end
 
 const FT_StreamDesc = FT_StreamDesc_
 
-# C code:
 # typedef unsigned long ( * FT_Stream_IoFunc ) ( FT_Stream stream , unsigned long offset , unsigned char * buffer , unsigned long count )
 const FT_Stream_IoFunc = Ptr{Cvoid}
 
-# C code:
 # typedef void ( * FT_Stream_CloseFunc ) ( FT_Stream stream )
 const FT_Stream_CloseFunc = Ptr{Cvoid}
 
@@ -160,19 +155,15 @@ end
 
 const FT_Outline = FT_Outline_
 
-# C code:
 # typedef int ( * FT_Outline_MoveToFunc ) ( const FT_Vector * to , void * user )
 const FT_Outline_MoveToFunc = Ptr{Cvoid}
 
-# C code:
 # typedef int ( * FT_Outline_LineToFunc ) ( const FT_Vector * to , void * user )
 const FT_Outline_LineToFunc = Ptr{Cvoid}
 
-# C code:
 # typedef int ( * FT_Outline_ConicToFunc ) ( const FT_Vector * control , const FT_Vector * to , void * user )
 const FT_Outline_ConicToFunc = Ptr{Cvoid}
 
-# C code:
 # typedef int ( * FT_Outline_CubicToFunc ) ( const FT_Vector * control1 , const FT_Vector * control2 , const FT_Vector * to , void * user )
 const FT_Outline_CubicToFunc = Ptr{Cvoid}
 
@@ -209,15 +200,12 @@ end
 
 const FT_Span = FT_Span_
 
-# C code:
 # typedef void ( * FT_SpanFunc ) ( int y , int count , const FT_Span * spans , void * user )
 const FT_SpanFunc = Ptr{Cvoid}
 
-# C code:
 # typedef int ( * FT_Raster_BitTest_Func ) ( int y , int x , void * user )
 const FT_Raster_BitTest_Func = Ptr{Cvoid}
 
-# C code:
 # typedef void ( * FT_Raster_BitSet_Func ) ( int y , int x , void * user )
 const FT_Raster_BitSet_Func = Ptr{Cvoid}
 
@@ -235,23 +223,18 @@ end
 
 const FT_Raster_Params = FT_Raster_Params_
 
-# C code:
 # typedef int ( * FT_Raster_NewFunc ) ( void * memory , FT_Raster * raster )
 const FT_Raster_NewFunc = Ptr{Cvoid}
 
-# C code:
 # typedef void ( * FT_Raster_DoneFunc ) ( FT_Raster raster )
 const FT_Raster_DoneFunc = Ptr{Cvoid}
 
-# C code:
 # typedef void ( * FT_Raster_ResetFunc ) ( FT_Raster raster , unsigned char * pool_base , unsigned long pool_size )
 const FT_Raster_ResetFunc = Ptr{Cvoid}
 
-# C code:
 # typedef int ( * FT_Raster_SetModeFunc ) ( FT_Raster raster , unsigned long mode , void * args )
 const FT_Raster_SetModeFunc = Ptr{Cvoid}
 
-# C code:
 # typedef int ( * FT_Raster_RenderFunc ) ( FT_Raster raster , const FT_Raster_Params * params )
 const FT_Raster_RenderFunc = Ptr{Cvoid}
 
@@ -331,7 +314,6 @@ end
 
 const FT_Data = FT_Data_
 
-# C code:
 # typedef void ( * FT_Generic_Finalizer ) ( void * object )
 const FT_Generic_Finalizer = Ptr{Cvoid}
 
