@@ -1,5 +1,7 @@
-using FreeType, FreeTypeAbstraction
+using FreeType
 using FreeType: FT_Vector
+using FreeTypeAbstraction
+using Pkg
 using Test
 
 library = Ref{FT_Library}()
@@ -59,5 +61,5 @@ end
 end
 
 
-## since there are no meaningful tests, we simply run FreeTypeAbstraction's tests for now
-# include(joinpath(dirname(pathof(FreeTypeAbstraction)), "..", "test", "runtests.jl"))
+# since there are no meaningful tests, we simply run FreeTypeAbstraction's tests for now
+Pkg.test("FreeTypeAbstraction")

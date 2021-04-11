@@ -324,7 +324,18 @@ end
 
 const FT_Generic = FT_Generic_
 
-const FT_ListNode = Ptr{Cvoid}
+mutable struct __JL_FT_ListNodeRec_
+end
+
+function Base.unsafe_load(x::Ptr{__JL_FT_ListNodeRec_})
+    unsafe_load(Ptr{FT_ListNodeRec_}(x))
+end
+
+function Base.getproperty(x::Ptr{__JL_FT_ListNodeRec_}, f::Symbol)
+    getproperty(Ptr{FT_ListNodeRec_}(x), f)
+end
+
+const FT_ListNode = Ptr{__JL_FT_ListNodeRec_}
 
 struct FT_ListRec_
     head::FT_ListNode
@@ -343,7 +354,7 @@ const FT_ListNodeRec = FT_ListNodeRec_
 
 const FT_ListRec = FT_ListRec_
 
-@cenum var"##Ctag#260"::UInt32 begin
+@cenum var"##Ctag#257"::UInt32 begin
     FT_Mod_Err_Base = 0
     FT_Mod_Err_Autofit = 0
     FT_Mod_Err_BDF = 0
@@ -370,7 +381,7 @@ const FT_ListRec = FT_ListRec_
     FT_Mod_Err_Max = 1
 end
 
-@cenum var"##Ctag#261"::UInt32 begin
+@cenum var"##Ctag#258"::UInt32 begin
     FT_Err_Ok = 0
     FT_Err_Cannot_Open_Resource = 1
     FT_Err_Unknown_File_Format = 2
@@ -510,7 +521,18 @@ mutable struct FT_RendererRec_ end
 
 const FT_Renderer = Ptr{FT_RendererRec_}
 
-const FT_Face = Ptr{Cvoid}
+mutable struct __JL_FT_FaceRec_
+end
+
+function Base.unsafe_load(x::Ptr{__JL_FT_FaceRec_})
+    unsafe_load(Ptr{FT_FaceRec_}(x))
+end
+
+function Base.getproperty(x::Ptr{__JL_FT_FaceRec_}, f::Symbol)
+    getproperty(Ptr{FT_FaceRec_}(x), f)
+end
+
+const FT_Face = Ptr{__JL_FT_FaceRec_}
 
 struct FT_Size_Metrics_
     x_ppem::FT_UShort
@@ -538,9 +560,31 @@ end
 
 const FT_Size = Ptr{FT_SizeRec_}
 
-const FT_GlyphSlot = Ptr{Cvoid}
+mutable struct __JL_FT_GlyphSlotRec_
+end
 
-const FT_CharMap = Ptr{Cvoid}
+function Base.unsafe_load(x::Ptr{__JL_FT_GlyphSlotRec_})
+    unsafe_load(Ptr{FT_GlyphSlotRec_}(x))
+end
+
+function Base.getproperty(x::Ptr{__JL_FT_GlyphSlotRec_}, f::Symbol)
+    getproperty(Ptr{FT_GlyphSlotRec_}(x), f)
+end
+
+const FT_GlyphSlot = Ptr{__JL_FT_GlyphSlotRec_}
+
+mutable struct __JL_FT_CharMapRec_
+end
+
+function Base.unsafe_load(x::Ptr{__JL_FT_CharMapRec_})
+    unsafe_load(Ptr{FT_CharMapRec_}(x))
+end
+
+function Base.getproperty(x::Ptr{__JL_FT_CharMapRec_}, f::Symbol)
+    getproperty(Ptr{FT_CharMapRec_}(x), f)
+end
+
+const FT_CharMap = Ptr{__JL_FT_CharMapRec_}
 
 @cenum FT_Encoding_::UInt32 begin
     FT_ENCODING_NONE = 0
