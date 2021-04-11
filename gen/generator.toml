@@ -5,6 +5,7 @@ module_name = "LibFreeType"
 jll_pkg_name = "FreeType2_jll"
 export_symbol_prefixes = ["FREETYPE_", "FT_", "ft_", "TT_", "TTAG_", "CFF_", "T1_", "CID_", "PS_", "t1_"]
 prologue_file_path = "./prologue.jl"
+use_deterministic_symbol = true
 
 printer_blacklist = [
     "ft_memchr",

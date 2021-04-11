@@ -358,7 +358,7 @@ const FT_ListNodeRec = FT_ListNodeRec_
 
 const FT_ListRec = FT_ListRec_
 
-@cenum var"##Ctag#257"::UInt32 begin
+@cenum __JL_Ctag_1::UInt32 begin
     FT_Mod_Err_Base = 0
     FT_Mod_Err_Autofit = 0
     FT_Mod_Err_BDF = 0
@@ -385,7 +385,7 @@ const FT_ListRec = FT_ListRec_
     FT_Mod_Err_Max = 1
 end
 
-@cenum var"##Ctag#258"::UInt32 begin
+@cenum __JL_Ctag_2::UInt32 begin
     FT_Err_Ok = 0
     FT_Err_Cannot_Open_Resource = 1
     FT_Err_Unknown_File_Format = 2
