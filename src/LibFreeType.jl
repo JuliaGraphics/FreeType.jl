@@ -335,6 +335,10 @@ function Base.getproperty(x::Ptr{__JL_FT_ListNodeRec_}, f::Symbol)
     getproperty(Ptr{FT_ListNodeRec_}(x), f)
 end
 
+function Base.setproperty!(x::Ptr{__JL_FT_ListNodeRec_}, f::Symbol, v)
+    setproperty!(Ptr{FT_ListNodeRec_}(x), f, v)
+end
+
 const FT_ListNode = Ptr{__JL_FT_ListNodeRec_}
 
 struct FT_ListRec_
@@ -532,6 +536,10 @@ function Base.getproperty(x::Ptr{__JL_FT_FaceRec_}, f::Symbol)
     getproperty(Ptr{FT_FaceRec_}(x), f)
 end
 
+function Base.setproperty!(x::Ptr{__JL_FT_FaceRec_}, f::Symbol, v)
+    setproperty!(Ptr{FT_FaceRec_}(x), f, v)
+end
+
 const FT_Face = Ptr{__JL_FT_FaceRec_}
 
 struct FT_Size_Metrics_
@@ -571,6 +579,10 @@ function Base.getproperty(x::Ptr{__JL_FT_GlyphSlotRec_}, f::Symbol)
     getproperty(Ptr{FT_GlyphSlotRec_}(x), f)
 end
 
+function Base.setproperty!(x::Ptr{__JL_FT_GlyphSlotRec_}, f::Symbol, v)
+    setproperty!(Ptr{FT_GlyphSlotRec_}(x), f, v)
+end
+
 const FT_GlyphSlot = Ptr{__JL_FT_GlyphSlotRec_}
 
 mutable struct __JL_FT_CharMapRec_
@@ -582,6 +594,10 @@ end
 
 function Base.getproperty(x::Ptr{__JL_FT_CharMapRec_}, f::Symbol)
     getproperty(Ptr{FT_CharMapRec_}(x), f)
+end
+
+function Base.setproperty!(x::Ptr{__JL_FT_CharMapRec_}, f::Symbol, v)
+    setproperty!(Ptr{FT_CharMapRec_}(x), f, v)
 end
 
 const FT_CharMap = Ptr{__JL_FT_CharMapRec_}
