@@ -8,7 +8,6 @@ library = Ref{FT_Library}()
 error = FT_Init_FreeType(library)
 @test error == 0
 
-
 @testset "test FT_Outline_Decompose" begin
 
 refface = Ref{FT_Face}()
@@ -62,4 +61,4 @@ end
 
 
 # since there are no meaningful tests, we simply run FreeTypeAbstraction's tests for now
-Pkg.test("FreeTypeAbstraction")
+# Pkg.test("FreeTypeAbstraction")
