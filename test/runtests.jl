@@ -1,5 +1,4 @@
 using FreeType
-using FreeType: FT_Vector
 using FreeTypeAbstraction
 using Pkg
 using Test
@@ -61,4 +60,4 @@ end
 
 
 # since there are no meaningful tests, we simply run FreeTypeAbstraction's tests for now
-# Pkg.test("FreeTypeAbstraction")
+Pkg.test("FreeTypeAbstraction")
