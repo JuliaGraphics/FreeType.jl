@@ -1037,20 +1037,6 @@ function FT_Outline_Get_Orientation(outline)
     ccall((:FT_Outline_Get_Orientation, libfreetype), FT_Orientation, (Ptr{FT_Outline},), outline)
 end
 
-const FREETYPE_H_ = nothing
-
-const FT2BUILD_H_ = nothing
-
-const FTHEADER_H_ = nothing
-
-const FT_BEGIN_HEADER = nothing
-
-const FT_END_HEADER = nothing
-
-const FTCONFIG_H_ = nothing
-
-const FTOPTION_H_ = nothing
-
 const FT_CONFIG_OPTION_ENVIRONMENT_PROPERTIES = nothing
 
 const FT_CONFIG_OPTION_INLINE_MULFIX = nothing
@@ -1145,8 +1131,6 @@ const TT_USE_BYTECODE_INTERPRETER = nothing
 
 const TT_SUPPORT_SUBPIXEL_HINTING_MINIMAL = nothing
 
-const FTSTDLIB_H_ = nothing
-
 const ft_ptrdiff_t = ptrdiff_t
 
 const FT_CHAR_BIT = CHAR_BIT
@@ -1167,9 +1151,9 @@ const FT_ULONG_MAX = ULONG_MAX
 
 const FT_FILE = FILE
 
-const FT_SIZEOF_INT = 32 / FT_CHAR_BIT
+const FT_SIZEOF_INT = 32 ÷ FT_CHAR_BIT
 
-const FT_SIZEOF_LONG = 32 / FT_CHAR_BIT
+const FT_SIZEOF_LONG = 64 ÷ FT_CHAR_BIT
 
 const FT_LONG64 = nothing
 
@@ -1177,21 +1161,7 @@ const FT_INT64 = Clong
 
 const FT_UINT64 = Culong
 
-# Skipping MacroDefinition: FT_BEGIN_STMNT do {
-
-# Skipping MacroDefinition: FT_END_STMNT } while ( 0 )
-
-# Skipping MacroDefinition: FT_DUMMY_STMNT FT_BEGIN_STMNT FT_END_STMNT
-
-# Skipping MacroDefinition: FT_CALLBACK_TABLE extern
-
 const FT_CALLBACK_TABLE_DEF = nothing
-
-const FTTYPES_H_ = nothing
-
-const FTSYSTEM_H_ = nothing
-
-const FTIMAGE_H_ = nothing
 
 const ft_pixel_mode_none = FT_PIXEL_MODE_NONE
 
@@ -1305,10 +1275,6 @@ const FT_Raster_Set_Mode_Func = FT_Raster_SetModeFunc
 
 const FT_Raster_Render_Func = FT_Raster_RenderFunc
 
-const FTERRORS_H_ = nothing
-
-const FTMODERR_H_ = nothing
-
 # Skipping MacroDefinition: FT_MODERRDEF ( e , v , s ) FT_Mod_Err_ ## e = 0 ,
 
 # Skipping MacroDefinition: FT_MODERR_START_LIST enum {
@@ -1359,41 +1325,41 @@ const ft_encoding_adobe_custom = FT_ENCODING_ADOBE_CUSTOM
 
 const ft_encoding_apple_roman = FT_ENCODING_APPLE_ROMAN
 
-const FT_FACE_FLAG_SCALABLE = Int32(1) << 0
+const FT_FACE_FLAG_SCALABLE = Clong(1) << 0
 
-const FT_FACE_FLAG_FIXED_SIZES = Int32(1) << 1
+const FT_FACE_FLAG_FIXED_SIZES = Clong(1) << 1
 
-const FT_FACE_FLAG_FIXED_WIDTH = Int32(1) << 2
+const FT_FACE_FLAG_FIXED_WIDTH = Clong(1) << 2
 
-const FT_FACE_FLAG_SFNT = Int32(1) << 3
+const FT_FACE_FLAG_SFNT = Clong(1) << 3
 
-const FT_FACE_FLAG_HORIZONTAL = Int32(1) << 4
+const FT_FACE_FLAG_HORIZONTAL = Clong(1) << 4
 
-const FT_FACE_FLAG_VERTICAL = Int32(1) << 5
+const FT_FACE_FLAG_VERTICAL = Clong(1) << 5
 
-const FT_FACE_FLAG_KERNING = Int32(1) << 6
+const FT_FACE_FLAG_KERNING = Clong(1) << 6
 
-const FT_FACE_FLAG_FAST_GLYPHS = Int32(1) << 7
+const FT_FACE_FLAG_FAST_GLYPHS = Clong(1) << 7
 
-const FT_FACE_FLAG_MULTIPLE_MASTERS = Int32(1) << 8
+const FT_FACE_FLAG_MULTIPLE_MASTERS = Clong(1) << 8
 
-const FT_FACE_FLAG_GLYPH_NAMES = Int32(1) << 9
+const FT_FACE_FLAG_GLYPH_NAMES = Clong(1) << 9
 
-const FT_FACE_FLAG_EXTERNAL_STREAM = Int32(1) << 10
+const FT_FACE_FLAG_EXTERNAL_STREAM = Clong(1) << 10
 
-const FT_FACE_FLAG_HINTER = Int32(1) << 11
+const FT_FACE_FLAG_HINTER = Clong(1) << 11
 
-const FT_FACE_FLAG_CID_KEYED = Int32(1) << 12
+const FT_FACE_FLAG_CID_KEYED = Clong(1) << 12
 
-const FT_FACE_FLAG_TRICKY = Int32(1) << 13
+const FT_FACE_FLAG_TRICKY = Clong(1) << 13
 
-const FT_FACE_FLAG_COLOR = Int32(1) << 14
+const FT_FACE_FLAG_COLOR = Clong(1) << 14
 
-const FT_FACE_FLAG_VARIATION = Int32(1) << 15
+const FT_FACE_FLAG_VARIATION = Clong(1) << 15
 
-const FT_STYLE_FLAG_ITALIC = Int32(1) << 0
+const FT_STYLE_FLAG_ITALIC = 1 << 0
 
-const FT_STYLE_FLAG_BOLD = Int32(1) << 1
+const FT_STYLE_FLAG_BOLD = 1 << 1
 
 const FT_OPEN_MEMORY = 0x01
 
@@ -1417,43 +1383,43 @@ const ft_open_params = FT_OPEN_PARAMS
 
 const FT_LOAD_DEFAULT = 0x00
 
-const FT_LOAD_NO_SCALE = Int32(1) << 0
+const FT_LOAD_NO_SCALE = Clong(1) << 0
 
-const FT_LOAD_NO_HINTING = Int32(1) << 1
+const FT_LOAD_NO_HINTING = Clong(1) << 1
 
-const FT_LOAD_RENDER = Int32(1) << 2
+const FT_LOAD_RENDER = Clong(1) << 2
 
-const FT_LOAD_NO_BITMAP = Int32(1) << 3
+const FT_LOAD_NO_BITMAP = Clong(1) << 3
 
-const FT_LOAD_VERTICAL_LAYOUT = Int32(1) << 4
+const FT_LOAD_VERTICAL_LAYOUT = Clong(1) << 4
 
-const FT_LOAD_FORCE_AUTOHINT = Int32(1) << 5
+const FT_LOAD_FORCE_AUTOHINT = Clong(1) << 5
 
-const FT_LOAD_CROP_BITMAP = Int32(1) << 6
+const FT_LOAD_CROP_BITMAP = Clong(1) << 6
 
-const FT_LOAD_PEDANTIC = Int32(1) << 7
+const FT_LOAD_PEDANTIC = Clong(1) << 7
 
-const FT_LOAD_IGNORE_GLOBAL_ADVANCE_WIDTH = Int32(1) << 9
+const FT_LOAD_IGNORE_GLOBAL_ADVANCE_WIDTH = Clong(1) << 9
 
-const FT_LOAD_NO_RECURSE = Int32(1) << 10
+const FT_LOAD_NO_RECURSE = Clong(1) << 10
 
-const FT_LOAD_IGNORE_TRANSFORM = Int32(1) << 11
+const FT_LOAD_IGNORE_TRANSFORM = Clong(1) << 11
 
-const FT_LOAD_MONOCHROME = Int32(1) << 12
+const FT_LOAD_MONOCHROME = Clong(1) << 12
 
-const FT_LOAD_LINEAR_DESIGN = Int32(1) << 13
+const FT_LOAD_LINEAR_DESIGN = Clong(1) << 13
 
-const FT_LOAD_NO_AUTOHINT = Int32(1) << 15
+const FT_LOAD_NO_AUTOHINT = Clong(1) << 15
 
-const FT_LOAD_COLOR = Int32(1) << 20
+const FT_LOAD_COLOR = Clong(1) << 20
 
-const FT_LOAD_COMPUTE_METRICS = Int32(1) << 21
+const FT_LOAD_COMPUTE_METRICS = Clong(1) << 21
 
-const FT_LOAD_BITMAP_METRICS_ONLY = Int32(1) << 22
+const FT_LOAD_BITMAP_METRICS_ONLY = Clong(1) << 22
 
-const FT_LOAD_ADVANCE_ONLY = Int32(1) << 8
+const FT_LOAD_ADVANCE_ONLY = Clong(1) << 8
 
-const FT_LOAD_SBITS_ONLY = Int32(1) << 14
+const FT_LOAD_SBITS_ONLY = Clong(1) << 14
 
 # Skipping MacroDefinition: FT_LOAD_TARGET_NORMAL FT_LOAD_TARGET_ ( FT_RENDER_MODE_NORMAL )
 
@@ -1506,8 +1472,6 @@ const FREETYPE_MAJOR = 2
 const FREETYPE_MINOR = 10
 
 const FREETYPE_PATCH = 1
-
-const FTOUTLN_H_ = nothing
 
 # exports
 const PREFIXES = ["FREETYPE_", "FT_", "ft_", "TT_", "TTAG_", "CFF_", "T1_", "CID_", "PS_", "t1_"]

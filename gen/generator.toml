@@ -39,8 +39,16 @@ printer_blacklist = [
     "FT_OUTLINE_CONTOURS_MAX",
     "FT_OUTLINE_POINTS_MAX",
     "FT_ERR_PREFIX",
+    "FT_BEGIN_HEADER",
+    "FT_END_HEADER",
+    "FT_BEGIN_STMNT",
+    "FT_END_STMNT",
+    "FT_DUMMY_STMNT",
+    "FT_CALLBACK_TABLE",
 ]
 
 [codegen.macro]
 macro_mode = "basic"
 
+ignore_header_guards = true
+ignore_header_guards_with_suffixes = ["_H_"]

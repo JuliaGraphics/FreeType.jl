@@ -1,5 +1,4 @@
 using FreeType
-using FreeTypeAbstraction
 using Pkg
 using Test
 
@@ -10,7 +9,7 @@ error = FT_Init_FreeType(library)
 @testset "test FT_Outline_Decompose" begin
 
 refface = Ref{FT_Face}()
-@test FT_New_Face(library[], joinpath(dirname(pathof(FreeTypeAbstraction)), "..", "test", "hack_regular.ttf"), 0, refface) == 0
+@test FT_New_Face(library[], joinpath(@__DIR__, "hack_regular.ttf"), 0, refface) == 0
 
 glyph_index = FT_Get_Char_Index(refface[], 'J')
 @test glyph_index == 0x00000031
@@ -59,5 +58,6 @@ end
 end
 
 
-# since there are no meaningful tests, we simply run FreeTypeAbstraction's tests for now
-Pkg.test("FreeTypeAbstraction")
+# since there are no meaningful tests, please manually do a test for FreeTypeAbstraction
+# using FreeTypeAbstraction
+# Pkg.test("FreeTypeAbstraction")
