@@ -1,5 +1,5 @@
 using Clang.Generators
-using FreeType.FreeType2_jll
+using FreeType2_jll
 
 cd(@__DIR__)
 
@@ -10,7 +10,8 @@ ftoutln_h = joinpath(include_dir, "freetype", "ftoutln.h") |> normpath
 
 options = load_options(joinpath(@__DIR__, "generator.toml"))
 
-args = ["-I$include_dir", "-DFT_FREETYPE_H"]
+args = get_default_args()
+push!(args, "-I$include_dir", "-DFT_FREETYPE_H")
 
 ctx = create_context([freetype_h, ftoutln_h], args, options)
 
