@@ -1461,11 +1461,9 @@ const FREETYPE_PATCH = 1
 
 # exports
 const PREFIXES = ["FREETYPE_", "FT_", "ft_", "TT_", "TTAG_", "CFF_", "T1_", "CID_", "PS_", "t1_"]
-foreach(names(@__MODULE__; all=true)) do s
-    for prefix in PREFIXES
-        if startswith(string(s), prefix)
-            @eval export $s
-        end
+for name in names(@__MODULE__; all=true), prefix in PREFIXES
+    if startswith(string(name), prefix)
+        @eval export $name
     end
 end
 
