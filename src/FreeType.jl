@@ -358,7 +358,7 @@ const FT_ListNodeRec = FT_ListNodeRec_
 
 const FT_ListRec = FT_ListRec_
 
-@cenum __JL_Ctag_1::UInt32 begin
+@cenum __JL_Ctag_7::UInt32 begin
     FT_Mod_Err_Base = 0
     FT_Mod_Err_Autofit = 0
     FT_Mod_Err_BDF = 0
@@ -385,7 +385,7 @@ const FT_ListRec = FT_ListRec_
     FT_Mod_Err_Max = 1
 end
 
-@cenum __JL_Ctag_2::UInt32 begin
+@cenum __JL_Ctag_8::UInt32 begin
     FT_Err_Ok = 0
     FT_Err_Cannot_Open_Resource = 1
     FT_Err_Unknown_File_Format = 2
@@ -1275,25 +1275,9 @@ const FT_Raster_Set_Mode_Func = FT_Raster_SetModeFunc
 
 const FT_Raster_Render_Func = FT_Raster_RenderFunc
 
-# Skipping MacroDefinition: FT_MODERRDEF ( e , v , s ) FT_Mod_Err_ ## e = 0 ,
-
-# Skipping MacroDefinition: FT_MODERR_START_LIST enum {
-
-# Skipping MacroDefinition: FT_MODERR_END_LIST FT_Mod_Err_Max } ;
-
 const FT_ERR_BASE = 0
 
 const FT_INCLUDE_ERR_PROTOS = nothing
-
-# Skipping MacroDefinition: FT_ERRORDEF ( e , v , s ) e = v ,
-
-# Skipping MacroDefinition: FT_ERROR_START_LIST enum {
-
-# Skipping MacroDefinition: FT_ERROR_END_LIST FT_ERR_CAT ( FT_ERR_PREFIX , Max ) } ;
-
-# Skipping MacroDefinition: FT_ERRORDEF_ ( e , v , s ) FT_ERRORDEF ( FT_ERR_CAT ( FT_ERR_PREFIX , e ) , v + FT_ERR_BASE , s )
-
-# Skipping MacroDefinition: FT_NOERRORDEF_ ( e , v , s ) FT_ERRORDEF ( FT_ERR_CAT ( FT_ERR_PREFIX , e ) , v , s )
 
 const FT_ERR_PROTOS_DEFINED = nothing
 
@@ -1421,15 +1405,17 @@ const FT_LOAD_ADVANCE_ONLY = Clong(1) << 8
 
 const FT_LOAD_SBITS_ONLY = Clong(1) << 14
 
-# Skipping MacroDefinition: FT_LOAD_TARGET_NORMAL FT_LOAD_TARGET_ ( FT_RENDER_MODE_NORMAL )
+FT_LOAD_TARGET_(x) = FT_Int32(x & 15) << 16
 
-# Skipping MacroDefinition: FT_LOAD_TARGET_LIGHT FT_LOAD_TARGET_ ( FT_RENDER_MODE_LIGHT )
+const FT_LOAD_TARGET_NORMAL = FT_LOAD_TARGET_(FT_RENDER_MODE_NORMAL)
 
-# Skipping MacroDefinition: FT_LOAD_TARGET_MONO FT_LOAD_TARGET_ ( FT_RENDER_MODE_MONO )
+const FT_LOAD_TARGET_LIGHT = FT_LOAD_TARGET_(FT_RENDER_MODE_LIGHT)
 
-# Skipping MacroDefinition: FT_LOAD_TARGET_LCD FT_LOAD_TARGET_ ( FT_RENDER_MODE_LCD )
+const FT_LOAD_TARGET_MONO = FT_LOAD_TARGET_(FT_RENDER_MODE_MONO)
 
-# Skipping MacroDefinition: FT_LOAD_TARGET_LCD_V FT_LOAD_TARGET_ ( FT_RENDER_MODE_LCD_V )
+const FT_LOAD_TARGET_LCD = FT_LOAD_TARGET_(FT_RENDER_MODE_LCD)
+
+const FT_LOAD_TARGET_LCD_V = FT_LOAD_TARGET_(FT_RENDER_MODE_LCD_V)
 
 const ft_render_mode_normal = FT_RENDER_MODE_NORMAL
 
@@ -1475,11 +1461,9 @@ const FREETYPE_PATCH = 1
 
 # exports
 const PREFIXES = ["FREETYPE_", "FT_", "ft_", "TT_", "TTAG_", "CFF_", "T1_", "CID_", "PS_", "t1_"]
-foreach(names(@__MODULE__; all=true)) do s
-    for prefix in PREFIXES
-        if startswith(string(s), prefix)
-            @eval export $s
-        end
+for name in names(@__MODULE__; all=true), prefix in PREFIXES
+    if startswith(string(name), prefix)
+        @eval export $name
     end
 end
 
