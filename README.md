@@ -10,7 +10,7 @@
 ```julia
 using FreeType
 
-library = Array(FT_Library, 1)
+library = Vector{FT_Library}(undef, 1)
 error = FT_Init_FreeType(library)
-assert(error == 0)
+@assert error == 0
 ```
