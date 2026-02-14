@@ -54,7 +54,7 @@ end
 const FT_Memory = Ptr{FT_MemoryRec_}
 
 struct FT_StreamDesc_
-    data::NTuple{8, UInt8}
+    data::NTuple{8,UInt8}
 end
 
 function Base.getproperty(x::Ptr{FT_StreamDesc_}, f::Symbol)
@@ -907,6 +907,258 @@ function FT_Get_Color_Glyph_Layer(face, base_glyph, aglyph_index, acolor_index, 
     ccall((:FT_Get_Color_Glyph_Layer, libfreetype), FT_Bool, (FT_Face, FT_UInt, Ptr{FT_UInt}, Ptr{FT_UInt}, Ptr{FT_LayerIterator}), face, base_glyph, aglyph_index, acolor_index, iterator)
 end
 
+struct FT_Color_
+    blue::FT_Byte
+    green::FT_Byte
+    red::FT_Byte
+    alpha::FT_Byte
+end
+
+const FT_Color = FT_Color_
+
+const FT_PALETTE_FOR_LIGHT_BACKGROUND = 0x01
+const FT_PALETTE_FOR_DARK_BACKGROUND = 0x02
+
+struct FT_Palette_Data_
+    num_palettes::FT_UShort
+    palette_name_ids::Ptr{FT_UShort}
+    palette_flags::Ptr{FT_UShort}
+    num_palette_entries::FT_UShort
+    palette_entry_name_ids::Ptr{FT_UShort}
+end
+
+const FT_Palette_Data = FT_Palette_Data_
+
+function FT_Palette_Data_Get(face, apalette)
+    ccall((:FT_Palette_Data_Get, libfreetype), FT_Error, (FT_Face, Ptr{FT_Palette_Data}), face, apalette)
+end
+
+function FT_Palette_Select(face, palette_index, apalette)
+    ccall((:FT_Palette_Select, libfreetype), FT_Error, (FT_Face, FT_UShort, Ptr{Ptr{FT_Color}}), face, palette_index, apalette)
+end
+
+# COLRv1 support (FreeType 2.11+)
+struct FT_OpaquePaint_
+    p::Ptr{FT_Byte}
+    insert_root_transform::FT_Bool
+end
+
+const FT_OpaquePaint = FT_OpaquePaint_
+
+@cenum FT_PaintFormat_::UInt32 begin
+    FT_COLR_PAINTFORMAT_COLR_LAYERS = 1
+    FT_COLR_PAINTFORMAT_SOLID = 2
+    FT_COLR_PAINTFORMAT_LINEAR_GRADIENT = 4
+    FT_COLR_PAINTFORMAT_RADIAL_GRADIENT = 6
+    FT_COLR_PAINTFORMAT_SWEEP_GRADIENT = 8
+    FT_COLR_PAINTFORMAT_GLYPH = 10
+    FT_COLR_PAINTFORMAT_COLR_GLYPH = 11
+    FT_COLR_PAINTFORMAT_TRANSFORM = 12
+    FT_COLR_PAINTFORMAT_TRANSLATE = 14
+    FT_COLR_PAINTFORMAT_SCALE = 16
+    FT_COLR_PAINTFORMAT_ROTATE = 24
+    FT_COLR_PAINTFORMAT_SKEW = 28
+    FT_COLR_PAINTFORMAT_COMPOSITE = 32
+    FT_COLR_PAINT_FORMAT_MAX = 33
+    FT_COLR_PAINTFORMAT_UNSUPPORTED = 255
+end
+
+const FT_PaintFormat = FT_PaintFormat_
+
+struct FT_ColorStop_
+    stop_offset::FT_Fixed
+    color::FT_Color
+end
+
+const FT_ColorStop = FT_ColorStop_
+
+struct FT_ColorStopIterator_
+    num_color_stops::FT_UInt
+    current_color_stop::FT_UInt
+    p::Ptr{FT_Byte}
+    read_variable::FT_Bool
+end
+
+const FT_ColorStopIterator = FT_ColorStopIterator_
+
+struct FT_ColorIndex_
+    palette_index::FT_UInt16
+    alpha::FT_F2Dot14
+end
+
+const FT_ColorIndex = FT_ColorIndex_
+
+@cenum FT_PaintExtend_::UInt32 begin
+    FT_COLR_PAINT_EXTEND_PAD = 0
+    FT_COLR_PAINT_EXTEND_REPEAT = 1
+    FT_COLR_PAINT_EXTEND_REFLECT = 2
+end
+
+const FT_PaintExtend = FT_PaintExtend_
+
+struct FT_ColorLine_
+    extend::FT_PaintExtend
+    color_stop_iterator::FT_ColorStopIterator
+end
+
+const FT_ColorLine = FT_ColorLine_
+
+struct FT_Affine23_
+    xx::FT_Fixed
+    xy::FT_Fixed
+    dx::FT_Fixed
+    yx::FT_Fixed
+    yy::FT_Fixed
+    dy::FT_Fixed
+end
+
+const FT_Affine23 = FT_Affine23_
+
+struct FT_PaintColrLayers_
+    layer_iterator::FT_LayerIterator
+end
+
+struct FT_PaintSolid_
+    color::FT_ColorIndex
+end
+
+struct FT_PaintLinearGradient_
+    colorline::FT_ColorLine
+    p0::FT_Vector
+    p1::FT_Vector
+    p2::FT_Vector
+end
+
+struct FT_PaintRadialGradient_
+    colorline::FT_ColorLine
+    c0::FT_Vector
+    r0::FT_Pos
+    c1::FT_Vector
+    r1::FT_Pos
+end
+
+struct FT_PaintSweepGradient_
+    colorline::FT_ColorLine
+    center::FT_Vector
+    start_angle::FT_Fixed
+    end_angle::FT_Fixed
+end
+
+struct FT_PaintGlyph_
+    paint::FT_OpaquePaint
+    glyphID::FT_UInt
+end
+
+struct FT_PaintColrGlyph_
+    glyphID::FT_UInt
+end
+
+struct FT_PaintTransform_
+    paint::FT_OpaquePaint
+    affine::FT_Affine23
+end
+
+struct FT_PaintTranslate_
+    paint::FT_OpaquePaint
+    dx::FT_Fixed
+    dy::FT_Fixed
+end
+
+struct FT_PaintScale_
+    paint::FT_OpaquePaint
+    scale_x::FT_Fixed
+    scale_y::FT_Fixed
+    center_x::FT_Fixed
+    center_y::FT_Fixed
+end
+
+struct FT_PaintRotate_
+    paint::FT_OpaquePaint
+    angle::FT_Fixed
+    center_x::FT_Fixed
+    center_y::FT_Fixed
+end
+
+struct FT_PaintSkew_
+    paint::FT_OpaquePaint
+    x_skew_angle::FT_Fixed
+    y_skew_angle::FT_Fixed
+    center_x::FT_Fixed
+    center_y::FT_Fixed
+end
+
+@cenum FT_Composite_Mode_::UInt32 begin
+    FT_COLR_COMPOSITE_CLEAR = 0
+    FT_COLR_COMPOSITE_SRC = 1
+    FT_COLR_COMPOSITE_DEST = 2
+    FT_COLR_COMPOSITE_SRC_OVER = 3
+    FT_COLR_COMPOSITE_DEST_OVER = 4
+    FT_COLR_COMPOSITE_SRC_IN = 5
+    FT_COLR_COMPOSITE_DEST_IN = 6
+    FT_COLR_COMPOSITE_SRC_OUT = 7
+    FT_COLR_COMPOSITE_DEST_OUT = 8
+    FT_COLR_COMPOSITE_SRC_ATOP = 9
+    FT_COLR_COMPOSITE_DEST_ATOP = 10
+    FT_COLR_COMPOSITE_XOR = 11
+    FT_COLR_COMPOSITE_PLUS = 12
+    FT_COLR_COMPOSITE_SCREEN = 13
+    FT_COLR_COMPOSITE_OVERLAY = 14
+    FT_COLR_COMPOSITE_DARKEN = 15
+    FT_COLR_COMPOSITE_LIGHTEN = 16
+    FT_COLR_COMPOSITE_COLOR_DODGE = 17
+    FT_COLR_COMPOSITE_COLOR_BURN = 18
+    FT_COLR_COMPOSITE_HARD_LIGHT = 19
+    FT_COLR_COMPOSITE_SOFT_LIGHT = 20
+    FT_COLR_COMPOSITE_DIFFERENCE = 21
+    FT_COLR_COMPOSITE_EXCLUSION = 22
+    FT_COLR_COMPOSITE_MULTIPLY = 23
+    FT_COLR_COMPOSITE_HSL_HUE = 24
+    FT_COLR_COMPOSITE_HSL_SATURATION = 25
+    FT_COLR_COMPOSITE_HSL_COLOR = 26
+    FT_COLR_COMPOSITE_HSL_LUMINOSITY = 27
+    FT_COLR_COMPOSITE_MAX = 28
+end
+
+const FT_Composite_Mode = FT_Composite_Mode_
+
+struct FT_PaintComposite_
+    source_paint::FT_OpaquePaint
+    composite_mode::FT_Composite_Mode
+    backdrop_paint::FT_OpaquePaint
+end
+
+# Union type for paint data - we allocate space for the largest variant
+struct FT_COLR_Paint_
+    format::FT_PaintFormat
+    u::NTuple{96,UInt8}  # Space for union (largest is FT_PaintComposite_ with 3 fields)
+end
+
+const FT_COLR_Paint = FT_COLR_Paint_
+
+@cenum FT_Color_Root_Transform_::UInt32 begin
+    FT_COLOR_INCLUDE_ROOT_TRANSFORM = 0
+    FT_COLOR_NO_ROOT_TRANSFORM = 1
+    FT_COLOR_ROOT_TRANSFORM_MAX = 2
+end
+
+const FT_Color_Root_Transform = FT_Color_Root_Transform_
+
+function FT_Get_Color_Glyph_Paint(face, base_glyph, root_transform, paint)
+    ccall((:FT_Get_Color_Glyph_Paint, libfreetype), FT_Bool, (FT_Face, FT_UInt, FT_Color_Root_Transform, Ptr{FT_OpaquePaint}), face, base_glyph, root_transform, paint)
+end
+
+function FT_Get_Paint_Layers(face, iterator, paint)
+    ccall((:FT_Get_Paint_Layers, libfreetype), FT_Bool, (FT_Face, Ptr{FT_LayerIterator}, Ptr{FT_OpaquePaint}), face, iterator, paint)
+end
+
+function FT_Get_Colorline_Stops(face, color_stop, iterator)
+    ccall((:FT_Get_Colorline_Stops, libfreetype), FT_Bool, (FT_Face, Ptr{FT_ColorStop}, Ptr{FT_ColorStopIterator}), face, color_stop, iterator)
+end
+
+function FT_Get_Paint(face, opaque_paint, paint)
+    ccall((:FT_Get_Paint, libfreetype), FT_Bool, (FT_Face, FT_OpaquePaint, Ptr{FT_COLR_Paint}), face, opaque_paint, paint)
+end
+
 function FT_Get_FSType_Flags(face)
     ccall((:FT_Get_FSType_Flags, libfreetype), FT_UShort, (FT_Face,), face)
 end
@@ -989,6 +1241,10 @@ end
 
 function FT_Outline_Get_CBox(outline, acbox)
     ccall((:FT_Outline_Get_CBox, libfreetype), Cvoid, (Ptr{FT_Outline}, Ptr{FT_BBox}), outline, acbox)
+end
+
+function FT_Outline_Get_BBox(outline, abbox)
+    ccall((:FT_Outline_Get_BBox, libfreetype), FT_Error, (Ptr{FT_Outline}, Ptr{FT_BBox}), outline, abbox)
 end
 
 function FT_Outline_Translate(outline, xOffset, yOffset)
